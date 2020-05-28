@@ -1,0 +1,75 @@
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/guards/auth.service';
+import{TestService} from 'src/app/guards/test.service'
+import * as myGlobals from 'src/app/guards/test.service'
+import { AppRoutingModule } from '../app-routing.module';
+import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
+import { Port } from '../_models/port';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+  validLogin: boolean;
+ // global:TestService=new TestService()
+   token:string;
+
+   port:Port=new Port()
+  constructor(public http:HttpClient ,public router:Router,public testser:TestService ) {}
+    login(form: NgForm)
+     {
+
+      let credentials = JSON.stringify(form.value);
+      this.http.post("http://localhost:"+this.port.port+"/api/auth/login" ,  credentials, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+      }).subscribe(response => {
+      this.token = (<any>response).token;
+      localStorage.setItem("jwt", this.token);
+     this.validLogin = true;
+    //  this.testser.setValidValue(true);
+     // console.log(this.testser.valid)
+      console.log(response);
+    //  this.router.navigateByUrl("/Home"); //go here for profile or main page
+
+      }, err => {
+      // this.invalidLogin = true;
+      });
+
+        let token = localStorage.getItem("jwt");
+        this.http.get("http://localhost:"+this.port.port+"/api/customer", {//for points api
+          headers: new HttpHeaders({
+        // "Authorization":"Bearer "+this.token,
+            "Content-Type": "application/json"
+          })
+        }).subscribe(response => {
+          console.log(response)
+          this.router.navigateByUrl("/Home"); //go here for profile or main page
+        }, err => {
+          console.log(err)
+    });
+    // this.http.get("http://localhost:"+this.port.port+"/api/address").subscribe(a=>console.log(a))
+    // console.log("hello");
+  }
+
+ getData(){
+  // return this.http.get("http://localhost:5000/api/customer",{
+  //   headers: new HttpHeaders({
+  //     "Authorization":"Bearer "+this.token
+ // }) 
+//})
+ }
+  ngOnInit(): void {
+   // this.testser.valid=true;
+   // console.log("init",this.testser.getValidValue)
+  }
+
+}
+
+// http://localhost:5000/api/auth/login

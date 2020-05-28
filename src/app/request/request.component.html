@@ -1,0 +1,10 @@
+<!-- <div> flag  == {{service.flag}}</div> -->
+
+<app-new-request-details *ngIf="service.startNewRequest()"></app-new-request-details>
+<app-request-detials *ngIf="!service.startNewRequest()"></app-request-detials>
+ 
+<!--  <h1>Page in progress</h1>
+<h3>New Request Page</h3>
+<app-new-request-details ></app-new-request-details>
+<h3>Current request page</h3>
+<app-request-detials></app-request-detials> -->

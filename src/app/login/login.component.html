@@ -1,0 +1,40 @@
+<router-outlet>
+  <!-- #loginForm="ngForm" (ngSubmit)="login(loginForm)" -->
+  <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)" >
+  <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;" class="row mb-5" >
+  
+   <div class="container-fluid" > 
+     <br/>
+     <br/>
+     <br/>
+    <h2 style="text-align: center;" class="form-signin-heading">Login</h2>
+    <div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+  
+        <label for="mobile" class="sr-only">Email address</label>
+        
+          <div class="input-group">
+   <input style="align-self: center;" type="mobile" id="mobile" name="mobile" ngModel class="form-control" placeholder="Mobile" required autofocus>
+         
+      </div >
+      </div> 
+  </div>
+                    <br/>
+  <div class="row">
+    <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+  
+      
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Password" required>
+        <br/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </div>
+   </div> 
+   </div>
+  </section>
+  
+    </form>
+    <!-- type="submit" -->
+  </router-outlet>

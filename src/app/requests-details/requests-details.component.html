@@ -1,0 +1,59 @@
+<div class="jumbtron">  
+    <h1 class="display-4 text-center">
+        Requests Details
+    </h1>
+<hr class="mx-5">
+
+<div class="mx-5">
+    <nav class="navbar">
+        <input class="form-control" type="text" name="search" [(ngModel)]="filter">      
+      </nav>
+<table class="table ">
+    <thead class="bg-success">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Non-Organic Weight</th>
+        <th scope="col">Organic Weight</th>
+        <th scope="col">Points</th>
+        <th scope="col">More Detials</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of requests | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+        <td >{{request.schedule.date |  date:'MM/dd/yyyy'}}</td>
+        <td >{{request.nonOrganicWeight}}</td>
+        <td >{{request.orgaincWeight}}</td>
+        <td >{{request.points}}</td>
+        <td ><Button>...</Button></td>
+      </tr>
+      <!-- <tr >
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+        </nav>
+    </td>
+    </tr> -->
+    </tbody>
+  </table>
+  
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+

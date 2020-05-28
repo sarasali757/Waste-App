@@ -1,0 +1,25 @@
+<div class="jumbtron">  
+    <h1 class="display-4 text-center">
+        Requests Details
+    </h1>
+<hr class="mx-5">
+
+
+    <div align="center">
+        <label for="" class="mx-2" >Status</label>
+        <label for="" class="mx-2"  >Pending</label>    
+    </div>
+
+    <div align="center">
+        <label class="mx-2"  >Estimate Time</label>
+        <label for="" class="mx-2" *ngIf="request" >{{request.schedule.date |  date:'MM/dd/yyyy'}}</label>    
+    </div>
+
+    <div align="center">
+        <label for="" class="mx-2" >Remaining </label>
+        <label for="" class="mx-2" *ngIf="request"  >{{getRemainingTime()}}</label>    
+    </div>
+    <div align="center">
+        <button class="btn btn-success mx-2" routerLink="/Home" >Done</button>
+        <button class="btn btn-success mx-2" routerLink="" (click)='DeleteRequest()'>Cancel Request</button>
+    </div>

@@ -1,0 +1,187 @@
+<div class="jumbtron">  
+    <h1 class="display-4 text-center">
+        New Request
+    </h1>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" > 
+
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" *ngIf="client" > Name:  </label>
+      <h3 class="col-sm-10" *ngIf="client" >
+        {{client.firstName}} {{ " "}} {{client.lastName}} 
+      </h3>
+  </div>
+
+<!--   <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Government</label>
+      <div class="col-sm-10">
+          <select id='sel_government' class="form-control" name ="government" #government ngModel
+          (change)='onOptionsSelected(government.value)' >
+            <option ></option>  
+            <option *ngFor="let government of governments"  
+                      [value]="government.id">  
+                  {{government.governorate}}  
+              </option>   
+           </select>
+      </div>
+  </div>  -->
+ <!--  *ngIf="client" name ="apartmentNumber" #apartmentNumber="ngModel" [(ngModel)]="client.apartmentNumber" -->
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Region</label>
+      <div class="col-sm-10">
+
+          <select ngModel id='sel_region' class="form-control" name ="region"  #region="ngModel" 
+          (change)='onOptionsSelected(region.value)' *ngIf="regions" 
+           [(ngModel)] ='client.address.regionId' >
+         <!--  [attr.selected]="region.id == client.address.regionId ? true : null" -->
+          <option *ngFor="let region of regions" 
+              [value]="region.id" >  
+                  {{region.name}}  
+              </option>   
+           </select>
+           <select name="" id=""  class="form-control" *ngIf="!regions">
+               <option value="">Loading</option>
+           </select>
+      </div>
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Street</label>
+      <div class="col-sm-10">
+          <select ngModel id='sel_region' class="form-control" name ="streetName"  *ngIf="addresses" 
+          [(ngModel)] ='client.addressId' >
+              <option *ngFor="let address of addresses"  [attr.selected]="address.id == client.addressId ? true : null" 
+              [value]="address.id"  >  
+                  {{address.streetName}}  
+              </option>   
+           </select>
+           <select name="" id=""  class="form-control" *ngIf="!addresses">
+            <option value="">Loading</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Building no.</label>
+      <div class="col-sm-10">
+          <input class="form-control" type="text" *ngIf="client" required  name ="buildingNumber" #buildingNumber="ngModel" [(ngModel)]="client.buildingNumber" > 
+          <input class="form-control" *ngIf="!client" disabled required>  
+        </div>
+  </div> 
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Apartment no.</label>
+      <div class="col-sm-10">
+          <input class="form-control" type="text"  *ngIf="client" name ="apartmentNumber" 
+          (change)="log(apartmentNumber)"
+           #apartmentNumber="ngModel" [(ngModel)]="client.apartmentNumber"  required>
+
+          <input class="form-control" *ngIf="!client" disabled required>
+
+          <!-- <div *ngIf="client && (apartnemtNumber.invalid && (apartnemtNumber.dirty || apartnemtNumber.touched))"class="alert alert-danger">
+            Not valid
+            </div> -->
+        </div>
+  </div>
+  
+  <!-- <input id="dummyname" name="dummyname" class="form-control" 
+      required minlength="4" appForbiddenName="bob"
+      ngModel #dummyname="ngModel" >
+
+    <div *ngIf="dummyname.invalid && (dummyname.dirty || dummyname.touched)"class="alert alert-danger">
+    Not valid
+    </div> -->
+
+<div class="form-group row">
+    <label class="col col-form-label">Estimate time</label>
+    <div class="col-sm-10">
+        <select ngModel id='sel_region' class="form-control" name="schedule">
+          <option *ngFor="let schedule of schedules" 
+                [value]="schedule.id">  
+                {{schedule.date}}
+            </option>    
+         </select>
+    </div>
+</div>
+
+
+  <div  class="row mb-5">
+      <div class="col-3"></div>
+    <div class="col-3">
+        <button type="submit" class="btn btn-success " >Submit</button> 
+    </div>
+    <div class="col-3">
+        <button  class="btn btn-success " routerLink="/Home" >Cancel</button> 
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+</form>
+
+
+</div>
+<div class="col"></div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+
+// Initialize Select2
+$('#sel_government').select2();
+
+// Set option selected onchange
+$('#user_government').change(function(){
+
+var value = $(this).val();
+
+// Set selected 
+$('#sel_government').val(value);
+$('#sel_government').select2().trigger('change');
+
+});
+});
+
+function myFunction() {
+  alert("The input value has changed. The new value is: " );
+}
+</script>
+
+</div>
+
+<!-- 
+    /// DELETE PART
+    <div class="radio form-group row">
+    <label class="col-sm-2 col-form-label">Separated?</label>
+    <label class="col-sm-5 col-form-label" >
+      <input ngModel type="radio" name="separated" value ="1">
+      Yes
+    </label>
+    <label class="col-sm-5 col-form-label" >
+        <input ngModel type="radio" name="separated" value ="0">
+        No
+    </label>
+</div> 
+<div class="form-group row">
+    <label class="col col-form-label">Organic Waste</label>
+    <div class="slidecontainer col form-control">
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div>
+    <label class="col col-form-label">
+        <input type="checkbox">
+        Organic Waste
+    </label>
+</div>
+<div class="form-group row">
+    <label class="col col-form-label"> Non Organic Waste</label>
+    <div class="slidecontainer col form-control">
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div>
+    <label class="col col-form-label">
+        <input type="checkbox">
+        Non Organic Waste
+    </label>
+</div>
+ -->
