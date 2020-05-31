@@ -31,12 +31,8 @@
      <li class="nav-item">
        <a class="nav-link" routerLink="#">Profile</a>
      </li>
-     <li class="nav-item">
-       <a class="nav-link" routerLink="#">Requests</a>
-     </li>
-     <li class="nav-item">
-       <a class="nav-link" routerLink="#">Promotions</a>
-     </li> <li class="nav-item dropdown">
+
+     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Request
       </a>
@@ -44,6 +40,19 @@
         <a class="dropdown-item" href="/Request">Request</a>
         <a class="dropdown-item" routerLink="/RequestsDetails">Requests List</a>
       </div>
+      </li>
+
+      
+     <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Promotions
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" routerLink="/MyPromotions">My-Promotion</a>
+        <a class="dropdown-item" routerLink="/Promotions">Promotions List</a>
+      </div>
+      </li>
+
      <li class="nav-item">
       <a class="nav-link" routerLink="/test">test</a>
     </li>
@@ -57,9 +66,11 @@
          <a class="nav-link" *ngIf="port.valid==false" href="/login">login</a>
          <a class="nav-link" *ngIf="port.valid==true" href="" (click)="logOut()">logout</a>
        </li>
+       
       </ul>
     </div>
  </nav>
+
 
  
 <router-outlet>

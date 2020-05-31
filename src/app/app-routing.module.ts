@@ -11,6 +11,8 @@ import { TestLoginComponent } from './test-login/test-login.component';
 
 import { RequestsDetailsComponent } from './requests-details/requests-details.component';
 import { RequestComponent } from './request/request.component';
+import { PromotionsComponent } from './promotions/promotions.component';
+import { MyPromotionsComponent } from './my-promotions/my-promotions.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,14 @@ const routes: Routes = [
     path: 'Request',
     component: RequestComponent,
   },
+  {
+    path: 'Promotions',
+    component: PromotionsComponent,
+  },
+  {
+    path: 'MyPromotions',
+    component: MyPromotionsComponent,
+  }, 
   { path: "", redirectTo:"Home",pathMatch:"full" },
   
 ];

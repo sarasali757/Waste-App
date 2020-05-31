@@ -8,6 +8,7 @@ import { NewRequestDetailService } from '../shared/new-request-detail.service'
 })
 export class RequestComponent implements OnInit {
 
+  
   constructor(public service:NewRequestDetailService) {
   
    }

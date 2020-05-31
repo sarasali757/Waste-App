@@ -26,8 +26,8 @@ export class RequestDetialsComponent implements OnInit {
       data => {  
         this.request = data as Requests ;  
         console.log(this.request)
-        console.log(this.request.schedule.date)      
-        this.remainingTime = (new Date(this.request.schedule.date)).valueOf()-(new Date()).valueOf();
+        console.log(this.request.schedule.time)      
+        this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
         console.log("time "+this.remainingTime);
         console.log(this.getRemainingTime());
       }  

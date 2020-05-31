@@ -29,7 +29,7 @@ export class NewRequestAddressModel {
 } 
 export class NewRequestScheduleModel {
     id: number;
-    date:string;
+//    date:string;
     time:string;
     regionId: number;
     driverId: number;

@@ -20,7 +20,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let request of requests | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-        <td >{{request.schedule.date |  date:'MM/dd/yyyy'}}</td>
+        <td >{{request.schedule.time |  date:'MM/dd/yyyy'}}</td>
         <td >{{request.nonOrganicWeight}}</td>
         <td >{{request.orgaincWeight}}</td>
         <td >{{request.points}}</td>

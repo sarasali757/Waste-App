@@ -31,6 +31,19 @@ import { NewRequestDetailService } from './shared/new-request-detail.service';
 import { RequestComponent } from './request/request.component';
 import { RequestDetialsComponent } from './request/request-detials/request-detials.component';
 import { NewRequestDetailsComponent } from './request/new-request-details/new-request-details.component';
+import { PromotionsComponent } from './promotions/promotions.component';
+//import { PromotionDetailsComponent } from './promotion-details/promotion-details.component';
+
+//popup
+
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+import { RequestsDetailsService } from './shared/requests-details.service';
+import { PromotionService } from './shared/promotion.service';
+import { ConfirmDialogBoxComponent } from './confirm-dialog-box/confirm-dialog-box.component';
+import { NotifyDialogBoxComponent } from './notify-dialog-box/notify-dialog-box.component';
+import { MyPromotionsComponent } from './my-promotions/my-promotions.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -50,7 +63,13 @@ export function tokenGetter() {
     RequestsDetailsComponent, 
     RequestComponent,
     RequestDetialsComponent,
-    NewRequestDetailsComponent
+    NewRequestDetailsComponent,
+    PromotionsComponent,
+   // PromotionDetailsComponent,
+    
+    ConfirmDialogBoxComponent,
+   NotifyDialogBoxComponent,
+   MyPromotionsComponent
   ],
   imports: [MatSliderModule,
     BrowserModule,
@@ -62,7 +81,8 @@ export function tokenGetter() {
     //   { path: 'login', component: LoginComponent },
     //   { path: 'customers', component: RegisterComponent },
     // ]),
-    BrowserAnimationsModule,MatToolbarModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -74,11 +94,17 @@ export function tokenGetter() {
     NgxPaginationModule,
     Ng2SearchPipeModule ,
    // FontAwesomeModule 
-
+   MatDialogModule
+  
   ],
   providers: [AuthService
   ,
   NewRequestDetailService
+  ,
+  RequestsDetailsService
+  ,
+  PromotionService
+  
 ],
   bootstrap: [AppComponent]
 })

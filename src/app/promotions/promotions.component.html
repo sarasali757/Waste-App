@@ -1,0 +1,41 @@
+<div class="jumbtron">  
+    <h1 class="display-4 text-center">
+       promotions
+    </h1>
+<hr class="mx-5">
+
+
+<div class="mx-5">
+    <nav class="navbar">
+        <input class="form-control" type="text" name="search" [(ngModel)]="filter">      
+      </nav>
+<table class="table ">
+    <thead class="bg-success">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Required Points</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Company</th>
+        <th scope="col">Add</th><!-- 
+        <th scope="col">More Detials</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let promotion of promotions | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+        <td hidden>{{promotion.id}}</td>
+        <td >{{promotion.name}}</td>
+        <td >{{promotion.requiredPoints}}</td>
+        <td >{{promotion.dateFrom |  date:'MM/dd/yyyy'}}</td>
+        <td >{{promotion.dateTo |  date:'MM/dd/yyyy'}}</td>
+        <td>{{promotion.company.name}}</td>
+        <td> <button mat-button (click)="openDialog(promotion)">Add</button></td><!-- 
+        <td ><Button  (click)='promotionDetials(promotion)'>...</Button></td> -->
+      </tr>
+    </tbody>
+  </table>
+  
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+

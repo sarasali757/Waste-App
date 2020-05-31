@@ -1,7 +1,8 @@
 <!-- <div> flag  == {{service.flag}}</div> -->
 
-<app-new-request-details *ngIf="service.startNewRequest()"></app-new-request-details>
-<app-request-detials *ngIf="!service.startNewRequest()"></app-request-detials>
+
+<app-new-request-details *ngIf="service.flag"></app-new-request-details>
+<app-request-detials *ngIf="!service.flag"></app-request-detials>
  
 <!--  <h1>Page in progress</h1>
 <h3>New Request Page</h3>
