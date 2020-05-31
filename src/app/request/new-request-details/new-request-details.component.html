@@ -3,7 +3,7 @@
         New Request
     </h1>
 <hr>
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col"></div>
         <div class="col-6">
@@ -16,7 +16,7 @@
         {{client.firstName}} {{ " "}} {{client.lastName}} 
       </h3>
   </div>
-
+ -->
 <!--   <div class="form-group row">
       <label class="col-sm-2 col-form-label">Government</label>
       <div class="col-sm-10">
@@ -29,8 +29,7 @@
               </option>   
            </select>
       </div>
-  </div>  -->
- <!--  *ngIf="client" name ="apartmentNumber" #apartmentNumber="ngModel" [(ngModel)]="client.apartmentNumber" -->
+  </div>  --><!-- 
   <div class="form-group row">
       <label class="col-sm-2 col-form-label">Region</label>
       <div class="col-sm-10">
@@ -38,7 +37,6 @@
           <select ngModel id='sel_region' class="form-control" name ="region"  #region="ngModel" 
           (change)='onOptionsSelected(region.value)' *ngIf="regions" 
            [(ngModel)] ='client.address.regionId' >
-         <!--  [attr.selected]="region.id == client.address.regionId ? true : null" -->
           <option *ngFor="let region of regions" 
               [value]="region.id" >  
                   {{region.name}}  
@@ -80,20 +78,9 @@
            #apartmentNumber="ngModel" [(ngModel)]="client.apartmentNumber"  required>
 
           <input class="form-control" *ngIf="!client" disabled required>
-
-          <!-- <div *ngIf="client && (apartnemtNumber.invalid && (apartnemtNumber.dirty || apartnemtNumber.touched))"class="alert alert-danger">
-            Not valid
-            </div> -->
-        </div>
   </div>
   
-  <!-- <input id="dummyname" name="dummyname" class="form-control" 
-      required minlength="4" appForbiddenName="bob"
-      ngModel #dummyname="ngModel" >
 
-    <div *ngIf="dummyname.invalid && (dummyname.dirty || dummyname.touched)"class="alert alert-danger">
-    Not valid
-    </div> -->
 
 <div class="form-group row">
     <label class="col col-form-label">Estimate time</label>
@@ -150,38 +137,88 @@ function myFunction() {
 </script>
 
 </div>
-
-<!-- 
-    /// DELETE PART
-    <div class="radio form-group row">
-    <label class="col-sm-2 col-form-label">Separated?</label>
-    <label class="col-sm-5 col-form-label" >
-      <input ngModel type="radio" name="separated" value ="1">
-      Yes
-    </label>
-    <label class="col-sm-5 col-form-label" >
-        <input ngModel type="radio" name="separated" value ="0">
-        No
-    </label>
-</div> 
-<div class="form-group row">
-    <label class="col col-form-label">Organic Waste</label>
-    <div class="slidecontainer col form-control">
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-    </div>
-    <label class="col col-form-label">
-        <input type="checkbox">
-        Organic Waste
-    </label>
-</div>
-<div class="form-group row">
-    <label class="col col-form-label"> Non Organic Waste</label>
-    <div class="slidecontainer col form-control">
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-    </div>
-    <label class="col col-form-label">
-        <input type="checkbox">
-        Non Organic Waste
-    </label>
-</div>
  -->
+
+ <div class="row">
+    <div class="col"></div>
+    <div class="col-4">
+
+ <form #form="ngForm" autocomplete="off"  (submit)="onSubmit(form)" class="example-form">
+
+    <mat-form-field appearance="legacy" > 
+      <mat-label  *ngIf="client" >Name</mat-label>
+      <input matInput style="font-size: 20px; color: black;" disabled value="{{client.firstName}} {{' '}} {{client.lastName}} "/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance="legacy" >
+        <mat-label>Region</mat-label>
+        <mat-select ngModel id='sel_region' class="form-control" name ="region"  #region="ngModel" 
+        (selectionChange)='onOptionsSelected(region.value)' *ngIf="regions" 
+         [(ngModel)] ='client.address.regionId' >
+            <mat-option  *ngFor="let region of regions" 
+                [value]="region.id" >{{region.name}}  
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="legacy">
+        <mat-label>Street</mat-label>
+        <mat-select ngModel id='sel_region' class="form-control" name ="streetName"  *ngIf="addresses" 
+        [(ngModel)] ='client.addressId' >
+            <mat-option  *ngFor="let address of addresses"  [attr.selected]="address.id == client.addressId ? true : null" 
+            [value]="address.id"  >
+            {{address.streetName}}  
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    
+    <table class="example-full-width" cellspacing="0" >
+        <tr>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label  *ngIf="client" > Building no.</mat-label>
+                <input matInput type="number" min="0" *ngIf="client" name ="buildingNumber" #buildingNumber="ngModel" [(ngModel)]="client.buildingNumber"/>        
+     
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label  *ngIf="client" > Apartment no.</mat-label>
+                <input matInput type="number" min="0" *ngIf="client"  name ="apartmentNumber" (change)="log(apartmentNumber)"
+                 #apartmentNumber="ngModel" [(ngModel)]="client.apartmentNumber" />
+            </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <mat-form-field appearance="legacy">
+        <mat-label>Estimate time</mat-label>
+        <mat-select ngModel *ngIf="client" id='sel_region' class="form-control" name="schedule" >
+            <mat-option  *ngFor="let schedule of schedules" 
+            [value]="schedule.id"  >
+            {{schedule.time |  date: 'MMM d, y, h:mm:ss a'}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+
+  <div  class="row mb-5">
+    <div class="col-3"></div>
+  <div class="col-3">
+      <button type="submit" mat-raised-button class="btn btn-success " >Submit</button> 
+  </div>
+  <div class="col-3">
+      <button  class="btn btn-success " mat-raised-button routerLink="/Home" >Cancel</button> 
+  </div>
+  <div class="col-3"></div>
+</div>
+
+ </form>
+
+</div>
+
+<div class="col"></div>
+</div>

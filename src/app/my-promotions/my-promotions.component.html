@@ -1,4 +1,4 @@
-<div class="jumbtron">  
+<!-- <div class="jumbtron">  
     <h1 class="display-4 text-center">
       My promotions
     </h1>
@@ -26,15 +26,53 @@
         <td >{{promotion.promtion.requiredPoints}}</td>
         <td >{{promotion.promtion.dateTo |  date:'MM/dd/yyyy'}}</td>
         <td>{{promotion.promtion.company.name}}</td>
-        <!-- 
-        <td> <button mat-button (click)="openDialog(promotion)">Add</button></td> -->
-        <!-- 
-        <td ><Button  (click)='promotionDetials(promotion)'>...</Button></td> -->
+        
       </tr>
     </tbody>
   </table>
   
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
+ -->
 
+ 
+ <div class="row m-3">
 
+  <div class="col">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"  [length]="totalSize"
+    [pageIndex]="currentPage" (page)=" handlePage($event)">
+</mat-paginator>
+  </div>
+ </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 x-5" >
+
+  <ng-container matColumnDef="promtion.name">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.promtion.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="promtion.requiredPoints">
+    <th mat-header-cell *matHeaderCellDef class="bg-success" > Points </th>
+    <td mat-cell *matCellDef="let element"> {{element.promtion.requiredPoints}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="promtion.dateTo">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Valid Through </th>
+    <td mat-cell *matCellDef="let element"> {{element.promtion.dateTo |  date:'MMMM d, y'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="promtion.company.name">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Company </th>
+    <td mat-cell *matCellDef="let element"> {{element.promtion.company.name}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

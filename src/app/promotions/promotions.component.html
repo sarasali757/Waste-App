@@ -1,9 +1,12 @@
-<div class="jumbtron">  
+<!-- <div class="jumbtron">  
     <h1 class="display-4 text-center">
        promotions
     </h1>
 <hr class="mx-5">
 
+<div>
+  total Points
+</div>
 
 <div class="mx-5">
     <nav class="navbar">
@@ -17,8 +20,8 @@
         <th scope="col">From</th>
         <th scope="col">To</th>
         <th scope="col">Company</th>
-        <th scope="col">Add</th><!-- 
-        <th scope="col">More Detials</th> -->
+        <th scope="col">Add</th>
+        <th scope="col">More Detials</th>
       </tr>
     </thead>
     <tbody>
@@ -29,8 +32,8 @@
         <td >{{promotion.dateFrom |  date:'MM/dd/yyyy'}}</td>
         <td >{{promotion.dateTo |  date:'MM/dd/yyyy'}}</td>
         <td>{{promotion.company.name}}</td>
-        <td> <button mat-button (click)="openDialog(promotion)">Add</button></td><!-- 
-        <td ><Button  (click)='promotionDetials(promotion)'>...</Button></td> -->
+        <td> <button mat-button (click)="openDialog(promotion)">Add</button></td>
+        <td ><Button  (click)='promotionDetials(promotion)'>...</Button></td>
       </tr>
     </tbody>
   </table>
@@ -39,3 +42,120 @@
 </div>
 
 
+ -->
+
+ <!-- 
+ <div class="row m-3">
+
+  <div class="col">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"  [length]="totalSize"
+    [pageIndex]="currentPage" (page)=" handlePage($event)">
+</mat-paginator>
+  </div>
+ </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 x-5" >
+
+  <ng-container matColumnDef="id">
+    <td mat-cell *matCellDef="let element" > {{element.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="requiredPoints">
+    <th mat-header-cell *matHeaderCellDef class="bg-success" > Points </th>
+    <td mat-cell *matCellDef="let element"> {{element.requiredPoints}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateFrom">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Valid Through </th>
+    <td mat-cell *matCellDef="let element"> {{element.dateFrom |  date:'MM/dd/yyyy'}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="dateTo">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Valid Through </th>
+    <td mat-cell *matCellDef="let element"> {{element.dateTo |  date:'MM/dd/yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="company.name">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Company </th>
+    <td mat-cell *matCellDef="let element"> {{element.company.name}} </td>
+  </ng-container>
+
+  <ng-container >
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Operation </th>
+    <td mat-cell *matCellDef="let element" > <button mat-button (click)="openDialog(element)">Add</button> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> -->
+
+<div>
+  total Points
+</div>
+
+<div class="row m-3">
+
+  <div class="col">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"  [length]="totalSize"
+    [pageIndex]="currentPage" (page)=" handlePage($event)">
+</mat-paginator>
+  </div>
+ </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 x-5" >
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="requiredPoints">
+    <th mat-header-cell *matHeaderCellDef class="bg-success" > Points </th>
+    <td mat-cell *matCellDef="let element"> {{element.requiredPoints}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateFrom">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Valid Through </th>
+    <td mat-cell *matCellDef="let element"> {{element.dateFrom |  date:'MMMM d, y'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateTo">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Valid Through </th>
+    <td mat-cell *matCellDef="let element"> {{element.dateTo |  date:'MMMM d, y'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="company.name">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Company </th>
+    <td mat-cell *matCellDef="let element"> {{element.company.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="add" >
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Operation </th>
+    <td mat-cell *matCellDef="let element" > <button mat-button (click)="openDialog(element)">Add</button> </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="id" >
+    <th mat-header-cell *matHeaderCellDef class="bg-success" hidden> id </th>
+    <td mat-cell *matCellDef="let element" hidden> {{element.id}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

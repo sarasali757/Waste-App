@@ -13,6 +13,7 @@ import { RequestsDetailsComponent } from './requests-details/requests-details.co
 import { RequestComponent } from './request/request.component';
 import { PromotionsComponent } from './promotions/promotions.component';
 import { MyPromotionsComponent } from './my-promotions/my-promotions.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'MyPromotions',
     component: MyPromotionsComponent,
+  },
+  {
+    path: 'Profile',
+    component: ProfileComponent,
   }, 
   { path: "", redirectTo:"Home",pathMatch:"full" },
   

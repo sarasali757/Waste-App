@@ -43,7 +43,16 @@ import { PromotionService } from './shared/promotion.service';
 import { ConfirmDialogBoxComponent } from './confirm-dialog-box/confirm-dialog-box.component';
 import { NotifyDialogBoxComponent } from './notify-dialog-box/notify-dialog-box.component';
 import { MyPromotionsComponent } from './my-promotions/my-promotions.component';
+import { ProfileComponent } from './profile/profile.component';
 
+import { MatTableModule } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -69,7 +78,8 @@ export function tokenGetter() {
     
     ConfirmDialogBoxComponent,
    NotifyDialogBoxComponent,
-   MyPromotionsComponent
+   MyPromotionsComponent,
+   ProfileComponent
   ],
   imports: [MatSliderModule,
     BrowserModule,
@@ -94,8 +104,15 @@ export function tokenGetter() {
     NgxPaginationModule,
     Ng2SearchPipeModule ,
    // FontAwesomeModule 
-   MatDialogModule
-  
+   MatDialogModule,
+   MatTableModule,
+   MatFormFieldModule,
+   MatInputModule,
+   MatPaginatorModule,
+   MatSelectModule,
+   MatButtonModule,
+   ReactiveFormsModule
+
   ],
   providers: [AuthService
   ,

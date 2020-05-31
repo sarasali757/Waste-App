@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NewRequestDetailService } from '../../shared/new-request-detail.service';
-import { NgForm } from '@angular/forms';
-import { NewRequestClientModel, NewRequestRegionModel, NewRequestAddressModel ,NewRequestScheduleModel} from '../../shared/new-request-detail.model';
+import { NgForm, Form, FormControl, Validators, FormGroup } from '@angular/forms';
+import { NewRequestClientModel, NewRequestRegionModel, NewRequestAddressModel ,NewRequestScheduleModel, Requests} from '../../shared/new-request-detail.model';
 
 
 @Component({
   selector: 'app-new-request-details',
   templateUrl: './new-request-details.component.html',
-  styles: []
+  styleUrls: ['./new-request-details.component.css']
 })
 
 export class NewRequestDetailsComponent implements OnInit {
@@ -17,12 +17,39 @@ export class NewRequestDetailsComponent implements OnInit {
   addresses: NewRequestAddressModel;
   schedules: NewRequestScheduleModel;
 
-  constructor (private service:NewRequestDetailService){ 
-    this.initialData();
-  }
+  public ownerForm: FormGroup;
+  owner: any;
   
+  constructor (private service:NewRequestDetailService){ 
+    //this.initialData();
+  }
+ 
   ngOnInit(): void { 
+    this.ownerForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      dateOfBirth: new FormControl(new Date()),
+      address: new FormControl('', [Validators.required, Validators.maxLength(100)])
+    });
       this.initialData();
+  }
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.ownerForm.controls[controlName].hasError(errorName);
+  }
+ 
+
+  public createOwner = (ownerFormValue) => {
+    if (this.ownerForm.valid) {
+      this.executeOwnerCreation(ownerFormValue);
+    }
+  }
+
+  private executeOwnerCreation = (ownerFormValue) => {
+     this.owner =  {
+      id: ownerFormValue.id,
+      buildingNumber : ownerFormValue.buildingNumber
+    }
+    // add request here 
+    console.log(this.owner);
   }
   log(x){console.log(x)}
 
@@ -93,5 +120,9 @@ export class NewRequestDetailsComponent implements OnInit {
       console.log(form.value);
       console.log(+form.value.region);
    } 
+
+   clickMe(form:Form){
+     console.log(form);
+   }
 }
 

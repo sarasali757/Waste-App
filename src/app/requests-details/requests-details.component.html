@@ -1,4 +1,4 @@
-<div class="jumbtron">  
+<!-- <div class="jumbtron">  
     <h1 class="display-4 text-center">
         Requests Details
     </h1>
@@ -26,34 +26,54 @@
         <td >{{request.points}}</td>
         <td ><Button>...</Button></td>
       </tr>
-      <!-- <tr >
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-        </nav>
-    </td>
-    </tr> -->
     </tbody>
   </table>
   
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 
+ -->
+
+ <div class="row m-3">
+
+  <div class="col">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"  [length]="totalSize"
+    [pageIndex]="currentPage" (page)=" handlePage($event)">
+</mat-paginator>
+  </div>
+ </div>
+
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 x-5" >
+
+  <ng-container matColumnDef="schedule.time">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.schedule.time |  date:'MMMM d, y'}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="orgaincWeight">
+    <th mat-header-cell *matHeaderCellDef class="bg-success" > Organic weight </th>
+    <td mat-cell *matCellDef="let element"> {{element.orgaincWeight}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nonOrganicWeight">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> Non-Organic weight </th>
+    <td mat-cell *matCellDef="let element"> {{element.nonOrganicWeight}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="points">
+    <th mat-header-cell *matHeaderCellDef class="bg-success"> points </th>
+    <td mat-cell *matCellDef="let element"> {{element.points}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
