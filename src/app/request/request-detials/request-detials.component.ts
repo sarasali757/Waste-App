@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Requests } from '../../shared/new-request-detail.model';
 import { NewRequestDetailService } from 'src/app/shared/new-request-detail.service';
+
+import { ConfirmDialogBoxComponent } from 'src/app/confirm-dialog-box/confirm-dialog-box.component';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifyDialogBoxComponent } from 'src/app/notify-dialog-box/notify-dialog-box.component';
 
 @Component({
   selector: 'app-request-detials',
@@ -12,11 +15,18 @@ export class RequestDetialsComponent implements OnInit {
 
   request:Requests;
   remainingTime;
+  remainingTimeString;
   hours;
   minutes;
   seconds;
-  constructor(private service:NewRequestDetailService) { 
+  date;
+  constructor(private service:NewRequestDetailService,private dialog:MatDialog) { 
     this.getRequest();
+
+    setInterval(() => {
+      this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
+       this.getRemainingTime()
+    }, 1000)
   }
 
   ngOnInit(): void {
@@ -30,7 +40,7 @@ export class RequestDetialsComponent implements OnInit {
         this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
         console.log("time "+this.remainingTime);
         console.log(this.getRemainingTime());
-      }  
+      }
       );
   }
    getRemainingTime(){
@@ -49,11 +59,26 @@ export class RequestDetialsComponent implements OnInit {
     var absoluteSeconds = Math.floor(seconds);
     var s = absoluteSeconds > 9 ? absoluteSeconds : '0' + absoluteSeconds;
   
-    return h + ':' + m + ':' + s;
+    this.remainingTimeString = h + ':' + m + ':' + s
+    return this.remainingTimeString ;
   }
 
   DeleteRequest(){
     this.service.DeleteRequest(this.request.id);
+  }
+  openDialog(){
+    this.dialog.open(ConfirmDialogBoxComponent,{ data: "Delete Current Request"})
+    .afterClosed()
+    .subscribe(result=> 
+      {  
+        if(result == true){
+          this.DeleteRequest()
+          this.openNotifyDialogBox("Deleted Successfully");
+        }
+      });
+  }
+  openNotifyDialogBox(message){
+    this.dialog.open(NotifyDialogBoxComponent,{ data: message})
   }
 }
 

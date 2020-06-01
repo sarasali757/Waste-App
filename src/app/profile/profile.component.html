@@ -1,36 +1,139 @@
-<p>profile works!</p>
+<div class="jumbtron">  
+    <h1 class="display-4 text-center">
+      Profile
+    </h1>
+<hr>
 
 <div class="row">
     <div class="col"></div>
 
     <div class="col-6">
-        <form action="">
+        
+ <form #form="ngForm" autocomplete="off" [formGroup]="group"  name="form" *ngIf="client" class="example-form"
+ (submit)="submit()">
 
-                <div class="row form-group">
-                    <div class="col">    <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="col">    <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                </div>
+    <table>
+        <tr>
+            <td>
+                <mat-form-field appearance="legacy" > 
+                <mat-label  *ngIf="client" >First Name</mat-label>
+                <input matInput style="font-size: 20px; color: black;" formControlName="firstNameControl" 
+                [(ngModel)] ="client.firstName"/>
+                </mat-form-field>
+                <mat-error *ngIf="hasError('firstNameControl', 'required')">First Name is required</mat-error>
 
-                <div class="row form-group">
-                    <div class="col">    <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="col">    <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                </div>
+            </td>
+            <td>
+                <mat-form-field appearance="legacy" > 
+                <mat-label  *ngIf="client" >Last Name</mat-label>
+                <input matInput style="font-size: 20px; color: black;" formControlName="lastNameControl" 
+                [(ngModel)] ="client.lastName"/>
+                </mat-form-field>
+                <mat-error *ngIf="hasError('lastNameControl', 'required')">Last Name is required</mat-error>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td>
 
+     <mat-form-field appearance="legacy" >
+        <mat-label>Region</mat-label>
+        <mat-select ngModel class="form-control" name ="region" 
+        (selectionChange)="onOptionsSelected()"  required
+        formControlName="regionControl" [(ngModel)] ='client.address.regionId' >
+            <mat-option>--</mat-option>
+            <mat-option  *ngFor="let region of regions" 
+                [value]="region.id" >{{region.name}}  
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('regionControl', 'required')">Region is required</mat-error>
+    </mat-form-field>
 
-        </form>
+</td>
+<td>
+    <mat-form-field appearance="legacy">
+        <mat-label>Street</mat-label>
+        <mat-select ngModel class="form-control" name ="streetName"  required
+        formControlName="streetControl"  [(ngModel)] ='client.addressId' >
+            <mat-option>--</mat-option>
+            <mat-option  *ngFor="let address of addresses"  [attr.selected]="address.id == client.addressId ? true : null" 
+            [value]="address.id"  >
+            {{address.streetName}}  
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('streetControl', 'required')">Street is required</mat-error>
+    </mat-form-field>
+
+</td>
+</tr>
+</table>
+
+    <table class="example-full-width" cellspacing="0" >
+        <tr>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label  *ngIf="client" > Building no.</mat-label>
+                <input matInput type="number" min="0"  formControlName="buildingNumberControl" 
+                name ="buildingNumber" [(ngModel)]="client.buildingNumber"/>        
+            </mat-form-field>
+            <mat-error *ngIf="hasError('buildingNumberControl', 'required')">Building No is required</mat-error>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label  *ngIf="client" > Apartment no.</mat-label>
+                <input matInput type="number" min="0"  formControlName="apartmentNumberControl"
+                name ="apartmentNumber" [(ngModel)]="client.apartmentNumber" />
+            </mat-form-field>
+            <mat-error *ngIf="hasError('apartmentNumberControl', 'required')">Apartment No is required</mat-error>
+        </td>
+      </tr>
+    </table>
+    <br>
+    
+    <mat-form-field class="example-full-width">
+        <mat-label  *ngIf="client" > Mobile</mat-label>
+        <span matPrefix>+2 &nbsp;</span>
+        <input matInput type="tel" min="0" maxlength="11"  formControlName="mobileControl"
+        name ="mobile" [(ngModel)]="client.mobile" />
+        <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <mat-error *ngIf="hasError('mobileControl', 'required')">Mobile is required</mat-error>
+
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label  *ngIf="client" > Email</mat-label>
+        <input matInput  min="0"  formControlName="emailControl"
+        name ="mobile" [(ngModel)]="client.email" />
+    </mat-form-field>
+    <mat-error *ngIf="!hasError('emailControl', 'required') && hasError('emailControl', 'email') ">Please enter a valid email address</mat-error>
+    <mat-error *ngIf="hasError('emailControl', 'required')">Email is required</mat-error> 
+
+    <mat-form-field appearance="legacy">
+        <mat-label>Category</mat-label>
+        <mat-select ngModel class="form-control" name ="category" 
+        formControlName="categoryControl"  [(ngModel)] ='client.categoryId' >
+            <mat-option  *ngFor="let category of categories"  [attr.selected]="category.id == client.categoryId? true : null" 
+            [value]="category.id" >
+            {{category.name}}  
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('categoryControl', 'required')">Street is required</mat-error>
+    </mat-form-field>
+
+  <div  class="row mb-5">
+    <div class="col-3"></div>
+  <div class="col-3">
+      <button type="submit" mat-raised-button class="btn btn-success" [disabled]="!form.valid" >Update</button> 
+  </div>
+  <div class="col-3">
+      <button  class="btn btn-success " mat-raised-button routerLink="/Home" >Cancel</button> 
+  </div>
+  <div class="col-3"></div>
+</div>
+
+ </form>
     </div>
-
     <div class="col"></div>
 </div>

@@ -8,12 +8,20 @@ import { NotifyDialogBoxComponent } from '../notify-dialog-box/notify-dialog-box
 
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
   selector: 'app-promotions',
   templateUrl: './promotions.component.html',
-  styleUrls: ['./promotions.component.css']
+  styleUrls: ['./promotions.component.css'],
+  animations: [trigger('detailExpand', [
+    state('void', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+    state('*', style({ height: '*', visibility: 'visible' })),
+    transition('void <=> *', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+  ]),
+],
 })
 export class PromotionsComponent implements OnInit {
   filter;
@@ -22,29 +30,35 @@ export class PromotionsComponent implements OnInit {
   result;
 
   dataSource: MatTableDataSource<Promotion>;
-
   pageSize = 5;
   currentPage = 0;
   totalSize = 0;
 
-@ViewChild(MatPaginator) paginator: MatPaginator;
+  displayedColumns: string[] = ['name', 'requiredPoints','dateFrom','dateTo', 'company.name','add','id'];
+
+  isExpansionDetailRow = (index, row) => row.hasOwnProperty('detailRow');
+  expandedElement: any;
+
+  Element : Promotion;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   array: any;
-
-
+  clientPoints;
   constructor(private service: PromotionService,private dialog:MatDialog) {
-    
-  /*   service.getPromotions().subscribe(  
-      data => {  
-        this.promotions = data as Promotion ;  
-        console.log(this.promotions)
-      }  
-    ); */
+    this.getClientPoints();
    }
-
+   
+  getClientPoints(){
+    this.service.getClientPoints().subscribe(data=>{
+      this.clientPoints = data 
+    });
+  }
   ngOnInit(): void {
+    
     this.getArray();
   }
-
+  
   openDialog(promotion){
     this.dialog.open(ConfirmDialogBoxComponent,{ data: promotion.name})
     .afterClosed()
@@ -56,6 +70,8 @@ export class PromotionsComponent implements OnInit {
         this.service.AddClientPromotion(promotion.id).subscribe(
           data  => {
             
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
           console.log("PUT Request is successful ", data);
             let message;
           if(data == false){
@@ -73,11 +89,15 @@ export class PromotionsComponent implements OnInit {
   }
 ///
 
-displayedColumns: string[] = ['name', 'requiredPoints','dateFrom','dateTo', 'company.name','add','id'];
 
-applyFilter(event: Event) {
+/* applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+} */
+applyFilter(filterValue: string) {
+  filterValue = filterValue.trim(); // Remove whitespace
+  filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+  this.dataSource.filter = filterValue;
 }
 
 public handlePage(e: any) {
@@ -107,4 +127,13 @@ private iterator() {
 }
 
 }
+/* export class ExampleDataSource extends DataSource<any> {
+  connect(): Observable<Element[]> {
+    const rows = [];
+    data.forEach(element => rows.push(element, { detailRow: true, element }));
+    console.log(rows);
+    return of(rows);
+  }
 
+  disconnect() { }
+} */

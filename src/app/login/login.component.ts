@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
      // console.log(this.testser.valid)
       console.log(response);
     //  this.router.navigateByUrl("/Home"); //go here for profile or main page
-
+      this.router.navigateByUrl("/Home"); 
       }, err => {
       // this.invalidLogin = true;
       });

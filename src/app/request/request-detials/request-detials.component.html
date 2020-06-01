@@ -11,15 +11,16 @@
     </div>
 
     <div align="center">
-        <label class="mx-2"  >Estimate Time</label>
-        <label for="" class="mx-2" *ngIf="request" >{{request.schedule.time |  date:'MM/dd/yyyy'}}</label>    
+        <label class="mx-2"  >Date </label>
+        <label for="" class="mx-2" *ngIf="request" >{{request.schedule.time |  date:'MMM d, y, h:mm:ss a'}}</label>    
     </div>
 
     <div align="center">
         <label for="" class="mx-2" >Remaining </label>
-        <label for="" class="mx-2" *ngIf="request"  >{{getRemainingTime()}}</label>    
+        <label for="" class="mx-2" *ngIf="request"  >{{remainingTimeString}}</label>    
     </div>
     <div align="center">
         <button class="btn btn-success mx-2" routerLink="/Home" >Done</button>
-        <button class="btn btn-success mx-2" routerLink="" (click)='DeleteRequest()'>Cancel Request</button>
+        <button class="btn btn-success mx-2" routerLink="" (click)='openDialog()'>Cancel Request</button>
     </div>
+

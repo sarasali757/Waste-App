@@ -31,6 +31,10 @@ export class PromotionService {
   GetMyPromotions(){
     return  this.httpService.get('http://localhost:'+this.port.port+'/Api/client/getMyPromotions/'+this.clientId);
   }
+  getClientPoints(){
 
+    return this.httpService.get('http://localhost:'+this.port.port+'/Api/client/getClientPoints/'+this.clientId);
+  }
 
+  
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewRequestDetailService } from '../../shared/new-request-detail.service';
-import { NgForm, Form, FormControl, Validators, FormGroup } from '@angular/forms';
-import { NewRequestClientModel, NewRequestRegionModel, NewRequestAddressModel ,NewRequestScheduleModel, Requests} from '../../shared/new-request-detail.model';
+import { NgForm, Form, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NewRequestClientModel, NewRequestRegionModel, NewRequestAddressModel ,NewRequestScheduleModel} from '../../shared/new-request-detail.model';
 
 
 @Component({
@@ -17,39 +17,26 @@ export class NewRequestDetailsComponent implements OnInit {
   addresses: NewRequestAddressModel;
   schedules: NewRequestScheduleModel;
 
-  public ownerForm: FormGroup;
-  owner: any;
-  
+  group= new FormGroup({
+    regionControl: new FormControl('', [Validators.required,] , ),
+
+    streetControl: new FormControl('', [Validators.required,] , )
+    ,
+    buildingNumberControl : new FormControl('', [ Validators.required,])
+    ,
+    apartmentNumberControl : new FormControl('', [ Validators.required,])
+    ,
+    scheduleControl : new FormControl('', [ Validators.required,])
+  })
+
   constructor (private service:NewRequestDetailService){ 
-    //this.initialData();
-  }
- 
-  ngOnInit(): void { 
-    this.ownerForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      dateOfBirth: new FormControl(new Date()),
-      address: new FormControl('', [Validators.required, Validators.maxLength(100)])
-    });
-      this.initialData();
+    this.initialData();
   }
   public hasError = (controlName: string, errorName: string) =>{
-    return this.ownerForm.controls[controlName].hasError(errorName);
+    return this.group.controls[controlName].hasError(errorName);
   }
- 
-
-  public createOwner = (ownerFormValue) => {
-    if (this.ownerForm.valid) {
-      this.executeOwnerCreation(ownerFormValue);
-    }
-  }
-
-  private executeOwnerCreation = (ownerFormValue) => {
-     this.owner =  {
-      id: ownerFormValue.id,
-      buildingNumber : ownerFormValue.buildingNumber
-    }
-    // add request here 
-    console.log(this.owner);
+  ngOnInit(): void { 
+      this.initialData();
   }
   log(x){console.log(x)}
 
@@ -82,15 +69,17 @@ export class NewRequestDetailsComponent implements OnInit {
 
   }
 
-  onOptionsSelected(value:string){
-    
+test(val){
+  console.log(val);
+}
+  onOptionsSelected(){
+    let value = this.group.controls['regionControl'].value;
     this.service.getAddresses(value).subscribe(  
       data => {  
         this.addresses= data as NewRequestAddressModel ;  
         console.log(this.addresses);
       }  
     ); 
-
     this.service.getSchedules(value).subscribe(  
       data => {  
         this.schedules = data as NewRequestScheduleModel ;  
@@ -99,26 +88,27 @@ export class NewRequestDetailsComponent implements OnInit {
     ); 
 
   }
-  onSubmit(form:NgForm) {
- 
-    console.log(form.value);
-    let credentials = {
-        "id": 0,
-        "apartmentNumber": (+form.value.apartmentNumber),
-        "clientId": 0 ,
-        "scheduleId": (+form.value.schedule),
-        "buildingNumber":  (+form.value.buildingNumber),
-        "points": 0,
-        "orgaincWeight": 0,
-        "nonOrganicWeight": 0,
-        "addressId":  (+form.value.streetName),
-        "collectorId": 1,
-        "rate": 0
-    }
+  onSubmit() {
+ console.log("on submit");
+    let credentials  = {
+      "id": 0,
+      "apartmentNumber": (this.group.controls['apartmentNumberControl'].value),
+      "clientId": 0 ,
+      "scheduleId": (this.group.controls['scheduleControl'].value),
+      "buildingNumber":  (this.group.controls['buildingNumberControl'].value),
+      "points": 0,
+      "orgaincWeight": 0,
+      "nonOrganicWeight": 0,
+      "addressId": (this.group.controls['streetControl'].value),
+      "collectorId": 1,
+      "rate": 0
+  } 
+
+    console.log(credentials)
     this.service.postNewRequestDetails(credentials);
  
-      console.log(form.value);
-      console.log(+form.value.region);
+     // console.log(form.value);
+    //  console.log(+form.value.region);
    } 
 
    clickMe(form:Form){

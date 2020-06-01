@@ -13,6 +13,6 @@ export class Client {
      clientCategory: ClientCategory
      address: Address
 
-     CategoryId:number;
-     AddressId:number;
+     categoryId:number;
+     addressId:number;
 }

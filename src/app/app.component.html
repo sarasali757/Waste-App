@@ -29,10 +29,10 @@
        <a class="nav-link" routerLink="/Home">Home</a>
      </li>
      <li class="nav-item">
-       <a class="nav-link" routerLink="/Profile">Profile</a>
+       <a class="nav-link" routerLink="/Profile" *ngIf="IsLoggedIn()" >Profile</a>
      </li>
 
-     <li class="nav-item dropdown">
+     <li class="nav-item dropdown" *ngIf="IsLoggedIn()" >
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Request
       </a>
@@ -43,7 +43,7 @@
       </li>
 
       
-     <li class="nav-item dropdown">
+     <li class="nav-item dropdown" *ngIf="IsLoggedIn()" >
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Promotions
       </a>
@@ -53,18 +53,18 @@
       </div>
       </li>
 
-     <li class="nav-item">
+  <!--    <li class="nav-item">
       <a class="nav-link" routerLink="/test">test</a>
-    </li>
+    </li> -->
    </ul>
    <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/register">Register</a>
+          <a class="nav-link" routerLink="/register" *ngIf="!IsLoggedIn()" >Register</a>
         </li>
         <li class="nav-item">
-         <a class="nav-link" *ngIf="port.valid==false" href="/login">login</a>
-         <a class="nav-link" *ngIf="port.valid==true" href="" (click)="logOut()">logout</a>
+         <a class="nav-link" *ngIf="!IsLoggedIn()" href="/login">login</a>
+         <a class="nav-link" *ngIf="IsLoggedIn()" href="" (click)="logOut()">logout</a>
        </li>
        
       </ul>

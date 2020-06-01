@@ -1,0 +1,18 @@
+<form  #addCategoryForm="ngForm"  [formGroup]="group"  name="addCategoryForm" class="example-container"
+(submit)="onSubmit(addCategoryForm)">
+    
+    <mat-form-field appearance="outline" class="formField">
+        <mat-label>Category Name</mat-label>
+        <input matInput placeholder="name" formControlName="cNameControl">
+        <mat-hint>Name should have a minimum of 3 characters.</mat-hint>
+        <mat-error *ngIf="hasError('cNameControl', 'required')">Address is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com">
+        <mat-error *ngIf="hasError('emailFormControl', 'required')">Address is required</mat-error>
+      </mat-form-field>
+
+    <button mat-raised-button class="submitBtn" type="submit" [disabled]="!addCategoryForm.valid">Add Category</button>
+</form>

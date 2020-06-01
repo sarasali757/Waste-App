@@ -7,7 +7,8 @@ export class Promotion
     requiredPoints;
     dateFrom;
     dateTo;
-    company:Company
+    details;
+    company:Company;
     companyId;
 }
 

@@ -16,9 +16,6 @@ import { HomeComponent } from './home/home.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RegisterAsComponent } from './register-as/register-as.component';
 import { RegisterAsRestrntComponent } from './register-as-restrnt/register-as-restrnt.component';
-import { TestLoginComponent } from './test-login/test-login.component';
-
-
 
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -53,12 +50,26 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputErrorsExample } from './input-errors-example/input-errors-example.component';
+
+
+//
+
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
+import {CdkDetailRowDirective} from './promotions/cdk-detail-row.directive';
+import {MatIconModule} from '@angular/material/icon';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
 
 @NgModule({
+  
+  entryComponents: [PromotionsComponent],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -67,7 +78,6 @@ export function tokenGetter() {
     CustomerComponent,
     RegisterAsComponent,
     RegisterAsRestrntComponent,
-    TestLoginComponent,
 
     RequestsDetailsComponent, 
     RequestComponent,
@@ -77,9 +87,11 @@ export function tokenGetter() {
    // PromotionDetailsComponent,
     
     ConfirmDialogBoxComponent,
-   NotifyDialogBoxComponent,
-   MyPromotionsComponent,
-   ProfileComponent
+    NotifyDialogBoxComponent,
+    MyPromotionsComponent,
+    ProfileComponent,
+    InputErrorsExample,
+    CdkDetailRowDirective
   ],
   imports: [MatSliderModule,
     BrowserModule,
@@ -103,7 +115,6 @@ export function tokenGetter() {
 
     NgxPaginationModule,
     Ng2SearchPipeModule ,
-   // FontAwesomeModule 
    MatDialogModule,
    MatTableModule,
    MatFormFieldModule,
@@ -111,8 +122,8 @@ export function tokenGetter() {
    MatPaginatorModule,
    MatSelectModule,
    MatButtonModule,
-   ReactiveFormsModule
-
+   ReactiveFormsModule,
+   MatIconModule,
   ],
   providers: [AuthService
   ,
