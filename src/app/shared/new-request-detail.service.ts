@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { NewRequestClientModel } from './new-request-detail.model';
 
-import { HttpClient,HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { catchError, map } from "rxjs/operators";
-import { Observable, throwError, from } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import {Router} from "@angular/router"
 import { Port } from '../_models/port';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { tokenGetter } from '../app.module';
+
 
 @Injectable({
   providedIn: 'root'

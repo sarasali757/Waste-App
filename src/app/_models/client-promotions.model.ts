@@ -1,9 +1,9 @@
 import { Promotion } from './promotion.model'
 
 export class ClientPromotions {
-    ClientId 
-    PromtionId
-    code
-    takeDate 
+    ClientId :number;
+    PromtionId:number;
+    code: string;
+    takeDate :string;
     Promtion :Promotion
 }

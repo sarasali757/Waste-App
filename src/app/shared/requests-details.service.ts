@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { tokenGetter } from '../app.module';
 import { HttpClient } from '@angular/common/http';
-import { Requests } from './new-request-detail.model';
+//import { Requests } from './new-request-detail.model';
 import { Port } from '../_models/port';
+
 
 @Injectable({
   providedIn: 'root'

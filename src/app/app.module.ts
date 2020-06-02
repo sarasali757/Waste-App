@@ -62,6 +62,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {CdkDetailRowDirective} from './promotions/cdk-detail-row.directive';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -113,8 +115,8 @@ export function tokenGetter() {
       }
     }),
 
-    NgxPaginationModule,
-    Ng2SearchPipeModule ,
+   NgxPaginationModule,
+   Ng2SearchPipeModule ,
    MatDialogModule,
    MatTableModule,
    MatFormFieldModule,
@@ -124,6 +126,7 @@ export function tokenGetter() {
    MatButtonModule,
    ReactiveFormsModule,
    MatIconModule,
+   MatTooltipModule
   ],
   providers: [AuthService
   ,

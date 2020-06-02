@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Requests } from '../../shared/new-request-detail.model';
+//import { Requests } from '../../shared/new-request-detail.model';
 import { NewRequestDetailService } from 'src/app/shared/new-request-detail.service';
 
 import { ConfirmDialogBoxComponent } from 'src/app/confirm-dialog-box/confirm-dialog-box.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NotifyDialogBoxComponent } from 'src/app/notify-dialog-box/notify-dialog-box.component';
 
+import {Requests} from '../../_models/requests.model' 
+import { from } from 'rxjs';
 @Component({
   selector: 'app-request-detials',
   templateUrl: './request-detials.component.html',

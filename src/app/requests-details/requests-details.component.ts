@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Requests} from '../shared/new-request-detail.model';
+//import { Requests} from '../shared/new-request-detail.model';
 import {MatTableDataSource} from '@angular/material/table';
 import { RequestsDetailsService } from '../shared/requests-details.service'
 import {MatPaginator} from '@angular/material/paginator';
 
-
+import {Requests} from '../_models/requests.model'
 @Component({
   selector: 'app-requests-details',
   templateUrl: './requests-details.component.html',

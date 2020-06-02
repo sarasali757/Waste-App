@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../shared/profile.service';
 import { Client } from '../_models/client.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NewRequestRegionModel, NewRequestAddressModel } from '../shared/new-request-detail.model';
+//import { NewRequestRegionModel, NewRequestAddressModel } from '../shared/new-request-detail.model';
 import { ClientCategory } from '../_models/client-category';
+import { Region } from '../_models/region.model';
+import { Address} from '../_models/address.model' 
 
 @Component({
   selector: 'app-profile',
@@ -13,9 +15,9 @@ import { ClientCategory } from '../_models/client-category';
 export class ProfileComponent implements OnInit {
 
   client;
-  regions: NewRequestRegionModel ;
+  regions: Region ;
 
-  addresses: NewRequestAddressModel;
+  addresses: Address;
   categories : ClientCategory;
   group= new FormGroup({
     
@@ -42,16 +44,15 @@ export class ProfileComponent implements OnInit {
   }
   
   initial(){
-
     this.service.getClientData().subscribe(data =>{
       this.client = data as Client
       console.log(this.client);
 
       this.service.getRegion().subscribe(
         data=>{
-          this.regions = data as NewRequestRegionModel;
+          this.regions = data as Region;
           this.service.getAddresses(this.client.address.regionId).subscribe(data=>{
-            this.addresses = data as NewRequestAddressModel;
+            this.addresses = data as Address;
           });
         }
       );
@@ -71,7 +72,7 @@ export class ProfileComponent implements OnInit {
     
     this.service.getAddresses(value).subscribe(  
       data => {  
-        this.addresses= data as NewRequestAddressModel ;  
+        this.addresses= data as Address ;  
         console.log(this.addresses);
       }  
     ); 

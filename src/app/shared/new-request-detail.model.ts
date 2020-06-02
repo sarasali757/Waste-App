@@ -1,4 +1,4 @@
-export class NewRequestClientModel {
+/* export class NewRequestClientModel {
     address:NewRequestAddressModel;
     addressId: number;
     apartmentNumber: number;
@@ -11,31 +11,29 @@ export class NewRequestClientModel {
     lastName: string;
     mobile: string;
     password: number;
-    totalPoints: number;
     constructor(){
         this.address.id=0;
         this.address.regionId=0;
         this.address.streetName="";
     }
-}
-export class NewRequestRegionModel {
+} */
+/* export class NewRequestRegionModel {
     id: number;
     name: string;
-}
-export class NewRequestAddressModel {
+} */
+/* export class NewRequestAddressModel {
     id: number;
     regionId: number;
     streetName: string;
-} 
-export class NewRequestScheduleModel {
+}  */
+/* export class NewRequestScheduleModel {
     id: number;
-//    time:string;
     time:string;
     regionId: number;
     driverId: number;
-} 
+}  */
 
-export class Requests{
+/* export class Requests{
     id 
     apartmentNumber
     clientId 
@@ -48,4 +46,4 @@ export class Requests{
     collectorId 
     rate 
     schedule:NewRequestScheduleModel;
-}
+} */
