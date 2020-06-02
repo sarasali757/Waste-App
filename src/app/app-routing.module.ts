@@ -14,6 +14,8 @@ import { PromotionsComponent } from './promotions/promotions.component';
 import { MyPromotionsComponent } from './my-promotions/my-promotions.component';
 import { ProfileComponent } from './profile/profile.component';
 import { InputErrorsExample } from './input-errors-example/input-errors-example.component';
+import { NewRequestDetailsComponent } from './request/new-request-details/new-request-details.component';
+import { RequestDetialsComponent } from './request/request-detials/request-detials.component';
 
 
 const routes: Routes = [
@@ -27,8 +29,12 @@ const routes: Routes = [
     component: RequestsDetailsComponent,
   },
   {
-    path: 'Request',
-    component: RequestComponent,
+    path: 'NewRequest',
+    component: NewRequestDetailsComponent,
+  },
+  {
+    path: 'CurrentRequest',
+    component: RequestDetialsComponent,
   },
   {
     path: 'Promotions',

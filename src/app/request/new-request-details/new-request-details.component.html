@@ -9,17 +9,17 @@
     <div class="col"></div>
     <div class="col-4">
 
- <form #form="ngForm" autocomplete="off" [formGroup]="group"  name="form"  (submit)="onSubmit()" class="example-form">
+ <form #form="ngForm" autocomplete="off" [formGroup]="group"  *ngIf="client && regions && addresses"  name="form"  (submit)="onSubmit()" class="example-form">
 
     <mat-form-field appearance="legacy" > 
-      <mat-label  *ngIf="client" >Name</mat-label>
+      <mat-label  >Name</mat-label>
       <input matInput style="font-size: 20px; color: black;" disabled value="{{client.firstName}} {{' '}} {{client.lastName}} "/>
     </mat-form-field>
     <br>
     <mat-form-field appearance="legacy" >
         <mat-label>Region</mat-label>
         <mat-select ngModel id='sel_region' class="form-control" name ="region" 
-        (selectionChange)="onOptionsSelected()" *ngIf="regions" 
+        (selectionChange)="onOptionsSelected()"
         formControlName="regionControl" [(ngModel)] ='client.address.regionId' >
             <mat-option  *ngFor="let region of regions" 
                 [value]="region.id" >{{region.name}}  
@@ -30,7 +30,7 @@
     <br>
     <mat-form-field appearance="legacy">
         <mat-label>Street</mat-label>
-        <mat-select ngModel class="form-control" name ="streetName"  *ngIf="addresses" 
+        <mat-select ngModel class="form-control" name ="streetName"  
         formControlName="streetControl"  [(ngModel)] ='client.addressId' >
             <mat-option>--</mat-option>
             <mat-option  *ngFor="let address of addresses"  [attr.selected]="address.id == client.addressId ? true : null" 
@@ -46,16 +46,16 @@
         <tr>
         <td>
             <mat-form-field class="example-full-width">
-                <mat-label  *ngIf="client" > Building no.</mat-label>
-                <input matInput type="number" min="0" *ngIf="client" formControlName="buildingNumberControl" 
+                <mat-label  > Building no.</mat-label>
+                <input matInput type="number" min="0"  formControlName="buildingNumberControl" 
                 name ="buildingNumber" [(ngModel)]="client.buildingNumber"/>        
             </mat-form-field>
             <mat-error *ngIf="hasError('buildingNumberControl', 'required')">Building No is required</mat-error>
         </td>
         <td>
             <mat-form-field class="example-full-width">
-                <mat-label  *ngIf="client" > Apartment no.</mat-label>
-                <input matInput type="number" min="0" *ngIf="client" formControlName="apartmentNumberControl"
+                <mat-label  > Apartment no.</mat-label>
+                <input matInput type="number" min="0" formControlName="apartmentNumberControl"
                 name ="apartmentNumber" [(ngModel)]="client.apartmentNumber" />
             </mat-form-field>
             <mat-error *ngIf="hasError('apartmentNumberControl', 'required')">Building No is required</mat-error>
@@ -65,7 +65,7 @@
     <br>
     <mat-form-field appearance="legacy">
         <mat-label>Estimate time</mat-label>
-        <mat-select ngModel *ngIf="client" id='sel_region' class="form-control" name="schedule" formControlName="scheduleControl">
+        <mat-select ngModel id='sel_region' class="form-control" name="schedule" formControlName="scheduleControl">
             <mat-option>--</mat-option>
             <mat-option  *ngFor="let schedule of schedules" 
             [value]="schedule.id"  >
