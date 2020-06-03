@@ -1,0 +1,8 @@
+/**
+ * Generated bundle index. Do not edit.
+ */
+export * from './public-api';
+export { ConfigurableFocusTrapConfig as ɵangular_material_src_cdk_a11y_a11y_b } from './focus-trap/configurable-focus-trap-config';
+export { FocusTrapManager as ɵangular_material_src_cdk_a11y_a11y_a } from './focus-trap/focus-trap-manager';
+
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguZC50cyIsInNvdXJjZXMiOlsiaW5kZXguZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogR2VuZXJhdGVkIGJ1bmRsZSBpbmRleC4gRG8gbm90IGVkaXQuXG4gKi9cbmV4cG9ydCAqIGZyb20gJy4vcHVibGljLWFwaSc7XG5leHBvcnQgeyBDb25maWd1cmFibGVGb2N1c1RyYXBDb25maWcgYXMgybVhbmd1bGFyX21hdGVyaWFsX3NyY19jZGtfYTExeV9hMTF5X2IgfSBmcm9tICcuL2ZvY3VzLXRyYXAvY29uZmlndXJhYmxlLWZvY3VzLXRyYXAtY29uZmlnJztcbmV4cG9ydCB7IEZvY3VzVHJhcE1hbmFnZXIgYXMgybVhbmd1bGFyX21hdGVyaWFsX3NyY19jZGtfYTExeV9hMTF5X2EgfSBmcm9tICcuL2ZvY3VzLXRyYXAvZm9jdXMtdHJhcC1tYW5hZ2VyJztcbiJdfQ==

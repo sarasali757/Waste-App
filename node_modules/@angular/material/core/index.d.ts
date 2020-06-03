@@ -1,0 +1,7 @@
+/**
+ * Generated bundle index. Do not edit.
+ */
+export * from './public-api';
+export { MATERIAL_SANITY_CHECKS_FACTORY as ɵangular_material_src_material_core_core_a } from './common-behaviors/common-module';
+
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguZC50cyIsInNvdXJjZXMiOlsiaW5kZXguZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogR2VuZXJhdGVkIGJ1bmRsZSBpbmRleC4gRG8gbm90IGVkaXQuXG4gKi9cbmV4cG9ydCAqIGZyb20gJy4vcHVibGljLWFwaSc7XG5leHBvcnQgeyBNQVRFUklBTF9TQU5JVFlfQ0hFQ0tTX0ZBQ1RPUlkgYXMgybVhbmd1bGFyX21hdGVyaWFsX3NyY19tYXRlcmlhbF9jb3JlX2NvcmVfYSB9IGZyb20gJy4vY29tbW9uLWJlaGF2aW9ycy9jb21tb24tbW9kdWxlJztcbiJdfQ==
