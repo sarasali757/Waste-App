@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
           })
         }).subscribe(response => {
           console.log(response)
+          
+   // location.reload();
           this.router.navigateByUrl("/Home"); //go here for profile or main page
         }, err => {
           console.log(err)

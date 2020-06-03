@@ -1,0 +1,27 @@
+<div *ngIf="client" class="collapse collapsestyel col-lg-3 col-md-4 col-12 float-md-left pr-md-3 pr-xl-6" id="navbarToggleExternalContent">
+    <div class="bg-light p-4">
+      <h1 class="text-dark ">{{client.firstName}} {{" "}} {{client.lastName}}</h1>
+      <!-- <span class="text-muted">Toggleable via the navbar brand.</span> -->
+      <div>
+        <span><i class="material-icons md-dark " style="font-size:16px;">stay_current_portrait</i></span>
+        <div style="display: inline;font-size: 16px;">{{" "}} +2 {{client.mobile}}</div>
+      </div>
+      <div>
+        <span><i class="material-icons md-dark " style="font-size:16px;">mail_outline</i></span>
+        <div style="display: inline;font-size: 16px;">{{" "}} {{client.email}}</div>
+      </div>
+      <div>
+        <span><i class="material-icons md-dark " style="font-size:16px;"> location_on</i></span>
+        <div style="display: inline;font-size: 16px;">{{""}} {{client.buildingNumber}},
+          {{""}} {{client.address.streetName}},
+          {{" "}} {{client.address.region.name}}, Alexandria</div>
+      </div>
+    </div>
+    <button>s</button>
+  </div>
+  
+ <!--  <div>
+    <button class="btn btn-block mt-2 mb-3"> Edit Profile</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" >Block level button</button>
+    <a href="/Home" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" >Primary link</a>
+  </div> -->

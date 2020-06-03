@@ -21,27 +21,38 @@
     </section>
 </section>
 </section> -->
-<!-- <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-      <h5 class="text-white h4">Collapsed content</h5>
-      <span class="text-muted">Toggleable via the navbar brand.</span>
-    </div>
-  </div>
-  <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler"
-        mat-raised-button
-        matTooltip="View Profile"
-        type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<!--  <mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
     </button>
-  </nav>
-</div>
- -->
- 
-<nav class="navbar navbar-expand-sm bg-light">
+  </mat-drawer>
 
-   <!-- Links -->
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+  </div>
+
+</mat-drawer-container> -->
+
+<!--   <nav class="navbar navbar-light bg-light ">
+    <button class="navbar-toggler"
+    mat-raised-button mat-icon-button
+    matTooltip="View Profile" style="border: transparent; box-shadow: none;"
+    type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <i class="material-icons md-dark">face</i>    </button>
+  </nav>
+ -->
+
+  <!-- 
+<nav class="navbar navbar-expand-sm bg-light">
+<li>
+
+</li>
    <ul class="navbar-nav">
      <li class="nav-item">
        <a class="nav-link" routerLink="/Home">Home</a>
@@ -71,10 +82,6 @@
         <a class="dropdown-item" routerLink="/Promotions">Promotions List</a>
       </div>
       </li>
-
-  <!--    <li class="nav-item">
-      <a class="nav-link" routerLink="/test">test</a>
-    </li> -->
    </ul>
    <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
       <ul class="navbar-nav">
@@ -90,8 +97,9 @@
     </div>
  </nav>
 
-
- 
+ -->
+ <app-navbar></app-navbar>
+ <app-my-profile></app-my-profile>
 <router-outlet>
 </router-outlet>
 <!-- <app-login></app-login> -->

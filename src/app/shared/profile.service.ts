@@ -13,7 +13,9 @@ export class ProfileService {
 
   constructor(private httpService: HttpClient) {
    let jwthelper = new JwtHelperService();
-   this.id = jwthelper.decodeToken(tokenGetter()).UserId;
+    if(tokenGetter()){
+    this.id = jwthelper.decodeToken(tokenGetter()).UserId;
+    }
    }
 
   getClientData(){

@@ -8,7 +8,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router) {}
+  constructor(private jwtHelper: JwtHelperService, private router: Router) {
+
+  }
   isUserAuthenticated() {
     let token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
@@ -18,8 +20,6 @@ export class HomeComponent implements OnInit {
       return false;
     }
   }
- 
- 
   ngOnInit(): void {
   }
 

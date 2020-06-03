@@ -19,6 +19,10 @@ import { RequestDetialsComponent } from './request/request-detials/request-detia
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+  },
   { path: "Home", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterAsComponent },
@@ -52,8 +56,10 @@ const routes: Routes = [
     path: 'test',
     component: InputErrorsExample,
   },
-  
-  { path: "", redirectTo:"Home",pathMatch:"full" },
+  {
+    path: '**',
+    component: HomeComponent,
+  },
   
 ];
 @NgModule({

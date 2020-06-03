@@ -63,7 +63,10 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {CdkDetailRowDirective} from './promotions/cdk-detail-row.directive';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -93,7 +96,9 @@ export function tokenGetter() {
     MyPromotionsComponent,
     ProfileComponent,
     InputErrorsExample,
-    CdkDetailRowDirective
+    CdkDetailRowDirective,
+    MyProfileComponent,
+    NavbarComponent
   ],
   imports: [MatSliderModule,
     BrowserModule,
@@ -126,7 +131,10 @@ export function tokenGetter() {
    MatButtonModule,
    ReactiveFormsModule,
    MatIconModule,
-   MatTooltipModule
+   MatTooltipModule,
+   MatSidenavModule,
+   MatProgressSpinnerModule,
+
   ],
   providers: [AuthService
   ,
