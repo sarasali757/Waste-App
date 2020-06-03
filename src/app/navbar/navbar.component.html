@@ -13,7 +13,7 @@
       <ul class="navbar-nav mr-auto">
         
         <li class="nav-item" routerLinkActive="active current">
-          <a class="nav-link"  matTooltip="View Profile"  (click)="drawer.toggle()">
+          <a class="nav-link"  matTooltip="View Profile"  (click)="drawer.toggle() ;Clicked();">
             Profile
           </a>
 
@@ -29,7 +29,8 @@
         <a class="nav-link" routerLink="/Home">Home</a>
       </li>
       <li class="nav-item" routerLinkActive="active current">
-        <a class="nav-link" routerLink="/Profile" *ngIf="IsLoggedIn()" >Profile</a>
+    
+        <a class="nav-link" routerLink="/Profile" *ngIf="IsLoggedIn()">Edit Profile</a>
       </li>
 
       <li class="nav-item dropdown" *ngIf="IsLoggedIn()" routerLinkActive="active current">
@@ -69,11 +70,10 @@
       </div>
       
   </nav>
-
-  <mat-drawer #drawer class="col-lg-3 col-md-4 col-12 float-md-left pr-md-3 pr-xl-6 bg-white mt-5"
-   mode="side" style="  position: Absolute;
-  left: 0;">
-     <div *ngIf="client">
+<!-- [style.position] = "clicked ? 'relative': 'absolute'" -->
+  <mat-drawer #drawer class="col-lg-3 col-md-4 col-12 float-md-left pr-md-3 pr-xl-6 bg-white mt-5" 
+   mode="side"  style="position: relative;">
+     <div *ngIf="client && clicked">
       <div class="bg-light p-4">
         <h1 class="text-dark ">{{client.firstName}} {{" "}} {{client.lastName}}</h1>
         <!-- <span class="text-muted">Toggleable via the navbar brand.</span> -->

@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   port: Port = new Port();
   showFiller = false;
   client: Client;
-
+  clicked = false;
   constructor(private service:ProfileService) {
     service.getClientData().subscribe(data=>{
       this.client = data as Client;
@@ -39,8 +39,8 @@ export class NavbarComponent implements OnInit {
     return true;
   }
   Clicked(){
-    console.log("hi")
-    this.showFiller = !this.showFiller;
+    console.log("clicked")
+    this.clicked = !this.clicked;
   }
   
 
