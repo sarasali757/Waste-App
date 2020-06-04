@@ -6,7 +6,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router'; 
-import { AuthService } from './guards/auth.service';
+import { AuthService, AuthGuard } from './guards/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -67,6 +67,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -98,7 +99,8 @@ export function tokenGetter() {
     InputErrorsExample,
     CdkDetailRowDirective,
     MyProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    AboutUsComponent
   ],
   imports: [MatSliderModule,
     BrowserModule,
@@ -143,7 +145,7 @@ export function tokenGetter() {
   RequestsDetailsService
   ,
   PromotionService
-  
+  ,AuthGuard
 ],
   bootstrap: [AppComponent]
 })

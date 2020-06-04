@@ -6,7 +6,7 @@ import{TestService} from 'src/app/guards/test.service'
 import * as myGlobals from 'src/app/guards/test.service'
 import { AppRoutingModule } from '../app-routing.module';
 import { AppComponent } from '../app.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Port } from '../_models/port';
 
 @Component({
@@ -20,7 +20,10 @@ export class LoginComponent implements OnInit {
    token:string;
 
    port:Port=new Port()
-  constructor(public http:HttpClient ,public router:Router,public testser:TestService ) {}
+
+  // private route : ActivatedRoute; 
+
+  constructor(public http:HttpClient ,public router:Router,public testser:TestService ,private route: ActivatedRoute) {}
     login(form: NgForm)
      {
 
@@ -29,20 +32,26 @@ export class LoginComponent implements OnInit {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
-      }).subscribe(response => {
-      this.token = (<any>response).token;
-      localStorage.setItem("jwt", this.token);
-     this.validLogin = true;
-    //  this.testser.setValidValue(true);
-     // console.log(this.testser.valid)
-      console.log(response);
-    //  this.router.navigateByUrl("/Home"); //go here for profile or main page
-      this.router.navigateByUrl("/Home"); 
+      }).subscribe(
+        response => {
+          this.token = (<any>response).token;
+          localStorage.setItem("jwt", this.token);
+          this.validLogin = true;
+        //  this.testser.setValidValue(true);
+        // console.log(this.testser.valid)
+
+          console.log(response);
+          let returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/Home';
+          //this.router.navigate([ returnUrl || '/Home' ]); 
+
+          this.router.navigateByUrl(returnUrl);
+
+
       }, err => {
       // this.invalidLogin = true;
       });
 
-        let token = localStorage.getItem("jwt");
+     /*    let token = localStorage.getItem("jwt");
         this.http.get("http://localhost:"+this.port.port+"/api/customer", {//for points api
           headers: new HttpHeaders({
         // "Authorization":"Bearer "+this.token,
@@ -55,7 +64,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl("/Home"); //go here for profile or main page
         }, err => {
           console.log(err)
-    });
+    }); */
     // this.http.get("http://localhost:"+this.port.port+"/api/address").subscribe(a=>console.log(a))
     // console.log("hello");
   }

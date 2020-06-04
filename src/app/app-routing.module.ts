@@ -16,41 +16,56 @@ import { ProfileComponent } from './profile/profile.component';
 import { InputErrorsExample } from './input-errors-example/input-errors-example.component';
 import { NewRequestDetailsComponent } from './request/new-request-details/new-request-details.component';
 import { RequestDetialsComponent } from './request/request-detials/request-detials.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
-
+import { AuthGuard }from './guards/auth.service'
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard]
   },
-  { path: "Home", component: HomeComponent },
+  { path: "Home",
+   component: HomeComponent,
+   canActivate: [AuthGuard]
+   },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterAsComponent },
-  {path: "register-as-apartment", component: RegisterComponent },
-  {path:"register-as-restrnt",component:RegisterAsRestrntComponent},
+  { path: "register-as-apartment", component: RegisterComponent },
+  { path:"register-as-restrnt",component:RegisterAsRestrntComponent},
   {
     path: 'RequestsDetails',
     component: RequestsDetailsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'NewRequest',
     component: NewRequestDetailsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'CurrentRequest',
     component: RequestDetialsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'Promotions',
     component: PromotionsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'MyPromotions',
     component: MyPromotionsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'Profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Aboutus',
+    component: AboutUsComponent,
   },
   {
     path: 'test',
