@@ -92,6 +92,7 @@ export class ProfileComponent implements OnInit {
     } 
     console.log(credentials);
     this.service.updateClient(credentials);
+    this.initial();
   }
 
   public hasError = (controlName: string, errorName: string) =>{

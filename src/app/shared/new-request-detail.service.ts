@@ -56,10 +56,9 @@ export class NewRequestDetailService {
 
     credentials.clientId = this.id;
     console.log(credentials.clientId);
-    this.httpService1.post('http://localhost:'+this.port.port+'/Api/client/AddNewRequest', JSON.stringify(credentials), 
+   return this.httpService1.post('http://localhost:'+this.port.port+'/Api/client/AddNewRequest', JSON.stringify(credentials), 
     {headers: new HttpHeaders({ "Content-Type": "application/json; charset=utf-8"})})
-    .subscribe(response => {console.log(response);},
-      err => {console.log(err);}) ;  
+      
   }
   DeleteRequest(id){
     this.httpService1.delete('http://localhost:'+this.port.port+'/Api/client/DeleteRequest/'+id)

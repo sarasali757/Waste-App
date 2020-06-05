@@ -5,6 +5,8 @@ import { Port } from '../_models/port';
 import { ProfileService } from '../shared/profile.service';
 import { Client } from '../_models/client.model';
 
+
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -16,10 +18,12 @@ export class NavbarComponent implements OnInit {
   client: Client;
   clicked = false;
   constructor(private service:ProfileService) {
+    if(tokenGetter()){
     service.getClientData().subscribe(data=>{
       this.client = data as Client;
     },err => {console.log(err);})
    }
+  }
 
   ngOnInit(): void {
   }

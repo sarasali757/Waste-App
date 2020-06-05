@@ -1,10 +1,11 @@
 import { Component, OnInit, InjectionToken, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+
 @Component({
   selector: 'app-confirm-dialog-box',
   templateUrl: './confirm-dialog-box.component.html',
-  styles: []
+  styleUrls: ['./confirm-dialog-box.component.css']
 })
 export class ConfirmDialogBoxComponent implements OnInit {
 
@@ -18,3 +19,8 @@ export class ConfirmDialogBoxComponent implements OnInit {
   }
 
 }
+/* export class Display {
+  body:string;
+  name:string;
+  extraText: string;
+} */

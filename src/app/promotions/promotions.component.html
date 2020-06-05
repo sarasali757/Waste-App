@@ -1,3 +1,86 @@
+
+
+<div >  
+
+  <h2 class=" text-center" style="margin-top:50px;">
+    Available promotions
+  </h2><!-- 
+<hr class="mx-5"> -->
+<mat-divider></mat-divider>
+  <h2 class="display-4 text-center">
+    My Points: {{clientPoints}}
+  </h2>
+</div>
+
+
+
+<div class="example-header row">
+  <div class="col">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>
+
+<div class="example-container mat-elevation-z8">
+	<mat-table #table [dataSource]="dataSource"  >
+
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="requiredPoints">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Points </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.requiredPoints}} </mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="dateFrom">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> From </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.dateFrom  |  date:'MMMM d, y'}} </mat-cell>
+		</ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="dateTo">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> To </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.dateTo  |  date:'MMMM d, y'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="company.name">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.company.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="add">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+			<mat-cell *matCellDef="let element">  <button mat-button (click)="openDialog(element)">Add</button></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="moreDetials">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let element"><mat-icon 
+        matSort matTooltip="More Detials" >more_vert</mat-icon></mat-cell>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="id" >
+			<mat-header-cell *matHeaderCellDef mat-sort-header hidden> id </mat-header-cell>
+			<mat-cell *matCellDef="let element" hidden> {{element.id}} </mat-cell>
+    </ng-container>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" 
+    [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl">
+		</mat-row>
+	</mat-table>
+</div>
+<ng-template #tpl let-element>
+	<div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
+	<strong>Detials:</strong>	 {{" "}} {{element.details}} 
+	</div>
+</ng-template>
+
+
+
 <!-- 
 <div class="mx-5">
     <nav class="navbar">
@@ -90,15 +173,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table> -->
-<div class="jumbtron">  
-  <h1 class="display-4 text-center">
-    Available promotions
-  </h1>
-<hr class="mx-5">
-<h2 class="display-4 text-center">
-  My Points: {{clientPoints}}
-</h2>
-</div>
+
 
 <!-- 
 <div class="row m-3">
@@ -164,63 +239,3 @@
 </table>
  -->
  
-<div class="example-header row">
-  <div class="col">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div>
-  <div class="col">
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
-</div>
-
-<div class="example-container mat-elevation-z8">
-	<mat-table #table [dataSource]="dataSource" matSort >
-
-		<ng-container matColumnDef="name">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-		</ng-container>
-
-		<ng-container matColumnDef="requiredPoints">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Points </mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.requiredPoints}} </mat-cell>
-		</ng-container>
-
-		<ng-container matColumnDef="dateFrom">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> From </mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.dateFrom  |  date:'MMMM d, y'}} </mat-cell>
-		</ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="dateTo">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> To </mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.dateTo  |  date:'MMMM d, y'}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="company.name">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.company.name}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="add">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Add </mat-header-cell>
-			<mat-cell *matCellDef="let element">  <button mat-button (click)="openDialog(element)">Add</button></mat-cell>
-		</ng-container>
-    <ng-container matColumnDef="id" >
-			<mat-header-cell *matHeaderCellDef mat-sort-header hidden> id </mat-header-cell>
-			<mat-cell *matCellDef="let element" hidden> {{element.id}} </mat-cell>
-    </ng-container>
-
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" 
-    [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl">
-		</mat-row>
-	</mat-table>
-</div>
-<ng-template #tpl let-element>
-	<div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
-	<strong>Detials:</strong>	 {{" "}} {{element.details}} 
-	</div>
-</ng-template>
-
-

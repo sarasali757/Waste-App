@@ -34,7 +34,7 @@ export class PromotionsComponent implements OnInit {
   currentPage = 0;
   totalSize = 0;
 
-  displayedColumns: string[] = ['name', 'requiredPoints','dateFrom','dateTo', 'company.name','add','id'];
+  displayedColumns: string[] = ['name', 'requiredPoints','dateFrom','dateTo', 'company.name','add','moreDetials','id'];
 
   isExpansionDetailRow = (index, row) => row.hasOwnProperty('detailRow');
   expandedElement: any;
@@ -60,7 +60,11 @@ export class PromotionsComponent implements OnInit {
   }
   
   openDialog(promotion){
-    this.dialog.open(ConfirmDialogBoxComponent,{ data: promotion.name})
+    
+    
+    let message1 = "Are you Sure you Want To Add\n"+ "'"+ promotion.name + "'" + "\n into your Promotions"
+    
+    this.dialog.open(ConfirmDialogBoxComponent,{ data:  message1})
     .afterClosed()
     .subscribe(result=> 
     {  
@@ -73,13 +77,14 @@ export class PromotionsComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           console.log("PUT Request is successful ", data);
-            let message;
+            let message2;
           if(data == false){
-            message = "Not Enough Points";
+            message2 = "Not Enough Points !";
           }else{
-            message = "Promotion Added Successfully"
+            message2 = "Promotion Added Successfully"
+            this.getClientPoints();
           }
-          this.openNotifyDialogBox(message);
+          this.openNotifyDialogBox(message2);
           });
       }
     });

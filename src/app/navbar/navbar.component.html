@@ -38,9 +38,9 @@
           Request
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink="/NewRequest">New Request</a>
-          <a class="dropdown-item" routerLink="/CurrentRequest">Current Request</a>
-          <a class="dropdown-item" routerLink="/RequestsDetails">Requests List</a>
+          <a class="dropdown-item" routerLink="/NewRequest" [queryParams]="{ tab: '0'}">New Request</a>
+          <a class="dropdown-item" routerLink="/NewRequest" [queryParams]="{ tab: '1'}">Current Request</a>
+          <a class="dropdown-item" routerLink="/NewRequest" [queryParams]="{ tab: '2'}">Requests List</a>
         </div>
        </li>
  
@@ -74,8 +74,8 @@
       
   </nav>
 <!-- [style.position] = "clicked ? 'relative': 'absolute'" -->
-  <mat-drawer #drawer class="col-lg-3 col-md-4 col-12 float-md-left pr-md-3 pr-xl-6 bg-white mt-5" 
-   mode="side"  style="position: relative;">
+  <mat-drawer #drawer class="col-lg-3 col-md-4 col-12 float-md-left pr-md-3 pr-xl-6 bg-white mt-5 mr-3" 
+   mode="side"  style="position: relative;" [style.display] = "clicked ? 'block': 'none'">
      <div *ngIf="client && clicked">
       <div class="bg-light p-4">
         <h1 class="text-dark ">{{client.firstName}} {{" "}} {{client.lastName}}</h1>

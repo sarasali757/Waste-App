@@ -6,6 +6,11 @@ import {Client} from '../../_models/client.model'
 import {Region} from "../../_models/region.model"
 import {Address} from '../../_models/address.model'
 import {Schedule} from '../../_models/schedule.model'
+import { NotifyDialogBoxComponent } from 'src/app/notify-dialog-box/notify-dialog-box.component';
+import { MatDialog } from '@angular/material/dialog';
+import { RequestDetialsComponent} from '../request-detials/request-detials.component'
+import {} from '../../requests-details/requests-details.component'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-request-details',
@@ -31,8 +36,12 @@ export class NewRequestDetailsComponent implements OnInit {
     ,
     scheduleControl : new FormControl('', [ Validators.required,])
   })
+  tab: any;
+ 
+  route: any;
 
-  constructor (private service:NewRequestDetailService){ 
+  activeTabIndex = 0;
+  constructor (private service:NewRequestDetailService,private dialog:MatDialog,private  activatedRoute: ActivatedRoute){ 
     this.initialData();
   }
   public hasError = (controlName: string, errorName: string) =>{
@@ -40,6 +49,18 @@ export class NewRequestDetailsComponent implements OnInit {
   }
   ngOnInit(): void { 
       this.initialData();
+      this.activatedRoute.queryParams.subscribe((params) => {
+        if (params.tab) {
+          this.tab = params.tab;
+          this.activeTabIndex = params.tab as number;
+        /*   this.route.navigate([], {
+            queryParams: {
+              tab: null,
+            },
+            queryParamsHandling: 'merge',
+          }); */
+        }
+      });
   }
   /* 
   log(x){console.log(x)} */
@@ -107,16 +128,31 @@ export class NewRequestDetailsComponent implements OnInit {
       "collectorId": 1,
       "rate": 0
   } 
+  let message;
 
     console.log(credentials)
-    this.service.postNewRequestDetails(credentials);
+
+    this.service.postNewRequestDetails(credentials).subscribe(response =>
+       {console.log(response);
+        message="Request Submited"
+        this.openNotifyDialogBox(message);
+      },
+      err => {console.log(err);
+        message="Sorry, Something went Wrong \n Please Try Again Later"
+        this.openNotifyDialogBox(message);
+      }) 
  
      // console.log(form.value);
     //  console.log(+form.value.region);
    } 
 
+   openNotifyDialogBox(message){
+    this.dialog.open(NotifyDialogBoxComponent,{ data: message})
+  }
    clickMe(form:Form){
      console.log(form);
    }
+   
+
 }
 

@@ -8,6 +8,7 @@ import { NotifyDialogBoxComponent } from 'src/app/notify-dialog-box/notify-dialo
 
 import {Requests} from '../../_models/requests.model' 
 import { from } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-request-detials',
   templateUrl: './request-detials.component.html',
@@ -22,7 +23,7 @@ export class RequestDetialsComponent implements OnInit {
   minutes;
   seconds;
   date;
-  constructor(private service:NewRequestDetailService,private dialog:MatDialog) { 
+  constructor(private service:NewRequestDetailService,private dialog:MatDialog,private router:Router) { 
     this.getRequest();
 
     setInterval(() => {
@@ -69,13 +70,15 @@ export class RequestDetialsComponent implements OnInit {
     this.service.DeleteRequest(this.request.id);
   }
   openDialog(){
-    this.dialog.open(ConfirmDialogBoxComponent,{ data: "Delete Current Request"})
+    let Message = "Are you Sure You Want To Delete \n Current Request"
+    this.dialog.open(ConfirmDialogBoxComponent,{ data: Message})
     .afterClosed()
     .subscribe(result=> 
       {  
         if(result == true){
           this.DeleteRequest()
           this.openNotifyDialogBox("Deleted Successfully");
+          this.router.navigate(['/Home'])
         }
       });
   }

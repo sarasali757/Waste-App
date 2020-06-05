@@ -12,14 +12,23 @@ export class ProfileService {
   port: Port = new Port();
 
   constructor(private httpService: HttpClient) {
-   let jwthelper = new JwtHelperService();
+   
+   }
+   getId(): boolean{
+    let jwthelper = new JwtHelperService();
     if(tokenGetter()){
-    this.id = jwthelper.decodeToken(tokenGetter()).UserId;
+      this.id = jwthelper.decodeToken(tokenGetter()).UserId;
+      return true;
+    }
+    else{
+      return false;
     }
    }
 
   getClientData(){
+    if( this.getId()){
     return this.httpService.get('http://localhost:'+this.port.port+'/Api/client/getClientData/'+this.id);
+    }
   }
   getRegion(){
     return this.httpService.get('http://localhost:'+this.port.port+'/Api/client/getRegions')
@@ -33,6 +42,7 @@ export class ProfileService {
   }
 
   updateClient(credentials){
+    if(this.getId()){
     credentials.id = this.id;
     console.log(credentials.id);
     this.httpService.put('http://localhost:'+this.port.port+'/Api/client/UpdateClient', JSON.stringify(credentials),
@@ -40,4 +50,5 @@ export class ProfileService {
     .subscribe(response => {console.log(response);},
       err => {console.log(err);}) ;   
   }
+}
 }

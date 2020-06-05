@@ -1,0 +1,11 @@
+export interface IAppState
+{
+    flag :boolean;
+}
+export function rootReducer(state: IAppState, action): IAppState{
+    switch(action.Type){
+        case 'PROFILE-CLICKED' : return { flag : !state.flag};
+        case 'FETCH_CLIENT_REQUEST' : 
+    }
+    return state;
+}

@@ -1,7 +1,18 @@
-<h2>Are you Sure to </h2>
+<!-- <p class="max-lines">Are You Sure To ADD {{ display}}</p> -->
+
+<div class="dialog">
+  <div style="padding-bottom: 16px;">
+    <h2 class="display-4 text-center mb-0" style="white-space: pre-line;">{{display}}</h2>
+    <!-- 
+    <h2 class="display-4 text-center mb-0" >{{display.name}}</h2> -->
+  </div>
+  <div class="buttons">
+  <button mat-button mat-dialog-close class="bg-success">Close</button>
+  <button mat-button [mat-dialog-close]="true"  cdkFocusInitial class="bg-success ml-3">Yes</button>
+  </div>
+</div>
+<!-- <h2>Are you Sure to  </h2>
 <h2> {{display}} !</h2>
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
   </div>
-  
+   -->

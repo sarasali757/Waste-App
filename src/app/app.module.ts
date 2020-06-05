@@ -68,6 +68,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatTabsModule} from '@angular/material/tabs';
+
+//redux
+import { NgReduxModule, NgRedux } from 'ng2-redux';
+//import { IAppState, rootReducer } from './Store'
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -124,6 +130,7 @@ export function tokenGetter() {
 
    NgxPaginationModule,
    Ng2SearchPipeModule ,
+
    MatDialogModule,
    MatTableModule,
    MatFormFieldModule,
@@ -136,6 +143,9 @@ export function tokenGetter() {
    MatTooltipModule,
    MatSidenavModule,
    MatProgressSpinnerModule,
+   NgReduxModule,
+   MatDividerModule,
+   MatTabsModule
 
   ],
   providers: [AuthService
@@ -149,4 +159,31 @@ export function tokenGetter() {
 ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  /* constructor(ngRedux: NgRedux<IAppState>){
+
+    ngRedux.configureStore(rootReducer,{ client : {  firstName:'' ,
+      lastName:'',
+      email:'',
+      buildingNumber:0,
+      mobile: '',
+      apartmentNumber:0,
+      totalPoints: 0,
+      clientCategory: {
+        id:0,
+        name :''
+      },
+      address: {
+        id :0,
+        streetName :'',
+        regionId :0,
+        region:{
+          id :0,
+          name:''
+        }
+      },
+      categoryId:0,
+      addressId:0}
+    });
+  } */
+ }

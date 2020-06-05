@@ -12,10 +12,12 @@ export class MyProfileComponent implements OnInit {
   client: Client;
 
   constructor(private service:ProfileService) {
+  /*   if(service.getId()){
     service.getClientData().subscribe(data=>{
       this.client = data as Client;
     },err => {console.log(err);})
-   }
+   } */
+  }
 
   ngOnInit(): void {
   }
