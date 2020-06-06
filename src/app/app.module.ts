@@ -70,6 +70,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSortModule} from '@angular/material/sort';
+
 
 //redux
 import { NgReduxModule, NgRedux } from 'ng2-redux';
@@ -81,7 +83,7 @@ export function tokenGetter() {
 
 @NgModule({
   
-  entryComponents: [PromotionsComponent],
+  entryComponents: [PromotionsComponent,RequestsDetailsComponent],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -145,7 +147,11 @@ export function tokenGetter() {
    MatProgressSpinnerModule,
    NgReduxModule,
    MatDividerModule,
-   MatTabsModule
+   MatTabsModule,
+   MatSortModule,
+   CdkTableModule,
+   CdkTreeModule,
+   
 
   ],
   providers: [AuthService

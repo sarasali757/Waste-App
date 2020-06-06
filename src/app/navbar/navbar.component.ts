@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   showFiller = false;
   client: Client;
   clicked = false;
+  
   constructor(private service:ProfileService) {
     if(tokenGetter()){
     service.getClientData().subscribe(data=>{
@@ -26,6 +27,12 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.onMainEvent.subscribe(
+      (client) => {
+        this.client = client;
+        console.log(client);
+      }
+   );
   }
 
   logOut() {
@@ -46,6 +53,5 @@ export class NavbarComponent implements OnInit {
     console.log("clicked")
     this.clicked = !this.clicked;
   }
-  
-
+ 
 }

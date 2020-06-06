@@ -1,4 +1,6 @@
 import { Schedule } from './schedule.model'
+import { Address } from './address.model';
+import { User } from './User.model';
 
 export class Requests {
     id :number;
@@ -13,4 +15,8 @@ export class Requests {
     collectorId :number;
     rate :number;
     schedule:Schedule;
+    isSeparated;
+
+    address: Address
+    collector: User
 }

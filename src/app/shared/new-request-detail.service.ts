@@ -21,6 +21,8 @@ export class NewRequestDetailService {
   
    let jwthelper = new JwtHelperService();
    this.id = jwthelper.decodeToken(tokenGetter()).UserId;
+
+   
    this.flag = this.startNewRequest();
   }
   startNewRequest(){

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { tokenGetter } from '../app.module';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Port } from '../_models/port';
+import { Client } from '../_models/client.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,10 @@ import { Port } from '../_models/port';
 export class ProfileService {
   id;
   port: Port = new Port();
-
+  onMainEvent: EventEmitter<Client> = new EventEmitter();
+ 
   constructor(private httpService: HttpClient) {
-   
+    
    }
    getId(): boolean{
     let jwthelper = new JwtHelperService();
@@ -45,10 +47,9 @@ export class ProfileService {
     if(this.getId()){
     credentials.id = this.id;
     console.log(credentials.id);
-    this.httpService.put('http://localhost:'+this.port.port+'/Api/client/UpdateClient', JSON.stringify(credentials),
+   return this.httpService.put('http://localhost:'+this.port.port+'/Api/client/UpdateClient', JSON.stringify(credentials),
     {headers: new HttpHeaders({ "Content-Type": "application/json; charset=utf-8"})})
-    .subscribe(response => {console.log(response);},
-      err => {console.log(err);}) ;   
+     
   }
 }
 }

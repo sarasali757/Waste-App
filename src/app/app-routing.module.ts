@@ -33,17 +33,17 @@ const routes: Routes = [
   { path: "register", component: RegisterAsComponent },
   { path: "register-as-apartment", component: RegisterComponent },
   { path:"register-as-restrnt",component:RegisterAsRestrntComponent},
-  {
+  /* {
     path: 'RequestsDetails',
     component: RequestsDetailsComponent,
     canActivate: [AuthGuard]
-  },
+  }, */
   {
-    path: 'NewRequest',
+    path: 'Request',
     component: NewRequestDetailsComponent,
     canActivate: [AuthGuard]
   },
-  {
+ /*  {
     path: 'CurrentRequest',
     component: RequestDetialsComponent,
     canActivate: [AuthGuard]
@@ -52,9 +52,9 @@ const routes: Routes = [
     path: 'Promotions',
     component: PromotionsComponent,
     canActivate: [AuthGuard]
-  },
+  }, */
   {
-    path: 'MyPromotions',
+    path: 'Promotions',
     component: MyPromotionsComponent,
     canActivate: [AuthGuard]
   },
