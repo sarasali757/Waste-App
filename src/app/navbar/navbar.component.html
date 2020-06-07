@@ -53,6 +53,9 @@
           <a class="dropdown-item" routerLink="/Promotions">Promotions List</a>
         </div>
        </li>
+       <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
+        <a class="nav-link" routerLink="/Feedback">Feedback</a>
+      </li>
       </ul>
     </div>
 

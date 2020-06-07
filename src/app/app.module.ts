@@ -73,6 +73,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 //redux
 import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
+
 //import { IAppState, rootReducer } from './Store'
 
 export function tokenGetter() {
@@ -106,7 +108,9 @@ export function tokenGetter() {
     CdkDetailRowDirective,
     MyProfileComponent,
     NavbarComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AddFeedbackComponent,
+    
   ],
   imports: [MatSliderModule,
     BrowserModule,
