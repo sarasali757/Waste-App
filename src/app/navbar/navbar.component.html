@@ -38,9 +38,9 @@
           Request
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink="/NewRequest" [queryParams]="{ tab: '0'}">New Request</a>
-          <a class="dropdown-item" routerLink="/NewRequest" [queryParams]="{ tab: '1'}">Current Request</a>
-          <a class="dropdown-item" routerLink="/NewRequest" [queryParams]="{ tab: '2'}">Requests List</a>
+          <a class="dropdown-item" routerLink="/Request" [queryParams]="{ tab: '0'}">New Request</a>
+          <a class="dropdown-item" routerLink="/Request" [queryParams]="{ tab: '1'}">Current Request</a>
+          <a class="dropdown-item" routerLink="/Request" [queryParams]="{ tab: '2'}">Requests List</a>
         </div>
        </li>
  
@@ -49,8 +49,8 @@
           Promotions
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink="/MyPromotions">My-Promotion</a>
-          <a class="dropdown-item" routerLink="/Promotions">Promotions List</a>
+          <a class="dropdown-item" routerLink="/Promotions" [queryParams]="{ tab: '0'}">My Promotions</a>
+          <a class="dropdown-item" routerLink="/Promotions" [queryParams]="{ tab: '1'}">Available Promotions </a>
         </div>
        </li>
        <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
@@ -92,12 +92,16 @@
           <div style="display: inline;font-size: 16px;">{{" "}} {{client.email}}</div>
         </div>
         <div>
-          <span><i class="material-icons md-dark " style="font-size:16px;"> location_on</i></span>
-          <div style="display: inline;font-size: 16px;">{{""}} {{client.buildingNumber}},
+          <span><i class="material-icons md-dark " style="font-size:16px;" > location_on</i></span>
+          <div style="display: inline;font-size: 16px;">
+            {{""}} {{client.buildingNumber}},
             {{""}} {{client.address.streetName}},
             {{" "}} {{client.address.region.name}}, Alexandria</div>
         </div>
-        
+        <div>
+          <span><i class="material-icons md-dark " style="font-size:16px;">category</i></span>
+          <div style="display: inline;font-size: 16px;">{{" "}} {{client.category.name}}</div>
+        </div>
       </div>
       <button type="button" class="btn btn-light btn-lg btn-block" routerLink="/Profile">Edit Profile</button>
     </div>

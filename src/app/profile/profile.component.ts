@@ -6,6 +6,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ClientCategory } from '../_models/client-category';
 import { Region } from '../_models/region.model';
 import { Address} from '../_models/address.model' 
+import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifyDialogBoxComponent } from '../notify-dialog-box/notify-dialog-box.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +19,12 @@ import { Address} from '../_models/address.model'
 export class ProfileComponent implements OnInit {
 
   client;
-  regions: Region ;
+  regions: Region [];
 
-  addresses: Address;
-  categories : ClientCategory;
+  addresses: Address[];
+  categories : ClientCategory[];
+  onMain: boolean = false;
+
   group= new FormGroup({
     
     firstNameControl: new FormControl('', [Validators.required,] , ),
@@ -27,7 +33,7 @@ export class ProfileComponent implements OnInit {
 
     regionControl: new FormControl('', [Validators.required,] , ),
 
-    streetControl: new FormControl('', [Validators.required,] , )
+    streetControl: new FormControl('', [Validators.required,Validators.nullValidator] , )
     ,
     buildingNumberControl : new FormControl('', [ Validators.required,])
     ,
@@ -39,43 +45,53 @@ export class ProfileComponent implements OnInit {
 
     categoryControl : new FormControl('', [ Validators.required,])
   })
-  constructor(private service:ProfileService) 
-  {
-  }
-  
+  constructor(private service:ProfileService,private location: Location,private dialog:MatDialog,private route:Router) 
+  {}
+
   initial(){
     this.service.getClientData().subscribe(data =>{
       this.client = data as Client
       console.log(this.client);
-
       this.service.getRegion().subscribe(
         data=>{
-          this.regions = data as Region;
+          this.regions = data as Region[];
           this.service.getAddresses(this.client.address.regionId).subscribe(data=>{
-            this.addresses = data as Address;
+            this.addresses = data as Address[];
           });
         }
       );
     });
     this.service.getCategories().subscribe(data=>{
-      this.categories = data as ClientCategory;
+      this.categories = data as ClientCategory[];
       console.log(this.categories);
     });
     
   }
   ngOnInit(): void {
     this.initial();
+    this.service.onMainEvent.subscribe(
+      (onMain) => {
+        this.onMain = onMain;
+        console.log(onMain);
+      });
   }
+  
+/*   updateOnMain(onMain):void {
+    this.service.onMainEvent.emit(onMain);
+    console.log(onMain);
+  } */
   onOptionsSelected(){
   
     let value = this.group.controls['regionControl'].value;
-    
+    if(value){
     this.service.getAddresses(value).subscribe(  
       data => {  
-        this.addresses= data as Address ;  
+        this.addresses= data as Address [];  
         console.log(this.addresses);
-      }  
+        this.group.controls['streetControl'].setErrors({'incorrect': true});
+      } 
     ); 
+  }
   }
   submit(){
     console.log("on submit");
@@ -90,13 +106,40 @@ export class ProfileComponent implements OnInit {
      "categoryId":this.group.controls["categoryControl"].value ,
      "addressId":this.group.controls["streetControl"].value ,
     } 
-    console.log(credentials);
-    this.service.updateClient(credentials);
-    this.initial();
+    var clientAddress = this.addresses.find(o => o.id === credentials.addressId);
+    this.client.address.streetName = clientAddress.streetName;
+
+    var clientRegion = this.regions.find(o => o.id === clientAddress.regionId);
+    this.client.address.region.name = clientRegion.name ;
+
+    
+    var clientCat= this.categories.find(o => o.id === credentials.categoryId);
+    this.client.category.name = clientCat.name ;
+
+   // console.log(credentials);
+    this.service.updateClient(credentials).subscribe(response => 
+      { //   this.initial();
+        let message ="Updated Successfully"
+        this.openNotifyDialogBox(message);
+   
+        this.service.onMainEvent.emit(this.client);
+        this.route.navigate(["/Home"]);
+      
+        // location.reload();
+      },
+      err => {console.log(err);
+      let message ="Sorry, Something went Wrong \n Please Try Again Later"
+      this.openNotifyDialogBox(message);
+
+      }) ; 
+
   }
 
   public hasError = (controlName: string, errorName: string) =>{
     return this.group.controls[controlName].hasError(errorName);
+  }
+  openNotifyDialogBox(message){
+    this.dialog.open(NotifyDialogBoxComponent,{ data: message})
   }
 
 }

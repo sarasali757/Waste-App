@@ -36,10 +36,6 @@ export class NewRequestDetailsComponent implements OnInit {
     ,
     scheduleControl : new FormControl('', [ Validators.required,])
   })
-  tab: any;
- 
-  route: any;
-
   activeTabIndex = 0;
   constructor (private service:NewRequestDetailService,private dialog:MatDialog,private  activatedRoute: ActivatedRoute){ 
     this.initialData();
@@ -51,19 +47,10 @@ export class NewRequestDetailsComponent implements OnInit {
       this.initialData();
       this.activatedRoute.queryParams.subscribe((params) => {
         if (params.tab) {
-          this.tab = params.tab;
           this.activeTabIndex = params.tab as number;
-        /*   this.route.navigate([], {
-            queryParams: {
-              tab: null,
-            },
-            queryParamsHandling: 'merge',
-          }); */
         }
       });
   }
-  /* 
-  log(x){console.log(x)} */
 
   initialData(){
     this.service.getClient().subscribe(  
@@ -94,9 +81,7 @@ export class NewRequestDetailsComponent implements OnInit {
 
   }
 
-/* test(val){
-  console.log(val);
-} */
+
   onOptionsSelected(){
     let value = this.group.controls['regionControl'].value;
     this.service.getAddresses(value).subscribe(  
@@ -142,8 +127,6 @@ export class NewRequestDetailsComponent implements OnInit {
         this.openNotifyDialogBox(message);
       }) 
  
-     // console.log(form.value);
-    //  console.log(+form.value.region);
    } 
 
    openNotifyDialogBox(message){

@@ -9,7 +9,7 @@ export class Client {
      mobile:string; 
      apartmentNumber:number;
      totalPoints: number;
-     clientCategory: ClientCategory
+     category: ClientCategory
      address: Address
 
      categoryId:number;

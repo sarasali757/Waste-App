@@ -114,7 +114,9 @@ public handlePage(e: any) {
 private getArray() {
   this.service.getPromotions().subscribe(  
     (data : Promotion[]) => {  
-      this.dataSource = new MatTableDataSource < Promotion > (data);
+      this.dataSource = new MatTableDataSource < Promotion > (data.sort(function(a,b) { 
+        return new Date(b.dateFrom).getTime() - new Date(a.dateFrom).getTime() 
+    }));
       console.log("data",this.dataSource.data);
       this.dataSource.paginator = this.paginator;
       this.array = data;

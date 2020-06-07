@@ -54,15 +54,15 @@
    <td>
        <mat-form-field appearance="legacy">
            <mat-label>Street</mat-label>
-           <mat-select ngModel class="form-control" name ="streetName"  required
-           formControlName="streetControl"  [(ngModel)] ='client.addressId' >
-               <mat-option>--</mat-option>
-               <mat-option  *ngFor="let address of addresses"  [attr.selected]="address.id == client.addressId ? true : null" 
+           <mat-select ngModel class="form-control" name ="streetName"  required #streetName
+           formControlName="streetControl"  [(ngModel)] ='client.address.id' >
+               <mat-option >--</mat-option>
+               <mat-option  *ngFor="let address of addresses"  
                [value]="address.id"  >
                {{address.streetName}}  
                </mat-option>
            </mat-select>
-           <mat-error *ngIf="hasError('streetControl', 'required')">Street is required</mat-error>
+           <mat-error *ngIf="hasError('streetControl','required') ">Street is required</mat-error>
        </mat-form-field>
    
    </td>
@@ -112,19 +112,21 @@
        <mat-form-field appearance="legacy">
            <mat-label>Category</mat-label>
            <mat-select ngModel class="form-control" name ="category" 
-           formControlName="categoryControl"  [(ngModel)] ='client.categoryId' >
+           
+           formControlName="categoryControl"  [(ngModel)] ='client.category.id' >
                <mat-option  *ngFor="let category of categories"  [attr.selected]="category.id == client.categoryId? true : null" 
                [value]="category.id" >
                {{category.name}}  
                </mat-option>
            </mat-select>
-           <mat-error *ngIf="hasError('categoryControl', 'required')">Street is required</mat-error>
+           <mat-error *ngIf="hasError('categoryControl', 'required')">Category is required</mat-error>
        </mat-form-field>
    
      <div  class="row mb-5">
        <div class="col-3"></div>
      <div class="col-3">
-         <button type="submit" mat-raised-button class="btn btn-success" [disabled]="!form.valid" >Update</button> 
+         <button type="submit" mat-raised-button class="btn btn-success" 
+         [disabled]="!form.valid " >Update</button> 
      </div>
      <div class="col-3">
          <button  class="btn btn-success " mat-raised-button routerLink="/Home" >Cancel</button> 

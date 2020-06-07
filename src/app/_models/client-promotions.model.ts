@@ -5,5 +5,5 @@ export class ClientPromotions {
     PromtionId:number;
     code: string;
     takeDate :string;
-    Promtion :Promotion
+    promtion :Promotion
 }
