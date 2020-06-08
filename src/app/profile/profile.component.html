@@ -7,6 +7,9 @@
  -->
  <mat-tab-group mat-align-tabs="start" class="mt-2 pl-4 ">
     <mat-tab label="Edit Profile">        
+        <div style="width:130px; margin:0 auto;" class="mb-4">
+            <mat-spinner *ngIf="!client" ></mat-spinner>
+          </div>
     <form #form="ngForm" autocomplete="off" [formGroup]="group"  name="form" 
     *ngIf="client" class="example-form mt-2"
     (submit)="submit()">

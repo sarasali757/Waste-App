@@ -4,11 +4,16 @@
     </h2>
 <mat-divider class="mb-3"></mat-divider>
 </div> -->
-<div style="width:130px; margin:0 auto;">
+<!-- <div style="width:130px; margin:0 auto;">
     <mat-spinner *ngIf="!client" ></mat-spinner>
-</div>
-<mat-tab-group mat-align-tabs="start" class="mt-2 pl-4 " [selectedIndex]="activeTabIndex" >    
+</div> -->
+<mat-tab-group mat-align-tabs="start" class="mt-2 pl-4 " [selectedIndex]="activeTabIndex"
+ (selectedTabChange)="tabChanged($event)">    
     <mat-tab label="New Request">  
+        <div style="width:130px; margin:0 auto;" class="mb-4">
+            <mat-spinner *ngIf="!client" ></mat-spinner>
+          </div>
+
          <form #form="ngForm" autocomplete="off" [formGroup]="group"  
          *ngIf="client && regions && addresses"  name="form"  (submit)="onSubmit()" class="example-form mt-2">
         

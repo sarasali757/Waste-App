@@ -1,6 +1,10 @@
 
+<div style="width:130px; margin:0 auto;" class="mb-4">
+  <mat-spinner *ngIf="!dataSource" ></mat-spinner>
+</div>
+<div *ngIf="dataSource">
 
-<div >  
+<div>  
   <h2 class="display-4 text-center m-0 pt-2">
     My Points: {{clientPoints}}
   </h2>
@@ -74,7 +78,7 @@
   <mat-divider></mat-divider>
 </ng-template>
 
-
+</div>
 
 <!-- 
 <div class="mx-5">

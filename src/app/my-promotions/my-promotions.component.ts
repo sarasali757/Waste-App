@@ -11,7 +11,8 @@ import { MatSort } from '@angular/material/sort';
 
 import {} from '../promotions/cdk-detail-row.directive'
 import { PromotionsComponent } from '../promotions/promotions.component'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-my-promotions',
   templateUrl: './my-promotions.component.html',
@@ -60,7 +61,7 @@ export class MyPromotionsComponent  {
   array: any;
   activeTabIndex: number;
 //
-  constructor(private service: PromotionService,private  activatedRoute: ActivatedRoute) {}
+  constructor(private service: PromotionService,private  activatedRoute: ActivatedRoute,private router:Router) {}
   /*  ngOnInit(): void {
       
   } */
@@ -75,8 +76,6 @@ export class MyPromotionsComponent  {
     }); 
 
   }
-
-//
    applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -98,7 +97,10 @@ export class MyPromotionsComponent  {
           return data.Promtion.name == filter;
          }; */
          this.dataSource.sort = this.sort;
-      }  
+      }  ,err=>{
+        setTimeout(() => this.router.url,10000); 
+        this.getArray();
+      }
     );
   }
  
@@ -121,7 +123,9 @@ private iterator() {
   const part = this.array.slice(start, end);
   this.dataSource = part;
 }
- 
+public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+  this.router.navigate(["/Promotions", { tab: tabChangeEvent.index }]);
+}
   
 }
 

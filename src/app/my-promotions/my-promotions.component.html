@@ -80,10 +80,16 @@
 
 <!-- v3 table -->
 
+
 <mat-tab-group mat-align-tabs="start" class="mt-2 pl-4 " [selectedIndex]="activeTabIndex"
-atSortActive="promtion.requiredPoints" matSortDirection="desc">
-  <mat-tab label="My Promotions">
-      
+atSortActive="promtion.requiredPoints" matSortDirection="desc" (selectedTabChange)="tabChanged($event)">
+  
+<mat-tab label="My Promotions">
+    <div style="width:130px; margin:0 auto;" class="mb-4">
+      <mat-spinner *ngIf="!dataSource" ></mat-spinner>
+    </div>
+
+    <div *ngIf ="dataSource">
     <div class="example-header row mr-0">
       <div class="col">
         <mat-form-field>
@@ -121,9 +127,9 @@ atSortActive="promtion.requiredPoints" matSortDirection="desc">
           <td mat-cell *matCellDef="let element"> {{element.promtion.company.name}} </td>
         </ng-container>
     
-        <ng-container matColumnDef="moreDetials">
+        <ng-container matColumnDef="moreDetials" >
           <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
-          <td mat-cell *matCellDef="let element"><mat-icon 
+          <td mat-cell *matCellDef="let element"  ><mat-icon 
             matSort matTooltip="More Detials" >more_vert</mat-icon></td>
         </ng-container>
       
@@ -149,7 +155,7 @@ atSortActive="promtion.requiredPoints" matSortDirection="desc">
       </div>
       <mat-divider></mat-divider>
     </ng-template>
-    
+  </div>
     </mat-tab>
   <mat-tab label="Available Promotions" ><app-promotions></app-promotions></mat-tab>
 </mat-tab-group>

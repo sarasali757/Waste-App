@@ -49,4 +49,6 @@
 }
 .mat-header-cell{
   background-color: #28a745;
+}td{
+  cursor: pointer;
 }

@@ -13,6 +13,7 @@ import {} from '../../requests-details/requests-details.component'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from 'src/app/shared/profile.service';
 import { tokenGetter } from 'src/app/app.module';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-new-request-details',
@@ -151,6 +152,8 @@ export class NewRequestDetailsComponent implements OnInit {
      console.log(form);
    }
    
-
+   public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    this.router.navigate(["/Request", { tab: tabChangeEvent.index }]);
+  }
 }
 

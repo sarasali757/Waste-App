@@ -81,6 +81,11 @@
  -->
 <!-- v3 table -->
        
+<div style="width:130px; margin:0 auto;" class="mb-4">
+  <mat-spinner *ngIf="!dataSource" ></mat-spinner>
+</div>
+<div *ngIf="dataSource">
+
     <div class="example-header row mr-0 mt-3">
       <div class="col">
         <mat-form-field>
@@ -159,3 +164,4 @@
     <mat-divider></mat-divider>
     </ng-template>
 
+</div>
