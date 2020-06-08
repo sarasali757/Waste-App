@@ -73,8 +73,6 @@ export class MyPromotionsComponent  {
     
       }
     }); 
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
 
   }
 
@@ -92,6 +90,7 @@ export class MyPromotionsComponent  {
       }));
         console.log("data source ="+this.dataSource.data);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.array = data;
         this.totalSize = this.array.length;
         this.iterator();

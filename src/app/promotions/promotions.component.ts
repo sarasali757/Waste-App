@@ -10,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class PromotionsComponent implements OnInit {
 
   array: any;
   clientPoints;
-  constructor(private service: PromotionService,private dialog:MatDialog) {
+  constructor(private service: PromotionService,private dialog:MatDialog,private router:Router) {
     this.getClientPoints();
    }
    
@@ -61,7 +62,6 @@ export class PromotionsComponent implements OnInit {
   
   openDialog(promotion){
     
-    
     let message1 = "Are you Sure you Want To Add\n"+ "'"+ promotion.name + "'" + "\n into your Promotions"
     
     this.dialog.open(ConfirmDialogBoxComponent,{ data:  message1})
@@ -73,10 +73,8 @@ export class PromotionsComponent implements OnInit {
       if(result == true){
         this.service.AddClientPromotion(promotion.id).subscribe(
           data  => {
-            
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-          console.log("PUT Request is successful ", data);
+          /*?????? this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort; */
             let message2;
           if(data == false){
             message2 = "Not Enough Points !";
@@ -85,7 +83,8 @@ export class PromotionsComponent implements OnInit {
             this.getClientPoints();
           }
           this.openNotifyDialogBox(message2);
-          });
+          }
+          );
       }
     });
   }
@@ -123,7 +122,10 @@ private getArray() {
       this.totalSize = this.array.length;
       this.iterator();
       console.log("hi")
-    }  
+    }  ,err=>{
+      setTimeout(() => this.router.url,10000); 
+      this.getArray();
+    }
   );
 }
 private iterator() {

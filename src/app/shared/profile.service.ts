@@ -13,10 +13,9 @@ export class ProfileService {
   port: Port = new Port();
   onMainEvent: EventEmitter<Client> = new EventEmitter();
  
-  constructor(private httpService: HttpClient) {
-    
-   }
-   getId(): boolean{
+  constructor(private httpService: HttpClient) { }
+
+  getId(): boolean{
     let jwthelper = new JwtHelperService();
     if(tokenGetter()){
       this.id = jwthelper.decodeToken(tokenGetter()).UserId;
@@ -25,10 +24,10 @@ export class ProfileService {
     else{
       return false;
     }
-   }
-
+  }
   getClientData(){
     if( this.getId()){
+      console.log(this.getId) ;
     return this.httpService.get('http://localhost:'+this.port.port+'/Api/client/getClientData/'+this.id);
     }
   }
@@ -40,7 +39,6 @@ export class ProfileService {
   }
   getCategories(){
     return this.httpService.get('http://localhost:'+this.port.port+'/Api/client/GetClientCategories');
-  
   }
 
   updateClient(credentials){
@@ -50,6 +48,6 @@ export class ProfileService {
    return this.httpService.put('http://localhost:'+this.port.port+'/Api/client/UpdateClient', JSON.stringify(credentials),
     {headers: new HttpHeaders({ "Content-Type": "application/json; charset=utf-8"})})
      
+    }
   }
-}
 }

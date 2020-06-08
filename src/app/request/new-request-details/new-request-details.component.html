@@ -66,7 +66,8 @@
             <br>
             <mat-form-field appearance="legacy">
                 <mat-label>Estimate time</mat-label>
-                <mat-select ngModel id='sel_region' class="form-control" name="schedule" formControlName="scheduleControl">
+                <mat-select ngModel id='sel_region' class="form-control" 
+                name="schedule" formControlName="scheduleControl">
                     <mat-option>--</mat-option>
                     <mat-option  *ngFor="let schedule of schedules" 
                     [value]="schedule.id"  >
@@ -94,7 +95,6 @@
         <mat-tab label ="My Requests"> <app-requests-details></app-requests-details></mat-tab>
 
   </mat-tab-group>
-
 
 <!-- <div class="container">
     <div class="row">

@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Port } from '../_models/port';
 import { ProfileService } from '../shared/profile.service';
 import { Client } from '../_models/client.model';
+import { Router } from '@angular/router';
 
 
 
@@ -18,21 +19,34 @@ export class NavbarComponent implements OnInit {
   client: Client;
   clicked = false;
   
-  constructor(private service:ProfileService) {
-    if(tokenGetter()){
-    service.getClientData().subscribe(data=>{
-      this.client = data as Client;
-    },err => {console.log(err);})
-   }
+  constructor(private service:ProfileService,private router: Router) {
   }
 
-  ngOnInit(): void {
+  getClient(){
+    if(tokenGetter()){
+      this.service.getClientData().subscribe(data=>{
+        this.client = data as Client;
+      },err=>{
+        setTimeout(() => this.router.url,250); 
+        this.getClient();
+      })
+     }
+  }
+
+  getClientChange(){
+    this.getClient();
     this.service.onMainEvent.subscribe(
       (client) => {
         this.client = client;
-        console.log(client);
+      },err=>{
+        setTimeout(() => this.router.url,250); 
+        this.getClientChange();
       }
    );
+  }
+  ngOnInit(): void {
+    this.getClient();
+    this.getClientChange();
   }
 
   logOut() {

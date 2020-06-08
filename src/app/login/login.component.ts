@@ -8,6 +8,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { AppComponent } from '../app.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Port } from '../_models/port';
+import { ProfileService } from '../shared/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +19,12 @@ export class LoginComponent implements OnInit {
   validLogin: boolean;
  // global:TestService=new TestService()
    token:string;
-
    port:Port=new Port()
 
-  // private route : ActivatedRoute; 
+  onMain: boolean = false;
 
-  constructor(public http:HttpClient ,public router:Router,public testser:TestService ,private route: ActivatedRoute) {}
+  constructor(public http:HttpClient ,public router:Router,public testser:TestService ,
+    private route: ActivatedRoute, private service: ProfileService) {}
     login(form: NgForm)
      {
 
@@ -45,6 +46,10 @@ export class LoginComponent implements OnInit {
           //this.router.navigate([ returnUrl || '/Home' ]); 
 
           this.router.navigateByUrl(returnUrl);
+
+          this.service.getClientData().subscribe(client=>{
+            this.updateOnMain(client) ;
+          })
 
 
       }, err => {
@@ -68,6 +73,10 @@ export class LoginComponent implements OnInit {
     // this.http.get("http://localhost:"+this.port.port+"/api/address").subscribe(a=>console.log(a))
     // console.log("hello");
   }
+  updateOnMain(onMain):void {
+    this.service.onMainEvent.emit(onMain);
+    console.log(onMain);
+  } 
 
  getData(){
   // return this.http.get("http://localhost:5000/api/customer",{

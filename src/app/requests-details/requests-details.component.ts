@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 
 
 import {Requests} from '../_models/requests.model'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-requests-details',
   templateUrl: './requests-details.component.html',
@@ -53,7 +54,7 @@ Element : Requests;
 
 array: any;
 
-  constructor(private service: RequestsDetailsService) {
+  constructor(private service: RequestsDetailsService,private router: Router) {
    
    }
    ngOnInit(): void {
@@ -78,7 +79,10 @@ array: any;
         this.totalSize = this.array.length;
         this.iterator();
         this.dataSource.sort = this.sort;
-      }  
+      }  ,err=>{
+        setTimeout(() => this.router.url,10000); 
+        this.getArray();
+      }
     );
   }
   public handlePage(e: any) {

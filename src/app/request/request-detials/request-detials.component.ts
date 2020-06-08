@@ -24,25 +24,24 @@ export class RequestDetialsComponent implements OnInit {
   seconds;
   date;
   constructor(private service:NewRequestDetailService,private dialog:MatDialog,private router:Router) { 
-    this.getRequest();
-
-    setInterval(() => {
-      this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
-       this.getRemainingTime()
-    }, 1000)
   }
 
   ngOnInit(): void {
+    this.getRequest();
   }
   getRequest(){
     this.service.getRequest().subscribe(  
       data => {  
         this.request = data as Requests ;  
-        console.log(this.request)
-        console.log(this.request.schedule.time)      
         this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
-        console.log("time "+this.remainingTime);
-        console.log(this.getRemainingTime());
+       
+        setInterval(() => {
+          this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
+           this.getRemainingTime()
+        }, 1000)
+      },err=>{
+        setTimeout(() => this.router.url,10000); 
+        this.getRequest();
       }
       );
   }

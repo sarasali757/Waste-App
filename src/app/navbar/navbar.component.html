@@ -13,7 +13,8 @@
       <ul class="navbar-nav mr-auto">
         
         <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
-          <a class="nav-link"  matTooltip="View Profile"  (click)="drawer.toggle() ;Clicked();">
+          <a class="nav-link"  matTooltip="View Profile"  style="cursor: pointer;"
+          (click)="drawer.toggle() ;Clicked();" > 
             Profile
           </a>
 
@@ -66,7 +67,7 @@
         </li>
         <li class="nav-item" routerLinkActive="active current">
          <a class="nav-link" *ngIf="!IsLoggedIn()" routerLink="/login">login</a>
-         <a class="nav-link" *ngIf="IsLoggedIn()" href="#" (click)="logOut()" routerLinkActive="active current">logout</a>
+         <a class="nav-link" *ngIf="IsLoggedIn()" href="/" (click)="logOut()" routerLinkActive="active current">logout</a>
        </li>
        
       </ul>

@@ -10,7 +10,9 @@ import { NotifyDialogBoxComponent } from 'src/app/notify-dialog-box/notify-dialo
 import { MatDialog } from '@angular/material/dialog';
 import { RequestDetialsComponent} from '../request-detials/request-detials.component'
 import {} from '../../requests-details/requests-details.component'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileService } from 'src/app/shared/profile.service';
+import { tokenGetter } from 'src/app/app.module';
 
 @Component({
   selector: 'app-new-request-details',
@@ -37,8 +39,10 @@ export class NewRequestDetailsComponent implements OnInit {
     scheduleControl : new FormControl('', [ Validators.required,])
   })
   activeTabIndex = 0;
-  constructor (private service:NewRequestDetailService,private dialog:MatDialog,private  activatedRoute: ActivatedRoute){ 
-    this.initialData();
+  constructor (private service:NewRequestDetailService,private dialog:MatDialog,
+    private  activatedRoute: ActivatedRoute,private router:Router,
+    private service2: ProfileService ){ 
+   // this.initialData(); 
   }
   public hasError = (controlName: string, errorName: string) =>{
     return this.group.controls[controlName].hasError(errorName);
@@ -51,34 +55,46 @@ export class NewRequestDetailsComponent implements OnInit {
         }
       });
   }
-
   initialData(){
-    this.service.getClient().subscribe(  
+    if(tokenGetter()){
+      this.service2.getClientData().subscribe(data=>{
+        this.client = data as Client;
+        this.service.getRegion().subscribe(  
+          data => {  
+            this.regions= data as Region;
+
+            this.service.getAddresses(this.client.address.regionId).subscribe(  
+              data => {  
+                this.addresses= data as Address ;  
+                console.log(this.addresses);
+              },err=>{
+                setTimeout(() => this.router.url,10000); 
+                this.initialData();
+              });
+              this.service.getSchedules(this.client.address.regionId).subscribe(  
+                data => {  
+                  this.schedules = data as Schedule ;  
+                  console.log(this.schedules);
+                },err=>{
+                  setTimeout(() => this.router.url,10000); 
+                  this.initialData();
+                }
+              );
+            }
+        );
+      },err=>{
+        setTimeout(() => this.router.url,10000); 
+        console.log("test");
+        this.initialData();
+      })
+     }
+
+/*     this.service.getClient().subscribe(  
       data => {  
         this.client = data as Client ;  
         console.log(this.client)
       }
-    );
-
-    this.service.getRegion().subscribe(  
-      data => {  
-        this.regions= data as Region;
-        
-        this.service.getAddresses(this.client.address.regionId).subscribe(  
-          data => {  
-            this.addresses= data as Address ;  
-            console.log(this.addresses);
-          }  );
-
-          this.service.getSchedules(this.client.address.regionId).subscribe(  
-            data => {  
-              this.schedules = data as Schedule ;  
-              console.log(this.schedules);
-            }  
-          );  
-      }  
-    );
-
+    ); */
   }
 
 
@@ -96,7 +112,6 @@ export class NewRequestDetailsComponent implements OnInit {
         console.log(this.schedules);
       }  
     ); 
-
   }
   onSubmit() {
  console.log("on submit");
