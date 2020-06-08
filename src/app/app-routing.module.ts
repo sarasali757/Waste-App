@@ -19,6 +19,7 @@ import { RequestDetialsComponent } from './request/request-detials/request-detia
 import { AboutUsComponent } from './about-us/about-us.component';
 
 import { AuthGuard }from './guards/auth.service'
+import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 const routes: Routes = [
   {
     path: '',
@@ -70,6 +71,10 @@ const routes: Routes = [
   {
     path: 'test',
     component: InputErrorsExample,
+  },
+  {
+    path:"Feedback",
+    component: AddFeedbackComponent,
   },
   {
     path: '**',
