@@ -9,6 +9,7 @@ import { AppComponent } from '../app.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Port } from '../_models/port';
 import { ProfileService } from '../shared/profile.service';
+import { tokenGetter } from '../app.module';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,9 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute, private service: ProfileService) {}
     login(form: NgForm)
      {
-
+      if(tokenGetter()){
+        localStorage.removeItem("jwt");
+      }
       let credentials = JSON.stringify(form.value);
       this.http.post("http://localhost:"+this.port.port+"/api/auth/login" ,  credentials, {
       headers: new HttpHeaders({

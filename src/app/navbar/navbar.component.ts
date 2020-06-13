@@ -7,7 +7,6 @@ import { Client } from '../_models/client.model';
 import { Router } from '@angular/router';
 
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

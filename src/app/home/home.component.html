@@ -1,4 +1,150 @@
 <!-- 
 <img src="./assets/imgs/bg.png" class="center" style="margin-left: 140px;">
  -->
- <h1>Home Page</h1>
+<!--  <div class="row" *ngIf="images">
+
+  <div *ngFor="let image of images">
+       <img [src]="createImgPath(image.image)" alt="profile picture" style="width:60px; height:60px;">
+  </div>
+  
+</div> -->
+<div style="background-image: url( ./assets/imgs/ODRAX20.jpg);background-size: cover;" id="top">
+  <div class="row m-0 pt-5 px-5" >
+      <div class=" col-lg-6 col-md-6 my-3 ">
+          <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel" >
+
+              <ol class="carousel-indicators" *ngIf="bind">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" *ngFor ="let index of count"
+                attr.data-slide-to ="{{index}}" ></li>
+                <!-- <li data-target="#carouselExampleCaptions" data-slide-to="2"></li> -->
+              </ol>
+              <div class="carousel-inner"  *ngIf="instructions">
+                
+                <div class="carousel-item active" >
+                  <img src=" ./assets/imgs/1.png " class="d-block w-100" style="max-width:  500px; margin: auto;" 
+                  alt="...">
+                </div>
+
+                <div class="carousel-item " *ngFor="let instruction of instructions" >
+                  <img [src]="createImgPath(instruction.image)"  class="d-block w-100" 
+                  style="max-width:  500px;margin: auto;" alt="...">
+                  <div class="carousel-caption d-none d-md-block" *ngIf="instruction.details" >
+                    <h4 class="text-dark"><strong> Tip:</strong></h4>
+                    <p class="text-dark" style="white-space: pre-line;font-size: 16px;"><strong>{{instruction.details}}</strong></p>
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+      </div>
+      <div class="col-lg-2">
+
+      </div>
+      <!-- second column -->
+      <div class=" col-lg-3 col-md-3 my-3 ">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src=" ./assets/imgs/1.png " class="d-block w-100" style="max-width: 500px;margin: auto;" alt="...">
+            </div>
+            <div class="carousel-item " *ngFor="let promotion of promotions" >
+              <img class="d-block w-100" [src]="createImgPath(promotion.image)" style="max-width:  500px;margin: auto;" alt="Second slide">
+              <div class="carousel-caption d-none d-md-block" *ngIf="promotion.details" >
+                <h5 class="text-dark"><strong>Tip:</strong> </h5>
+                <p class="text-dark" style="white-space: pre-line;"><strong> {{promotion.details}}</strong></p>
+              </div>
+            </div>
+            
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <div class=" my-3">
+          <img class="d-block w-100" src="./assets/imgs/Ad.png" style="max-width:  500px;margin: auto;max-height: 175px;" >
+        </div>
+      </div>
+  </div>
+
+  <div class="row m-0">
+    <section class="container-fluid">
+      <section class="container py-5 mu-5">
+          <section class="row pt-3 ">
+              <figure class="col-sm " align="center" >
+                  <img src="./assets/imgs/Ad.png" alt="" class="img-fluid " style="max-width: 150px; max-height: 175px;">
+              </figure>
+              <figure class="col-sm " align="center">
+                  <img src="./assets/imgs/Ad.png" alt="" class="img-fluid " style="max-width: 150px; max-height: 175px;">
+              </figure>
+              <figure class="col-sm " align="center">
+                  <img src="./assets/imgs/Ad.png" alt="" class="img-fluid "  style="max-width: 150px; max-height: 175px;">
+              </figure>
+          </section>
+      </section>
+    </section>
+  </div>
+</div>
+
+<!--  -->
+
+<section class="container-fluid">
+  <section class="container py-5 mu-5">
+      <section class="row pt-3 ">
+          <figure class="col-sm mb-4" align="center" >
+              <img src="./assets/imgs/environment.png" alt="" class="img-fluid imgRound" style="max-width: 100px;">
+              <h4><strong>Environment friendly</strong></h4>
+          </figure>
+          <figure class="col-sm mb-4" align="center">
+              <img src="./assets/imgs/trash.png" alt="" class="img-fluid imgRound" style="max-width: 100px;">
+              <h4><strong>Clean Environment</strong></h4>
+          </figure>
+          <figure class="col-sm mb-4" align="center">
+              <img src="./assets/imgs/recycle.png" alt="" class="img-fluid imgRound"  style="max-width: 100px;">
+              <h4><strong>Recycle</strong></h4>
+          </figure>
+          <figure class="col-sm mb-4" align="center">
+              <img src="./assets/imgs/garbage-truck.png" alt="" class="img-fluid imgRound" style="max-width: 100px;">
+              <h4><strong>Transportation </strong></h4>
+            </figure>
+          <figure class="col-sm mb-4" align="center">
+              <img src="./assets/imgs/hand-holding-a-phone-to-take-a-selfie-pic.png" alt="" 
+              class="img-fluid imgRound" style="max-width: 100px;">
+              <h4><strong>Easy to use</strong></h4>
+          </figure>
+      </section>
+  </section>
+</section>
+<!--  -->
+
+<section class="container-fluid">
+
+  <section class="row mx-4 mb-5" id="AboutUs">
+      <figure class="col-lg-6 col-sm-12">
+          <img src="./assets/imgs/garbage-collector-portrait-worker-recycling-truck-loading-waste-trash-bin-keeper-160159837.jpg " alt="" class="img-fluid">
+      </figure>
+      <section class="col-lg-6 col-sm-12 pt-5 mt-5">
+          <h2 class="font-weight-bold ">Our Progress <br></h2>
+          <p>We are here to help.</p>
+          <p>WasteApp have until now #### clients that support our vision which is a clean 
+            environment with zero waste per year. <br>
+          Our Mission won't complete without WasteApp team, we have ### collectors and ### Driver 
+          around the city help to serve a 24h with a clean environment</p>
+          <button *ngIf="!isLoggedIn()" type="button" class="btn btn-light rounded-0 px-4 py-2 grad text-white"  routerLink="/register"
+              style="font-size: 12px;">
+              join our Community</button>
+      </section>
+  </section>
+</section>

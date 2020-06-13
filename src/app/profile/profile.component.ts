@@ -130,7 +130,6 @@ export class ProfileComponent implements OnInit {
       err => {console.log(err);
       let message ="Sorry, Something went Wrong \n Please Try Again Later"
       this.openNotifyDialogBox(message);
-
       }) ; 
 
   }

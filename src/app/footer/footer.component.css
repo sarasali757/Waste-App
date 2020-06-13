@@ -1,0 +1,19 @@
+#other2 {
+    width: 100%;
+   /*  padding: 0 7%; */
+    margin: 0;
+    max-width: 100%;
+
+    background-image: url("/assets/imgs/3136771.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+}
+.grad {
+    background-image: linear-gradient(to right, #22892d, #74d14c);
+    
+    border-radius: 30%;
+}
+.clickable{
+    cursor: pointer;
+}

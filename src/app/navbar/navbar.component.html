@@ -63,14 +63,16 @@
     <div class="collapse navbar-collapse justify-content-end mx-5" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item" routerLinkActive="active current">
-          <a class="nav-link" routerLink="/Aboutus" *ngIf="!IsLoggedIn()" routerLinkActive="active current" >About Us</a>
+          <a class="nav-link" routerLink="/Aboutus" *ngIf="!IsLoggedIn()" routerLinkActive="active current" 
+          pageScroll [routerLink]="['Home']" href="#AboutUs"
+          >About Us</a>
         </li>
         <li class="nav-item" routerLinkActive="active current">
           <a class="nav-link" routerLink="/register" *ngIf="!IsLoggedIn()" routerLinkActive="active current" >Register</a>
         </li>
         <li class="nav-item" routerLinkActive="active current">
          <a class="nav-link" *ngIf="!IsLoggedIn()" routerLink="/login">login</a>
-         <a class="nav-link" *ngIf="IsLoggedIn()" href="/" (click)="logOut()" routerLinkActive="active current">logout</a>
+         <a class="nav-link" *ngIf="IsLoggedIn()" href="/Home" (click)="logOut()" routerLinkActive="active current">logout</a>
        </li>
        
       </ul>

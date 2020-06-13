@@ -124,7 +124,7 @@ private iterator() {
   this.dataSource = part;
 }
 public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
-  this.router.navigate(["/Promotions", { tab: tabChangeEvent.index }]);
+  this.router.navigate(["/Promotions",  ], { queryParams: { tab: tabChangeEvent.index } });
 }
   
 }

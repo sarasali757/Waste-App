@@ -10,5 +10,6 @@ export class Promotion
     details;
     company:Company;
     companyId;
+    image;
 }
 

@@ -76,8 +76,15 @@ import {MatSortModule} from '@angular/material/sort';
 //redux
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
+import { TestImgComponent } from './test-img/test-img.component';
+import { GetImgComponent } from './get-img/get-img.component';
+import { FooterComponent } from './footer/footer.component';
 
 //import { IAppState, rootReducer } from './Store'
+
+import {NgxPageScrollModule} from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -112,6 +119,9 @@ export function tokenGetter() {
     NavbarComponent,
     AboutUsComponent,
     AddFeedbackComponent,
+    TestImgComponent,
+    GetImgComponent,
+    FooterComponent,
     
   ],
   imports: [MatSliderModule,
@@ -155,7 +165,9 @@ export function tokenGetter() {
    MatSortModule,
    CdkTableModule,
    CdkTreeModule,
-   
+   NgxPageScrollModule,
+   NgxPageScrollCoreModule,
+   NgxPageScrollCoreModule.forRoot({duration: 1000}),
 
   ],
   providers: [AuthService

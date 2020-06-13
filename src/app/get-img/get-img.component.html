@@ -1,0 +1,20 @@
+<!-- <img [src]="imageToShow"
+     alt="Place image title"
+     *ngIf="!isImageLoading; else noImageFound">
+<ng-template #noImageFound>
+     <img src="fallbackImage.png" alt="Fallbackimage">
+</ng-template>
+ -->
+<!-- 
+ <img id="image" [src]="imageSrc" width="100" height="50">
+ -->
+
+ <div class="row" *ngIf="images">
+
+     <div *ngFor="let image of images">
+          <img [src]="createImgPath(image.image)" alt="profile picture" style="width:60px; height:60px;">
+     </div>
+     
+ </div>
+<!-- 
+<img [src]="createImgPath()" alt="profile picture" style="width:60px; height:60px;"> -->

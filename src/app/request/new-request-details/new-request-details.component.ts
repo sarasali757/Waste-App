@@ -153,7 +153,7 @@ export class NewRequestDetailsComponent implements OnInit {
    }
    
    public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
-    this.router.navigate(["/Request", { tab: tabChangeEvent.index }]);
+    this.router.navigate(["/Request",], { queryParams: { tab: tabChangeEvent.index } });
   }
 }
 

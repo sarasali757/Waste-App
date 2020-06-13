@@ -20,6 +20,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 
 import { AuthGuard }from './guards/auth.service'
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
+import { TestImgComponent } from './test-img/test-img.component';
+import { GetImgComponent } from './get-img/get-img.component';
 const routes: Routes = [
   {
     path: '',
@@ -27,8 +29,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: "Home",
-   component: HomeComponent,
-   canActivate: [AuthGuard]
+   component: HomeComponent/* ,
+   canActivate: [AuthGuard] */
    },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterAsComponent },
@@ -43,6 +45,13 @@ const routes: Routes = [
     path: 'Request',
     component: NewRequestDetailsComponent,
     canActivate: [AuthGuard]
+  },{
+    path :'img',
+    component : TestImgComponent,
+  },
+  {
+    path :'getimg',
+    component : GetImgComponent,
   },
  /*  {
     path: 'CurrentRequest',

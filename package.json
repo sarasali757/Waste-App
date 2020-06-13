@@ -27,6 +27,8 @@
     "jquery": "^3.5.1",
     "ng2-redux": "^5.1.2",
     "ng2-search-filter": "^0.5.1",
+    "ngx-page-scroll": "^7.0.1",
+    "ngx-page-scroll-core": "^7.0.1",
     "ngx-pagination": "^5.0.0",
     "popper.js": "^1.16.1",
     "redux": "^4.0.5",

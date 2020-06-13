@@ -1,0 +1,22 @@
+.square {
+    height: 75px;
+    width: 75px;
+}
+/* .fill-class > svg { 
+    fill: orange;
+} */
+
+/* figure{
+    max-width: 150px;
+} */
+.imgRound{
+
+    border-radius: 30%;
+    background-image: linear-gradient(to right, #22892d, #74d14c);
+    padding: 24px;
+    margin-bottom: 8px;
+}
+.grad {
+    background-image: linear-gradient(to right, #22892d, #74d14c);
+    border: none;
+}

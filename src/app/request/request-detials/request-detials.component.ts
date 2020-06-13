@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-request-detials',
   templateUrl: './request-detials.component.html',
-  styles: []
+  styleUrls: ['./request-detials.component.css']
 })
 export class RequestDetialsComponent implements OnInit {
 
