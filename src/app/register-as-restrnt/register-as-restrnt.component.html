@@ -1,5 +1,6 @@
-<form class="form-signin" name="form" #form >
-    <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;" class="row mb-5" >
+<form class="form-signin" name="form" #form="ngForm" >
+    <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;" 
+    class="row mb-5 mx-0 mt-0" >
      <div class="container-fluid" > 
        <br/><br/> <br/>
       <h2 style="text-align: center;" class="form-signin-heading">Register</h2>
@@ -56,7 +57,7 @@
             <br/>     
             <label for="streetName" class="sr-only">Street Name</label>
             <select class="form-control" [(ngModel)]="newClient.AddressId" name="streetName" #street
-            placeholder="street name" >
+            placeholder="street name" required>
               <option value="null" disabled="true" [selected]="true">Street Name</option>
               <option *ngFor="let item of address " [ngValue]="item.id">{{item.streetName}}</option>
             </select>
@@ -64,6 +65,7 @@
             <label for="Mobile" class="sr-only">Mobile</label>
             <div class="input-group">
               <input style="align-self: center;"  minlength="11"  maxlength="11" #mobile
+              pattern="^[0-9]*$"
               [(ngModel)]="newClient.Mobile" type="tel" name="Mobile" 
               class="form-control" placeholder="Mobile" required autofocus>
             </div> 
@@ -82,7 +84,7 @@
         <div class="row">
           <div class="col-lg-5"></div>
           <div class="col-lg-2">
-            <button class="btn btn-lg btn-primary btn-block grad"  
+            <button class="btn btn-lg btn-primary btn-block grad"   [disabled]="!form.valid"
             (click)="Register()">Register</button>
           </div>
 

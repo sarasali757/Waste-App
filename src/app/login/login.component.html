@@ -1,7 +1,8 @@
 <router-outlet>
   <!-- #loginForm="ngForm" (ngSubmit)="login(loginForm)" -->
   <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)" >
-  <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;" class="row mb-5" >
+  <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;"
+   class="row mb-5 mx-0 mt-0" >
   
    <div class="container-fluid" > 
      <br/>
@@ -20,7 +21,7 @@
             <div class="input-group-text">+2</div>
           </div>
           <input style="align-self: center;width: 400px;" type="mobile" id="mobile" required minlength="11" maxlength="11"
-          name="mobile" ngModel class="form-control" placeholder="Mobile"  autofocus 
+          name="mobile" ngModel class="form-control" placeholder="Mobile"  autofocus pattern="^[0-9]*$"
            #mobile="ngModel">
         </div>
       </div>

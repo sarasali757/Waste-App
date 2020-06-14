@@ -1,5 +1,6 @@
-<form class="form-signin" >
-    <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;" class="row mb-5" >
+<form class="form-signin" class="m-0"  #form="ngForm" >
+    <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;" 
+    class="row mb-5 mx-0 mt-0" >
      <div class="container-fluid" > 
        <br/><br/> <br/>
       <h2 style="text-align: center;" class="form-signin-heading">Register</h2>
@@ -46,7 +47,7 @@
               <div class="input-group">
                 <input style="align-self: center;" [(ngModel)]="newClient.Mobile"  minlength="11"  maxlength="11"
                  type="tel" name="Mobile" class="form-control"
-                  placeholder="Mobile" 
+                  placeholder="Mobile" pattern="^[0-9]*$"
                  required autofocus>
               </div> 
     </div> 
@@ -68,16 +69,17 @@
 
             <label for="streetName" class="sr-only">Street</label>
             <select class="form-control" [(ngModel)]="newClient.AddressId" #street
-            name="streetName" placeholder="Street" >
+            name="streetName" placeholder="Street" required>
              <option value="null" disabled="true" [selected]="true">Street Name</option>
               <option *ngFor="let item of address " [ngValue]="item.id">{{item.streetName}}</option>
             </select>
 
             <br/>     
            
-        <label for="username" class="sr-only">Apartment Number</label>
+        <label for="apartmentNumber" class="sr-only">Apartment Number</label>
            <div class="input-group">
-             <input style="align-self: center;" type="number" [(ngModel)]="newClient.ApartmentNumber"  name="password" class="form-control" placeholder="Apartment Number" required autofocus>
+             <input style="align-self: center;" type="number" [(ngModel)]="newClient.ApartmentNumber"  
+             name="apartmentNumber" class="form-control" placeholder="Apartment Number" required autofocus>
             </div>
             <br/>
             <!-- <select #c class="form-control" [(ngModel)]="newClient.CategoryId" name="CategoryId" placeholder="CategoryId" >
@@ -90,7 +92,8 @@
         <div class="row">
           <div class="col-lg-5"></div>
           <div class="col-lg-2">
-            <button class="btn btn-lg btn-primary btn-block grad"  (click)="Register()">Register</button>
+            <button class="btn btn-lg btn-primary btn-block grad"  [disabled]="!form.valid" 
+            (click)="Register()">Register</button>
           </div>
 
         </div>
