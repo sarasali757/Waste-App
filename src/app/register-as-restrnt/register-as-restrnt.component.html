@@ -1,4 +1,4 @@
-<form class="form-signin" >
+<form class="form-signin" name="form" #form >
     <section style="background-image: url(assets/imgs/loginbg.jpg);background-size: cover;height: 750px;" class="row mb-5" >
      <div class="container-fluid" > 
        <br/><br/> <br/>
@@ -8,27 +8,33 @@
     <!-- filelds -->
     <div class="col-lg-3">
      <span  class="font-weight-bold" style="font-size:medium;">Contact Person Data</span>   
-    <label for="username" class="sr-only">First Name</label>
+    <label for="FirstName" class="sr-only">First Name</label>
     <div class="input-group">
-      <input style="align-self: center;" type="text" [(ngModel)]="newClient.FirstName" name="FirstName" ngModel class="form-control" placeholder="First Name" [(ngModel)]="newClient.FirstName" required autofocus>
+      <input style="align-self: center;" type="text" 
+      [(ngModel)]="newClient.FirstName" name="FirstName" #fname
+      ngModel class="form-control" placeholder="First Name"  required autofocus>
      </div >
          <br/> 
     
-      <label for="username" class="sr-only">Email address</label>
+      <label for="email" class="sr-only">Email address</label>
       <div class="input-group">
-        <input style="align-self: center;" type="email" name="username" [(ngModel)]="newClient.Email"  class="form-control" placeholder="User Name" required autofocus>
+        <input style="align-self: center;" type="email" name="email" 
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #lname
+        [(ngModel)]="newClient.Email"  class="form-control" placeholder="Email" 
+        required autofocus>
       </div> 
           <br/>     
-          <select #r   id="reg_selected"  class="form-control" 
-                name="Region" placeholder="Region"  (change)="getStreets(r.value)" >
+            <label for="Region" class="sr-only">Region</label>
+            <select #r   id="reg_selected"  class="form-control" 
+                name="Region" placeholder="Region"  (change)="getStreets(r.value)"   >
                 <option value="" hidden >Region</option>
                 <option #o *ngFor="let item of region"  [value]="item.id">{{item.name}}</option>
-                
               </select>
              <br/>  
-             <label for="LastName" class="sr-only">Building Number</label>
+             <label for="BuildingNumber" class="sr-only">Building Number </label>
            <div class="input-group">
-              <input type="number"  class="form-control" [(ngModel)]="newClient.BuildingNumber" placeholder="Building Number" name="BuildingNumber" required>
+              <input type="number"  class="form-control" [(ngModel)]="newClient.BuildingNumber" #BuildingNumber
+              placeholder="Building Number" name="BuildingNumber" required>
            </div>
            <br/>    
            
@@ -39,21 +45,27 @@
 <div class="col-lg-3">
     <br/>
   <label for="LastName" class="sr-only">Last Name</label>
-          <input type="text" [(ngModel)]="newClient.LastName" class="form-control" placeholder="Last Name" name="LastName" required>
+          <input type="text" [(ngModel)]="newClient.LastName" class="form-control" #lname
+           placeholder="Last Name" name="LastName" required>
              <br/>
-       <label for="username" class="sr-only">Password</label>
+       <label for="password" class="sr-only">Password</label>
            <div class="input-group">
-             <input style="align-self: center;" [(ngModel)]="newClient.Password"  type="password" name="password" class="form-control" placeholder="Password" required autofocus>
+             <input style="align-self: center;" [(ngModel)]="newClient.Password" #password
+              type="password" name="password" class="form-control" placeholder="Password" required autofocus>
             </div>
             <br/>     
-            <select class="form-control" [(ngModel)]="newClient.AddressId" name="streetName" placeholder="street name" >
-              <option value="" hidden >Street Name</option>
+            <label for="streetName" class="sr-only">Street Name</label>
+            <select class="form-control" [(ngModel)]="newClient.AddressId" name="streetName" #street
+            placeholder="street name" >
+              <option value="null" disabled="true" [selected]="true">Street Name</option>
               <option *ngFor="let item of address " [ngValue]="item.id">{{item.streetName}}</option>
             </select>
             <br/>     
-            <label for="username" class="sr-only">Mobile</label>
+            <label for="Mobile" class="sr-only">Mobile</label>
             <div class="input-group">
-              <input style="align-self: center;" [(ngModel)]="newClient.Mobile" type="tel" name="Mobile" class="form-control" placeholder="Mobile" required autofocus>
+              <input style="align-self: center;"  minlength="11"  maxlength="11" #mobile
+              [(ngModel)]="newClient.Mobile" type="tel" name="Mobile" 
+              class="form-control" placeholder="Mobile" required autofocus>
             </div> 
         <!-- <label for="username" class="sr-only">Apartment Number</label>
            <div class="input-group">
@@ -70,7 +82,8 @@
         <div class="row">
           <div class="col-lg-5"></div>
           <div class="col-lg-2">
-            <button class="btn btn-lg btn-primary btn-block grad" (click)="Register()">Register</button>
+            <button class="btn btn-lg btn-primary btn-block grad"  
+            (click)="Register()">Register</button>
           </div>
 
         </div>

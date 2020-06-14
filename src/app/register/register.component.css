@@ -2,3 +2,22 @@
     background-image: linear-gradient(to right, #22892d, #74d14c);
     border: none;
 }
+
+.ng-touched.ng-invalid-required {
+    border-color: red;
+}
+/* Show red border when stuff has been typed in, but its invalid */
+.ng-dirty.ng-invalid {
+  border-color: red;
+}
+/*Show normal border color when typed in for the first time*/
+.ng-untouched.ng-invalid {
+    border-color: transparent;
+    border: none; 
+}
+.ng-submitted input.ng-invalid{
+    border-color: red;
+}
+.ng-pristine {
+    border-color: red;  
+}

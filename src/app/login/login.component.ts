@@ -10,6 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Port } from '../_models/port';
 import { ProfileService } from '../shared/profile.service';
 import { tokenGetter } from '../app.module';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifyDialogBoxComponent } from '../notify-dialog-box/notify-dialog-box.component';
+import { Client } from '../_models/client.model';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +28,7 @@ export class LoginComponent implements OnInit {
   onMain: boolean = false;
 
   constructor(public http:HttpClient ,public router:Router,public testser:TestService ,
-    private route: ActivatedRoute, private service: ProfileService) {}
+    private route: ActivatedRoute, private service: ProfileService,private dialog:MatDialog) {}
     login(form: NgForm)
      {
       if(tokenGetter()){
@@ -57,6 +60,10 @@ export class LoginComponent implements OnInit {
 
       }, err => {
       // this.invalidLogin = true;
+      
+      let message ="Invalid login"
+      this.dialog.open(NotifyDialogBoxComponent,{  width: '250px', data: message})
+      //alert("Invalid login");
       });
 
      /*    let token = localStorage.getItem("jwt");

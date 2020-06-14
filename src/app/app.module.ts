@@ -71,6 +71,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSortModule} from '@angular/material/sort';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 //redux
@@ -146,7 +147,7 @@ export function tokenGetter() {
 
    NgxPaginationModule,
    Ng2SearchPipeModule ,
-
+   MatBadgeModule,
    MatDialogModule,
    MatTableModule,
    MatFormFieldModule,

@@ -12,25 +12,79 @@
   <div class="col-lg-4"></div>
   <div class="col-lg-4">
   
+    <div class="row">
+      <div class="col-auto">
+        <label class="sr-only" for="mobile">Mobile</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">+2</div>
+          </div>
+          <input style="align-self: center;width: 400px;" type="mobile" id="mobile" required minlength="11" maxlength="11"
+          name="mobile" ngModel class="form-control" placeholder="Mobile"  autofocus 
+           #mobile="ngModel">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+      class="alert alert-danger ml-3">
+        *Please Enter your mobile number
+      </div>
+    </div>
+<!-- 
+    <div class="row">
         <label for="mobile" class="sr-only">Email address</label>
-        
           <div class="input-group">
-   <input style="align-self: center;" type="mobile" id="mobile" name="mobile" ngModel class="form-control" placeholder="Mobile" required autofocus>
-         
-      </div >
+            <input style="align-self: center;" type="mobile" id="mobile" required minlength="11" maxlength="11"
+              name="mobile" ngModel class="form-control" placeholder="Mobile"  autofocus 
+               #mobile="ngModel">
+              </div>
+            </div > -->
+
+             
+
+      
       </div> 
   </div>
                     <br/>
-  <div class="row">
-    <div class="col-lg-4"></div>
-  <div class="col-lg-4">
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Password" required>
-        <br/>
-        <button class="btn btn-lg btn-primary btn-block grad" type="submit" >Sign in</button>
-      </div>
-   </div> 
-   </div>
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+
+        <div class="row">
+          <div class="col-auto">
+            <label for="password" class="sr-only">Password</label>
+            <div class="input-group mb-2">
+              <input type="password" id="password" name="password" ngModel class="form-control"  
+              #password="ngModel" style="align-self: center;width: 440px;"
+              placeholder="Password"  required >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="alert alert-danger ml-3">
+            *Please Enter your password
+          </div>
+        </div>
+
+     <!--    <div class="row">
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" id="password" name="password" ngModel class="form-control"  #password="ngModel"
+          placeholder="Password"  required  >
+        </div> -->
+
+       
+          <br/>
+          <button class="btn btn-lg btn-primary btn-block grad" type="submit" 
+          [disabled]="!mobile.valid && !password.valid ">Sign in</button>
+       
+        
+         
+        </div>
+    
+      </div> 
+    </div>
   </section>
   
     </form>

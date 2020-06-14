@@ -11,6 +11,8 @@ import { Address } from '../_models/address';
 import { Category } from '../_models/category';
 import { ClientCategory } from '../_models/client-category';
 import { Address2 } from '../_models/address2';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifyDialogBoxComponent } from '../notify-dialog-box/notify-dialog-box.component';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -23,7 +25,9 @@ streets:string[]=[];
 region:Region[]; port:Port=new Port()
 address: Address2[]=[];
 category:ClientCategory[]=[];
-  constructor(public http:HttpClient ,public router:Router,public s:TestService) { }
+  constructor(public http:HttpClient ,public router:Router,public s:TestService,private dialog: MatDialog) { 
+    this.newClient.AddressId =null;
+  }
   Register(){
   //get addressId
   // this.http.get<number>("http://localhost:55915/api/address/GetAddressId?rId="+this.address.regionId+"&stN="+this.address.streetName)
@@ -36,23 +40,32 @@ category:ClientCategory[]=[];
   }
   Register2(){
     console.log("before send",this.newClient)
-    this.http.post("http://localhost:"+this.port.port+"/api/client/RegistrationAprtmnt" ,this.newClient).subscribe(a=>{console.log(a)
-    console.log("hi")
-    this.router.navigateByUrl("/login"); })
+    this.http.post("http://localhost:"+this.port.port+"/api/client/RegistrationAprtmnt" ,this.newClient)
+    .subscribe(a=>{console.log(a)
+        
+      let message ="Register Successfully"
+      this.dialog.open(NotifyDialogBoxComponent,{  width: '250px', data: message})
+        this.router.navigateByUrl("/login"); 
+      },
+      err=>{
+      let message ="Something Went Wrong! \nPlease try again later "
+      this.dialog.open(NotifyDialogBoxComponent,{   data: message})
+      })
 
   }
   getStreets(r:number){
     console.log("id is "+r)
-    this.http.get<Address2[]>("http://localhost:"+this.port.port+"/api/address/GetAddress?id="+r).subscribe(a=>{this.address=a;
-  console.log(a)})
-    
+    this.http.get<Address2[]>("http://localhost:"+this.port.port+"/api/address/GetAddress/"+r).subscribe(
+      a=>{this.address=a;
+     console.log(a)
+    })
   }
 setCategory(c:number){
   console.log(c)
  this.newClient.CategoryId=c;
 }
   getOnLoad(){
-      this.http.get<Region[]>("http://localhost:"+this.port.port+"/api/address/GetRegion").subscribe(a=>{this.region=a
+      this.http.get<Region[]>("http://localhost:"+this.port.port+"/Region/GetRegion").subscribe(a=>{this.region=a
     console.log(a)})
   //  this.newClient.streetName="45"
      console.log("hello")

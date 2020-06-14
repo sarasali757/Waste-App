@@ -5,3 +5,7 @@
 .buttons{
     margin-left:65px ;
 }
+.grad {
+    background-image: linear-gradient(to right, #22892d, #74d14c);
+    border: none;
+}
