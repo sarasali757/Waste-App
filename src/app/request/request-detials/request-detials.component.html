@@ -17,6 +17,12 @@
         <label class="mx-2"  >Date </label>
         <label for="" class="mx-2" *ngIf="request " >{{request.schedule.time |  date:'MMM d, y, h:mm:ss a'}}</label>    
     </div>
+    <div align="center">
+        <label class="mx-2"  >Address  </label>
+        <label for="" class="mx-2" *ngIf="request " >{{request.buildingNumber}},{{" "}}
+            {{request.address.streetName}},{{" "}} {{request.schedule.region.name}},{{' '}} Alexandria
+        </label>    
+    </div>
 
     <div align="center">
         <label for="" class="mx-2" >Remaining </label>

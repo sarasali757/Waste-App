@@ -135,7 +135,7 @@ export class NewRequestDetailsComponent implements OnInit {
       "orgaincWeight": 0,
       "nonOrganicWeight": 0,
       "addressId": (this.group.controls['streetControl'].value),
-      "collectorId": 1,
+      "collectorId": 0,
       "rate": 0
   } 
   let message;
@@ -153,7 +153,6 @@ export class NewRequestDetailsComponent implements OnInit {
         message="Sorry, Something went Wrong \n Please Try Again Later"
         this.openNotifyDialogBox(message);
       }) 
- 
    } 
 
    openNotifyDialogBox(message){
