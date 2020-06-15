@@ -98,7 +98,21 @@
  </nav>
 
  -->
- <app-navbar></app-navbar><!-- 
+ <app-navbar></app-navbar>
+<select   id='Notification' class="form-control" name ="Notification">
+        <option selected disabled>  
+          Notification  
+            </option>   
+            <option>  
+              <span>{{message}}</span>
+             <div class="container" *ngIf="messages.length > 0"> 
+                <div *ngFor="let message of messages">
+                  <span>congratulation You Collect 5 Points</span>
+                </div> 
+              </div> 
+                </option> 
+         </select> 
+<!-- 
  <app-my-profile></app-my-profile> -->
 <router-outlet>
 </router-outlet>
