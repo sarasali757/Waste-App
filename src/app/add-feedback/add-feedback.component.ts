@@ -5,6 +5,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { tokenGetter } from '../app.module';
 import { HttpClient } from '@angular/common/http';
 import { FeedbackCategory } from '../_models/feedback-category';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifyDialogBoxComponent } from '../notify-dialog-box/notify-dialog-box.component';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class AddFeedbackComponent implements OnInit {
   getCatgs(){
    return this.http.get<FeedbackCategory[]>("http://localhost:50856/api/feedbackcategory/getall");
   }
-  constructor(private s:FeedbackService,private http:HttpClient) { 
+  constructor(private s:FeedbackService,private http:HttpClient,private dialog:MatDialog) { 
     let jwthelper = new JwtHelperService();
     this.newFb.clientId = jwthelper.decodeToken(tokenGetter()).UserId;
     console.log(this.newFb.clientId);
@@ -31,6 +33,9 @@ export class AddFeedbackComponent implements OnInit {
     console.log(this.newFb);
       this.s.addFeedback(this.newFb).subscribe(a=>{
         console.log(a);
+        let message ="Thanks for sharing your feedback."
+        this.dialog.open(NotifyDialogBoxComponent,{ data: message})
+
         //message to user that fb is sent successfully
       })
   }

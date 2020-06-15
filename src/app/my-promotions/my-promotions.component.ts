@@ -74,14 +74,18 @@ export class MyPromotionsComponent  {
     
       }
     }); 
-
+    this.service.onMainEvent.subscribe(
+      (client) => {
+        this.getArray();
+      }
+   );
   }
    applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  private getArray() {
+  public getArray() {
     this.service.GetMyPromotions().subscribe(  
       (data : ClientPromotions[]) => {  
         this.dataSource = new MatTableDataSource < ClientPromotions > (data.sort(function(a,b) { 

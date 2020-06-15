@@ -33,12 +33,14 @@ export class RequestDetialsComponent implements OnInit {
     this.service.getRequest().subscribe(  
       data => {  
         this.request = data as Requests ;  
+        if(this.request.id !=0 ){
         this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
        
         setInterval(() => {
           this.remainingTime = (new Date(this.request.schedule.time)).valueOf()-(new Date()).valueOf();
            this.getRemainingTime()
         }, 1000)
+      }
       },err=>{
         setTimeout(() => this.router.url,10000); 
         this.getRequest();

@@ -20,7 +20,7 @@
       <label for="email" class="sr-only">Email address</label>
       <div class="input-group">
         <input style="align-self: center;" type="email" name="email" 
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #lname
+        pattern="[a-z A-Z 0-9._%+-]+@[a-z0-9.-]+\.[a-z A-Z]{2,4}$" #lname
         [(ngModel)]="newClient.Email"  class="form-control" placeholder="Email" 
         required autofocus>
       </div> 

@@ -46,6 +46,7 @@ export class PromotionsComponent implements OnInit {
 
   array: any;
   clientPoints;
+  onMain: boolean = false;
   constructor(private service: PromotionService,private dialog:MatDialog,private router:Router) {
     this.getClientPoints();
    }
@@ -58,6 +59,11 @@ export class PromotionsComponent implements OnInit {
   ngOnInit(): void {
     
     this.getArray();
+    this.service.onMainEvent.subscribe(
+      (onMain) => {
+        this.onMain = onMain;
+        console.log(onMain);
+      });
   }
   
   openDialog(promotion){
@@ -81,6 +87,7 @@ export class PromotionsComponent implements OnInit {
           }else{
             message2 = "Promotion Added Successfully"
             this.getClientPoints();
+            this.service.onMainEvent.emit("str");
           }
           this.openNotifyDialogBox(message2);
           }
