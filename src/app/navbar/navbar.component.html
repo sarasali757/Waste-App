@@ -2,8 +2,8 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-weight: bold;"
   >
 
-    <a class="navbar-brand" href="/Home">
-      <img src="../../assets/imgs/1.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    <a class="navbar-brand mr-5" href="/Home">
+      <img src="../../assets/imgs/1.png" width="30" height="30" class="d-inline-block align-top " alt="">
       <div style="margin-left: 10px; margin-top: 2px; display: inline-block;">WasteApp</div>
     </a>
 
@@ -12,7 +12,7 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto pl-5 ml-5">
         
         <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
           <a class="nav-link"  matTooltip="View Profile"  style="cursor: pointer;"
@@ -60,9 +60,9 @@
        <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
         <a class="nav-link mr-3" routerLink="#" matBadge="8" >Notification</a>
       </li>  
-      <li>
+     <!--  <li>
         <a class="nav-link" routerLink="/MySchedule" *ngIf="IsLoggedIn()">My Schedule</a>
-      </li>
+      </li> -->
        <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
         <a class="nav-link" routerLink="/Feedback" >Feedback</a>
       </li>

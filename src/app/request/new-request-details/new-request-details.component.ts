@@ -15,6 +15,7 @@ import { ProfileService } from 'src/app/shared/profile.service';
 import { tokenGetter } from 'src/app/app.module';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import {} from '../../my-schedule/my-schedule.component'
+import { DummyRequestSharedService } from 'src/app/shared/dummy-request-shared.service';
 @Component({
   selector: 'app-new-request-details',
   templateUrl: './new-request-details.component.html',
@@ -28,6 +29,7 @@ export class NewRequestDetailsComponent implements OnInit {
   addresses: Address;
   schedules: Schedule;
 
+  onMain: boolean = false;
   group= new FormGroup({
     regionControl: new FormControl('', [Validators.required,] , ),
 
@@ -41,7 +43,7 @@ export class NewRequestDetailsComponent implements OnInit {
   })
   activeTabIndex = 0;
   constructor (private service:NewRequestDetailService,private dialog:MatDialog,
-    private  activatedRoute: ActivatedRoute,private router:Router,
+    private  activatedRoute: ActivatedRoute,private router:Router, private dummyService: DummyRequestSharedService,
     private service2: ProfileService ){ 
    // this.initialData(); 
    this.selectedSchedule = (<unknown>this.router.getCurrentNavigation().extras.state) as number;
@@ -56,6 +58,11 @@ export class NewRequestDetailsComponent implements OnInit {
           this.activeTabIndex = params.tab as number;
         }
       });
+        this.dummyService.onMainEvent.subscribe(
+          (onMain) => {
+            this.onMain = onMain;
+            console.log(onMain);
+          });
   }
   initialData(){
     if(tokenGetter()){
@@ -117,6 +124,7 @@ export class NewRequestDetailsComponent implements OnInit {
   }
   onSubmit() {
  console.log("on submit");
+ console.log(this.group.controls['scheduleControl'].value)
     let credentials  = {
       "id": 0,
       "apartmentNumber": (this.group.controls['apartmentNumberControl'].value),
@@ -138,6 +146,8 @@ export class NewRequestDetailsComponent implements OnInit {
        {console.log(response);
         message="Request Submited"
         this.openNotifyDialogBox(message);
+        this.dummyService.onMainEvent.emit("str");
+
       },
       err => {console.log(err);
         message="Sorry, Something went Wrong \n Please Try Again Later"

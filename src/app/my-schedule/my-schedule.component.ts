@@ -13,6 +13,7 @@ import {ScheduleService} from '../shared/schedule.service'
 import {Schedule} from '../_models/schedule.model'
 import {Requests} from '../_models/requests.model'
 import { Subject } from 'rxjs';
+import { DummyRequestSharedService } from '../shared/dummy-request-shared.service';
 
 @Component({
   selector: 'app-my-schedule',
@@ -36,7 +37,7 @@ export class MyScheduleComponent implements OnInit {
   // public multiselect: Boolean = true;
   constructor(private location:Location,private router:Router, private activatedRoute:ActivatedRoute,
     private requestService:NewRequestDetailService, private requestDetailsService:RequestsDetailsService,
-    private scheduleService:ScheduleService) {
+    private scheduleService:ScheduleService,private dummyService: DummyRequestSharedService) {
    }
   
   ngOnInit(){
@@ -46,6 +47,11 @@ export class MyScheduleComponent implements OnInit {
     //  console.log("dateee: ",new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate());
      this.minMonth = this.minDate.getMonth();
      this.maxMonth = this.maxDate.getMonth();
+     this.dummyService.onMainEvent.subscribe(
+      (client) => {
+        
+      }
+   );
   }
   onLoad(args: any){
     
@@ -159,7 +165,8 @@ export class MyScheduleComponent implements OnInit {
   }
 
   onValueChange(args: any) {
-    this.router.navigate(['/MySchedule'])
+    //alert("change")
+    //this.router.navigate(['/MySchedule'])
 
     this.selectedValue = args.value;
     // console.log("this.selectedValue: ",this.selectedValue.getMonth());
@@ -171,13 +178,16 @@ export class MyScheduleComponent implements OnInit {
           title = args.event.currentTarget.getAttribute('data-val');
           title = title == null ? "" : " ( "+title+" )";
        }
+       console.log(this.requests)
     // document.querySelector('#time').textContent = 'Time: ' + args.value.toLocaleDateString();
     for (let index = 0; index < this.requests.length; index++) {
       if(args.value.getDate() === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[2])
       && args.value.getMonth()+1 === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[1])){
         console.log(args.value.getMonth() + "--" + new Date().getMonth());
         
+        console.log("1");
         if(args.value.getMonth() > new Date().getMonth()+1){
+          console.log("2");
           this.value = 'You have coming visit on this day at ' + 
           this.requests[index]['schedule']['time'].split('T')[1];
           this.btnVisible = 'hidden';
@@ -186,6 +196,7 @@ export class MyScheduleComponent implements OnInit {
           this.img="../../assets/imgs/coming.jpg"
         }
         else if(args.value.getMonth()+1 < new Date().getMonth()+1){
+          console.log("3");
           this.value = 'You had a visit on this day at ' + 
           this.requests[index]['schedule']['time'].split('T')[1] + ', You got ' + this.requests[index]['points'] + ' points';
           this.btnVisible = 'hidden'
@@ -193,7 +204,9 @@ export class MyScheduleComponent implements OnInit {
           this.img="../../assets/imgs/coins.jpg"
         }
         else{
+          console.log("4");
           if(args.value.getDate() > new Date().getDate()){
+            console.log("5");
             this.value = 'You have coming visit on this day at ' + 
             this.requests[index]['schedule']['time'].split('T')[1];
             this.btnVisible = 'hidden'
@@ -201,6 +214,7 @@ export class MyScheduleComponent implements OnInit {
             this.img="../../assets/imgs/coming.jpg"
           }
           else if(args.value.getDate() == new Date().getDate()){
+            console.log("6");
             this.value = 'You have a visit today at ' + 
             this.requests[index]['schedule']['time'].split('T')[1];
             this.btnVisible = 'hidden'
@@ -208,6 +222,7 @@ export class MyScheduleComponent implements OnInit {
             this.img="../../assets/imgs/coming.jpg"
           }
           else if(args.value.getDate() < new Date().getDate()){
+            console.log("7");
             this.value = 'You had a visit on this day at ' + 
             this.requests[index]['schedule']['time'].split('T')[1] + ', You got ' + this.requests[index]['points'] + ' points';
             this.btnVisible = 'hidden'
@@ -218,7 +233,8 @@ export class MyScheduleComponent implements OnInit {
         break;
       }
       else{
-        alert("visivle")
+        console.log("8");
+        alert("visible")
         this.btnVisible = 'visible'
         myParagraph.style.color = 'blue'
         for (let index = 0; index < this.schedules.length; index++) {

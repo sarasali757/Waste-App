@@ -1,6 +1,6 @@
 export class Schedule {
     id: number;
-    time:string;
+    time;
     regionId: number;
     driverId: number;
 }

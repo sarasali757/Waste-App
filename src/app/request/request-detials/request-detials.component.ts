@@ -9,6 +9,7 @@ import { NotifyDialogBoxComponent } from 'src/app/notify-dialog-box/notify-dialo
 import {Requests} from '../../_models/requests.model' 
 import { from } from 'rxjs';
 import { Router } from '@angular/router';
+import { DummyRequestSharedService } from 'src/app/shared/dummy-request-shared.service';
 @Component({
   selector: 'app-request-detials',
   templateUrl: './request-detials.component.html',
@@ -23,11 +24,17 @@ export class RequestDetialsComponent implements OnInit {
   minutes;
   seconds;
   date;
-  constructor(private service:NewRequestDetailService,private dialog:MatDialog,private router:Router) { 
+  constructor(private service:NewRequestDetailService,private dialog:MatDialog,private router:Router
+    ,private dummyService: DummyRequestSharedService) { 
   }
 
   ngOnInit(): void {
     this.getRequest();
+    this.dummyService.onMainEvent.subscribe(
+      (client) => {
+        this.getRequest();
+      }
+   );
   }
   MakeNewRequest(){
     this.router.navigate(["/Request",], { queryParams: { tab: 0 } });
