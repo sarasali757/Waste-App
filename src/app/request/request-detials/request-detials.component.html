@@ -1,6 +1,7 @@
 <div style="width:130px; margin:0 auto;" class="mb-4">
     <mat-spinner *ngIf="!request" ></mat-spinner>
-  </div>
+</div>
+
 <div *ngIf="request">
 <div class="jumbtron">  
     <h2 class="display-4 text-center" style="margin-top:50px;">
@@ -14,7 +15,7 @@
 
     <div align="center">
         <label class="mx-2"  >Date </label>
-        <label for="" class="mx-2" *ngIf="request" >{{request.schedule.time |  date:'MMM d, y, h:mm:ss a'}}</label>    
+        <label for="" class="mx-2" *ngIf="request && request.id !=0" >{{"request.schedule.time "|  date:'MMM d, y, h:mm:ss a'}}</label>    
     </div>
 
     <div align="center">
@@ -25,4 +26,5 @@
         <button class="btn grad mx-2" routerLink="/Home" >Done</button>
         <button class="btn grad mx-2"  (click)='openDialog()'>Cancel Request</button>
     </div>
+</div>
 </div>

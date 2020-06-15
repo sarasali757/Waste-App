@@ -45,7 +45,8 @@ export class ProfileComponent implements OnInit {
 
     categoryControl : new FormControl('', [ Validators.required,])
   })
-  constructor(private service:ProfileService,private location: Location,private dialog:MatDialog,private route:Router) 
+  constructor(private service:ProfileService,private location: Location,
+    private dialog:MatDialog,private route:Router) 
   {}
 
   initial(){

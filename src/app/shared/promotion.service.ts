@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Port } from '../_models/port'
 import { tokenGetter } from '../app.module';
@@ -10,6 +10,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class PromotionService {
   port: Port = new Port();
   clientId;
+  onMainEvent: EventEmitter<string> = new EventEmitter();
+
   constructor(private httpService: HttpClient) {
     let jwthelper = new JwtHelperService();
     this.clientId = jwthelper.decodeToken(tokenGetter()).UserId;
