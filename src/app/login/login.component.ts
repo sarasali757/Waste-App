@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
       }, err => {
       // this.invalidLogin = true;
-      
+      console.log(err);
       let message ="Invalid login"
       this.dialog.open(NotifyDialogBoxComponent,{  width: '250px', data: message})
       //alert("Invalid login");

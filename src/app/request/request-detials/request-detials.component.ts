@@ -29,6 +29,9 @@ export class RequestDetialsComponent implements OnInit {
   ngOnInit(): void {
     this.getRequest();
   }
+  MakeNewRequest(){
+    this.router.navigate(["/Request",], { queryParams: { tab: 0 } });
+  }
   getRequest(){
     this.service.getRequest().subscribe(  
       data => {  

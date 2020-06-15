@@ -218,6 +218,7 @@ export class MyScheduleComponent implements OnInit {
         break;
       }
       else{
+        alert("visivle")
         this.btnVisible = 'visible'
         myParagraph.style.color = 'blue'
         for (let index = 0; index < this.schedules.length; index++) {

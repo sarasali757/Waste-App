@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from 'src/app/shared/profile.service';
 import { tokenGetter } from 'src/app/app.module';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-
+import {} from '../../my-schedule/my-schedule.component'
 @Component({
   selector: 'app-new-request-details',
   templateUrl: './new-request-details.component.html',

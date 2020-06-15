@@ -2,7 +2,7 @@
     <mat-spinner *ngIf="!request" ></mat-spinner>
 </div>
 
-<div *ngIf="request">
+<div *ngIf="request && request.id !=0 ">
 <div class="jumbtron">  
     <h2 class="display-4 text-center" style="margin-top:50px;">
         Requests Details
@@ -27,4 +27,15 @@
         <button class="btn grad mx-2"  (click)='openDialog()'>Cancel Request</button>
     </div>
 </div>
+</div>
+
+<div *ngIf="request && request.id ==0 " class="mb-4">
+
+    <h2 class="display-4 text-center" style="margin-top:50px;">There's no Current request</h2>
+    <div align="center">
+        <button class="btn grad mx-2 " (click)="MakeNewRequest()" >
+            New Request
+        </button>
+    </div>
+   
 </div>
