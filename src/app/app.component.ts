@@ -47,7 +47,7 @@ export class AppComponent  implements OnInit {
       {
       const text = `${nick}: ${receivedMessage}:${points} points`;
       this.messages.push(text);
-      })
+      });
   }
 
 }
