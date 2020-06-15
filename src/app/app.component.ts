@@ -36,17 +36,19 @@ export class AppComponent  implements OnInit {
        skipNegotiation: true,
        transport: signalR.HttpTransportType.WebSockets
      })
-     .build();
-  this.hubConnection
-  .start()
-  .then(() => console.log('Connection started!'))
-  .catch(err => console.log('Error while establishing connection :('));
-  this.hubConnection.serverTimeoutInMilliseconds = 2000000
-  this.hubConnection.on('MessageReceived', (nick: string, receivedMessage: string,points:string) => {
-  const text = `${nick}: ${receivedMessage}:${points} points`;
-  this.messages.push(text);
+      .build();
+      this.hubConnection
+      .start()
+      .then(() => console.log('Connection started!'))
+      .catch(err => console.log('Error while establishing connection :('));
+      this.hubConnection.serverTimeoutInMilliseconds = 2000000
+
+      this.hubConnection.on('MessageReceived', (nick: string, receivedMessage: string,points:string) =>
+      {
+      const text = `${nick}: ${receivedMessage}:${points} points`;
+      this.messages.push(text);
+      })
   }
- 
 
 }
 
