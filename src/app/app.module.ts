@@ -85,7 +85,11 @@ import { FooterComponent } from './footer/footer.component';
 
 import {NgxPageScrollModule} from 'ngx-page-scroll';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { MyScheduleComponent } from './my-schedule/my-schedule.component';
 
+//Calendar
+
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -123,6 +127,7 @@ export function tokenGetter() {
     TestImgComponent,
     GetImgComponent,
     FooterComponent,
+    MyScheduleComponent,
     
   ],
   imports: [MatSliderModule,
@@ -169,7 +174,7 @@ export function tokenGetter() {
    NgxPageScrollModule,
    NgxPageScrollCoreModule,
    NgxPageScrollCoreModule.forRoot({duration: 1000}),
-
+   CalendarModule
   ],
   providers: [AuthService
   ,

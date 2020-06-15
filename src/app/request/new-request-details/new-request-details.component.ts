@@ -22,7 +22,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 })
 
 export class NewRequestDetailsComponent implements OnInit {
-
+  selectedSchedule:number;
   client :Client;
   regions: Region ;
   addresses: Address;
@@ -44,6 +44,7 @@ export class NewRequestDetailsComponent implements OnInit {
     private  activatedRoute: ActivatedRoute,private router:Router,
     private service2: ProfileService ){ 
    // this.initialData(); 
+   this.selectedSchedule = (<unknown>this.router.getCurrentNavigation().extras.state) as number;
   }
   public hasError = (controlName: string, errorName: string) =>{
     return this.group.controls[controlName].hasError(errorName);

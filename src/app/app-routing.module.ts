@@ -22,6 +22,8 @@ import { AuthGuard }from './guards/auth.service'
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { TestImgComponent } from './test-img/test-img.component';
 import { GetImgComponent } from './get-img/get-img.component';
+import {MyScheduleComponent} from './my-schedule/my-schedule.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -84,6 +86,15 @@ const routes: Routes = [
   {
     path:"Feedback",
     component: AddFeedbackComponent,
+  },
+  {
+    path:"MySchedule",
+    component: MyScheduleComponent
+  },
+  {
+    path: 'NewRequest',
+    component: NewRequestDetailsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

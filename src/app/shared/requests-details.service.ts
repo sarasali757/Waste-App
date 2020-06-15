@@ -20,4 +20,10 @@ export class RequestsDetailsService {
     return this.httpService.get('http://localhost:'+ this.port.port +'/Api/client/RequestsList/'+currentUser.UserId);
   }
 
+  getAllRequests(){
+    let jwthelper = new JwtHelperService();
+    let currentUser = jwthelper.decodeToken(tokenGetter());
+    return this.httpService.get('http://localhost:'+ this.port.port +'/Api/client/AllRequestsList/'+currentUser.UserId);
+  }
+  
 }

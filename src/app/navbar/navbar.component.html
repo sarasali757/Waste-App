@@ -1,15 +1,17 @@
   
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-weight: bold;"
+  >
 
-    <a class="navbar-brand mx-5" href="/Home">
+    <a class="navbar-brand" href="/Home">
       <img src="../../assets/imgs/1.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      <div style="margin-left: 10px; margin-top: 2px; display: inline-block;">WasteApp</div>
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 200px;"> 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
       <ul class="navbar-nav mr-auto">
         
         <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
@@ -57,11 +59,14 @@
        <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
         <a class="nav-link mr-3" routerLink="#" matBadge="8" >Notification</a>
       </li>  
+      <li>
+        <a class="nav-link" routerLink="/MySchedule" *ngIf="IsLoggedIn()">My Schedule</a>
+      </li>
        <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
         <a class="nav-link" routerLink="/Feedback" >Feedback</a>
       </li>
       <li class="nav-item" routerLinkActive="active current" *ngIf="IsLoggedIn()">
-        <a class="nav-link" routerLink="#" >Survay</a>
+        <a class="nav-link" routerLink="#" >Survey</a>
       </li>
       </ul>
     </div>
@@ -72,8 +77,14 @@
           pageScroll [routerLink]="['Home']" href="#AboutUs"
           >About Us</a>
         </li>
+        <li class="nav-item ml-3" routerLinkActive="active current">
+          <img src="../../assets/imgs/signup.png" *ngIf="!IsLoggedIn()" width="20" height="20" class="d-inline-block align-top mt-1">
+        </li>
         <li class="nav-item" routerLinkActive="active current">
           <a class="nav-link" routerLink="/register" *ngIf="!IsLoggedIn()" routerLinkActive="active current" >Register</a>
+        </li>
+        <li class="nav-item ml-3" routerLinkActive="active current">
+          <img src="../../assets/imgs/login.png" *ngIf="!IsLoggedIn()" width="20" height="20" class="d-inline-block align-top mt-1">
         </li>
         <li class="nav-item" routerLinkActive="active current">
          <a class="nav-link" *ngIf="!IsLoggedIn()" routerLink="/login">login</a>
