@@ -63,7 +63,7 @@ export class NewRequestDetailService {
    return this.httpService1.post('http://localhost:'+this.port.port+'/Api/client/AddNewRequest'
    , JSON.stringify(credentials), 
     {headers: new HttpHeaders({ "Content-Type": "application/json; charset=utf-8"})})
-      
+   
   }
   DeleteRequest(id){
     this.httpService1.delete('http://localhost:'+this.port.port+'/Api/client/DeleteRequest/'+id)
