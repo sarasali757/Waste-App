@@ -23,6 +23,7 @@ import { DummyRequestSharedService } from '../shared/dummy-request-shared.servic
 export class MyScheduleComponent implements OnInit {
   maxMonth:number;
   minMonth:number;
+  myParagraph;
   img:string="../../assets/imgs/select.jpg"
   visible:string='hidden'
   btnVisible:string='hidden'
@@ -49,7 +50,7 @@ export class MyScheduleComponent implements OnInit {
      this.maxMonth = this.maxDate.getMonth();
      this.dummyService.onMainEvent.subscribe(
       (client) => {
-        this.onLoad("");
+        
       }
    );
   }
@@ -171,115 +172,108 @@ export class MyScheduleComponent implements OnInit {
     this.selectedValue = args.value;
     // console.log("this.selectedValue: ",this.selectedValue.getMonth());
 
-    let myParagraph = document.getElementById('paragraph')
+    this.myParagraph = document.getElementById('paragraph')
     let title: string = '';
        if(args.event){
        /*Displays selected date in the label*/
           title = args.event.currentTarget.getAttribute('data-val');
           title = title == null ? "" : " ( "+title+" )";
        }
-       console.log(this.requests)
+       console.log("requests: ",this.requests)
     // document.querySelector('#time').textContent = 'Time: ' + args.value.toLocaleDateString();
-    
-    let length = this.requests.length;
-    if(length){
-     
-    
-    for (let index = 0; index < length; index++) {
-      if(args.value.getDate() === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[2])
-      && args.value.getMonth()+1 === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[1])){
-        console.log(args.value.getMonth() + "--" + new Date().getMonth());
-        
-        console.log("1");
-        if(args.value.getMonth() > new Date().getMonth()+1){
-          console.log("2");
-          this.value = 'You have coming visit on this day at ' + 
-          this.requests[index]['schedule']['time'].split('T')[1];
-          this.btnVisible = 'hidden';
-          myParagraph.style.color = 'palevioletred';
-          // this.img = "coming"
-          this.img="../../assets/imgs/coming.jpg"
-        }
-        else if(args.value.getMonth()+1 < new Date().getMonth()+1){
-          console.log("3");
-          this.value = 'You had a visit on this day at ' + 
-          this.requests[index]['schedule']['time'].split('T')[1] + ', You got ' + this.requests[index]['points'] + ' points';
-          this.btnVisible = 'hidden'
-          myParagraph.style.color = 'limegreen'
-          this.img="../../assets/imgs/coins.jpg"
-        }
-        else{
-          console.log("4");
-          if(args.value.getDate() > new Date().getDate()){
-            console.log("5");
+    if(this.requests.length == 0)
+    {
+      this.startMakingRequest(args);
+    }
+    else{
+      for (let index = 0; index < this.requests.length; index++) {
+        if(args.value.getDate() === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[2])
+        && args.value.getMonth()+1 === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[1])){
+          console.log(args.value.getMonth() + "--" + new Date().getMonth());
+          
+          console.log("1");
+          if(args.value.getMonth() > new Date().getMonth()+1){
+            console.log("2");
             this.value = 'You have coming visit on this day at ' + 
             this.requests[index]['schedule']['time'].split('T')[1];
-            this.btnVisible = 'hidden'
-            myParagraph.style.color = 'palevioletred'
+            this.btnVisible = 'hidden';
+            this.myParagraph.style.color = 'palevioletred';
+            // this.img = "coming"
             this.img="../../assets/imgs/coming.jpg"
           }
-          else if(args.value.getDate() == new Date().getDate()){
-            console.log("6");
-            this.value = 'You have a visit today at ' + 
-            this.requests[index]['schedule']['time'].split('T')[1];
-            this.btnVisible = 'hidden'
-            myParagraph.style.color = 'palevioletred'
-            this.img="../../assets/imgs/coming.jpg"
-          }
-          else if(args.value.getDate() < new Date().getDate()){
-            console.log("7");
+          else if(args.value.getMonth()+1 < new Date().getMonth()+1){
+            console.log("3");
             this.value = 'You had a visit on this day at ' + 
             this.requests[index]['schedule']['time'].split('T')[1] + ', You got ' + this.requests[index]['points'] + ' points';
             this.btnVisible = 'hidden'
-            myParagraph.style.color = 'limegreen'
+            this.myParagraph.style.color = 'limegreen'
             this.img="../../assets/imgs/coins.jpg"
           }
-        }
-        break;
-      }
-      else{
-      
-        this.btnVisible = 'visible'
-        myParagraph.style.color = 'blue'
-        for (let index = 0; index < this.schedules.length; index++) {
-          if (args.value.getDate() === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[2]) &&
-              args.value.getMonth()+1 === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[1])){
-             document.querySelector('#time').textContent = 'Time: ' + this.schedules[index]['time'].split('T')[1];
-             this.value = 'There is a visit at ' + this.schedules[index]['time'].split('T')[1];
-             this.img="../../assets/imgs/select.jpg"
-            //  this.selectedValue = args.value;
-            this.selectedScheduleId = this.schedules[index]['id'];
-             break;
-          }
           else{
-           document.querySelector('#time').textContent = 'Time: ' + '---';
-           this.value = 'No Visit on this day, Do you like to make a special request?'
-           this.img="../../assets/imgs/select.jpg"
+            console.log("4");
+            if(args.value.getDate() > new Date().getDate()){
+              console.log("5");
+              this.value = 'You have coming visit on this day at ' + 
+              this.requests[index]['schedule']['time'].split('T')[1];
+              this.btnVisible = 'hidden'
+              this.myParagraph.style.color = 'palevioletred'
+              this.img="../../assets/imgs/coming.jpg"
+            }
+            else if(args.value.getDate() == new Date().getDate()){
+              console.log("6");
+              this.value = 'You have a visit today at ' + 
+              this.requests[index]['schedule']['time'].split('T')[1];
+              this.btnVisible = 'hidden'
+              this.myParagraph.style.color = 'palevioletred'
+              this.img="../../assets/imgs/coming.jpg"
+            }
+            else if(args.value.getDate() < new Date().getDate()){
+              console.log("7");
+              this.value = 'You had a visit on this day at ' + 
+              this.requests[index]['schedule']['time'].split('T')[1] + ', You got ' + this.requests[index]['points'] + ' points';
+              this.btnVisible = 'hidden'
+              this.myParagraph.style.color = 'limegreen'
+              this.img="../../assets/imgs/coins.jpg"
+            }
           }
-       }
+          break;
+        }
+        else{
+          this.startMakingRequest(args);
+        }
       }
     }
-  }else{
-    this.btnVisible = 'visible'
-        myParagraph.style.color = 'blue'
-        for (let index = 0; index < this.schedules.length; index++) {
-          if (args.value.getDate() === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[2]) &&
-              args.value.getMonth()+1 === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[1])){
-             document.querySelector('#time').textContent = 'Time: ' + this.schedules[index]['time'].split('T')[1];
-             this.value = 'There is a visit at ' + this.schedules[index]['time'].split('T')[1];
-             this.img="../../assets/imgs/select.jpg"
-            //  this.selectedValue = args.value;
-            this.selectedScheduleId = this.schedules[index]['id'];
-             break;
-          }
-          else{
-           document.querySelector('#time').textContent = 'Time: ' + '---';
-           this.value = 'No Visit on this day, Do you like to make a special request?'
-           this.img="../../assets/imgs/select.jpg"
-          }
-       }
-  }
+    
  }
+
+ startMakingRequest(args){
+   if(args.value.getMonth()+1 < new Date().getMonth()+1 || 
+     (args.value.getMonth()+1 == new Date().getMonth()+1 && args.value.getDate() < new Date().getDate())){
+      this.img="../../assets/imgs/alarm.jpg"
+      this.value = "OOPS! ... Time's up, please choose another day."
+      this.myParagraph.style.color = 'black'
+      this.btnVisible = 'hidden'
+     }
+   else{
+     this.btnVisible = 'visible'
+     this.myParagraph.style.color = 'blue'
+      for (let index = 0; index < this.schedules.length; index++) {
+        if (args.value.getDate() === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[2]) &&
+            args.value.getMonth()+1 === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[1])){
+          document.querySelector('#time').textContent = 'Time: ' + this.schedules[index]['time'].split('T')[1];
+          this.value = 'There is a visit at ' + this.schedules[index]['time'].split('T')[1];
+          this.img="../../assets/imgs/select.jpg"
+          //  this.selectedValue = args.value;
+          this.selectedScheduleId = this.schedules[index]['id'];
+          break;
+        }
+        else{
+        document.querySelector('#time').textContent = 'Time: ' + '---';
+        this.value = 'No Visit on this day, Do you like to make a special request?'
+        this.img="../../assets/imgs/select.jpg"
+        }
+      }
+    }
+  }
  
-  
 }

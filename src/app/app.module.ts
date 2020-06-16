@@ -90,6 +90,7 @@ import { MyScheduleComponent } from './my-schedule/my-schedule.component';
 //Calendar
 
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { AddSurveyComponent } from './add-survey/add-survey.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -128,6 +129,7 @@ export function tokenGetter() {
     GetImgComponent,
     FooterComponent,
     MyScheduleComponent,
+    AddSurveyComponent,
     
   ],
   imports: [MatSliderModule,
