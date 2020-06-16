@@ -3,15 +3,58 @@
 </div>
 
 <div *ngIf="request && request.id !=0 ">
-<div class="jumbtron">  
-    <h2 class="display-4 text-center" style="margin-top:50px;">
-        Requests Details
-    </h2>
-<hr class="mx-5">
-    <div align="center">
+    <div class="jumbtron">  
+        <h2 class="display-4 text-center" style="margin-top:50px;">
+            Requests Details
+        </h2>
+        <hr class="mx-5">
+
+        <div class="row m-0">
+            <div class="col" align = "right">
+                <label for="" class="mx-2" >Status</label>
+            </div>
+            <div class="col" >
+                <label for="" class="mx-2"  >Pending</label>    
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col" align = "right">
+                <label class="mx-2"  >Date </label>
+            </div>
+            <div class="col" >
+                <label for="" class="mx-2" *ngIf="request " >{{request.schedule.time |  date:'MMM d, y, h:mm:ss a'}}</label>    
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col" align = "right">
+                <label class="mx-2"  >Address  </label>             
+            </div>
+            <div class="col" >
+                <label for="" class="mx-2" *ngIf="request " >{{request.buildingNumber}},{{" "}}
+                    {{request.address.streetName}},{{" "}} {{request.schedule.region.name}},{{' '}} Alexandria
+                </label>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col" align = "right">
+                <label for="" class="mx-2" >Remaining </label>
+            </div>
+            <div class="col" >
+                <label for="" class="mx-2" *ngIf="request"  >{{remainingTimeString}}</label>    
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col" align = "right">
+                <button class="btn grad mx-2" routerLink="/Home" >Done</button>
+            </div>
+            <div class="col" >
+                <button class="btn grad mx-2"  (click)='openDialog()'>Cancel Request</button>
+            </div>
+        </div>
+  <!--   <div align="center">
         <label for="" class="mx-2" >Status</label>
         <label for="" class="mx-2"  >Pending</label>    
-    </div>
+    </div> 
 
     <div align="center">
         <label class="mx-2"  >Date </label>
@@ -23,6 +66,7 @@
             {{request.address.streetName}},{{" "}} {{request.schedule.region.name}},{{' '}} Alexandria
         </label>    
     </div>
+    
 
     <div align="center">
         <label for="" class="mx-2" >Remaining </label>
@@ -32,7 +76,8 @@
         <button class="btn grad mx-2" routerLink="/Home" >Done</button>
         <button class="btn grad mx-2"  (click)='openDialog()'>Cancel Request</button>
     </div>
-</div>
+    -->
+    </div>
 </div>
 
 <div *ngIf="request && request.id ==0 " class="mb-4">
@@ -43,5 +88,4 @@
             New Request
         </button>
     </div>
-   
 </div>
