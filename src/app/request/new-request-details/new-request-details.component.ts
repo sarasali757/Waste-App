@@ -144,9 +144,14 @@ export class NewRequestDetailsComponent implements OnInit {
 
     this.service.postNewRequestDetails(credentials).subscribe(response =>
        {console.log(response);
+        
         message="Request Submited"
         this.openNotifyDialogBox(message);
         this.dummyService.onMainEvent.emit("str");
+        this.router.navigate([['/Request'], { queryParams: { tab: 0} }]);
+        //this.router.navigate(['/Request'], { queryParams: { tab: 2} });
+        console.log("submited");
+    
 
       },
       err => {console.log(err);
@@ -158,8 +163,8 @@ export class NewRequestDetailsComponent implements OnInit {
    openNotifyDialogBox(message){
     this.dialog.open(NotifyDialogBoxComponent,{ data: message})
   }
-   clickMe(form:Form){
-     console.log(form);
+   clickMe(){
+     console.log(this.group.controls['scheduleControl'].value);
    }
    
    public tabChanged(tabChangeEvent: MatTabChangeEvent): void {

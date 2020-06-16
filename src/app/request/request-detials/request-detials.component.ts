@@ -26,13 +26,14 @@ export class RequestDetialsComponent implements OnInit {
   date;
   constructor(private service:NewRequestDetailService,private dialog:MatDialog,private router:Router
     ,private dummyService: DummyRequestSharedService) { 
+      this.getRequest();
   }
 
   ngOnInit(): void {
     this.getRequest();
     this.dummyService.onMainEvent.subscribe(
       (client) => {
-        this.getRequest();
+      //  this.getRequest();
       }
    );
   }

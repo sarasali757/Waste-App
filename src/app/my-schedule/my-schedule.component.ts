@@ -49,7 +49,7 @@ export class MyScheduleComponent implements OnInit {
      this.maxMonth = this.maxDate.getMonth();
      this.dummyService.onMainEvent.subscribe(
       (client) => {
-        
+        this.onLoad("");
       }
    );
   }
@@ -180,7 +180,12 @@ export class MyScheduleComponent implements OnInit {
        }
        console.log(this.requests)
     // document.querySelector('#time').textContent = 'Time: ' + args.value.toLocaleDateString();
-    for (let index = 0; index < this.requests.length; index++) {
+    
+    let length = this.requests.length;
+    if(length){
+     
+    
+    for (let index = 0; index < length; index++) {
       if(args.value.getDate() === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[2])
       && args.value.getMonth()+1 === parseInt(this.requests[index]['schedule']['time'].split('T')[0].split('-')[1])){
         console.log(args.value.getMonth() + "--" + new Date().getMonth());
@@ -233,8 +238,7 @@ export class MyScheduleComponent implements OnInit {
         break;
       }
       else{
-        console.log("8");
-        alert("visible")
+      
         this.btnVisible = 'visible'
         myParagraph.style.color = 'blue'
         for (let index = 0; index < this.schedules.length; index++) {
@@ -255,7 +259,27 @@ export class MyScheduleComponent implements OnInit {
        }
       }
     }
-    
+  }else{
+    this.btnVisible = 'visible'
+        myParagraph.style.color = 'blue'
+        for (let index = 0; index < this.schedules.length; index++) {
+          if (args.value.getDate() === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[2]) &&
+              args.value.getMonth()+1 === parseInt(this.schedules[index]['time'].split('T')[0].split('-')[1])){
+             document.querySelector('#time').textContent = 'Time: ' + this.schedules[index]['time'].split('T')[1];
+             this.value = 'There is a visit at ' + this.schedules[index]['time'].split('T')[1];
+             this.img="../../assets/imgs/select.jpg"
+            //  this.selectedValue = args.value;
+            this.selectedScheduleId = this.schedules[index]['id'];
+             break;
+          }
+          else{
+           document.querySelector('#time').textContent = 'Time: ' + '---';
+           this.value = 'No Visit on this day, Do you like to make a special request?'
+           this.img="../../assets/imgs/select.jpg"
+          }
+       }
+  }
  }
+ 
   
 }

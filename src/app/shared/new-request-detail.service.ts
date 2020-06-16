@@ -52,7 +52,10 @@ export class NewRequestDetailService {
     return this.httpService1.get('http://localhost:'+this.port.port+'/Api/client/getAddresses/'+ id)
   }
   getSchedules(id){
-    return this.httpService1.get('http://localhost:'+this.port.port+'/Api/client/getSchedules/'+ id)
+    let regionId = id ;
+    let clientId = this.id;
+    return this.httpService1.get('http://localhost:'+this.port.port+'/Api/client/getSchedules/'+ 
+    regionId +"/"+clientId)
   }
   postNewRequestDetails(credentials){
     credentials.clientId = this.id;
