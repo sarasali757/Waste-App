@@ -71,9 +71,9 @@ export class MyScheduleComponent implements OnInit {
                   span = document.createElement('span');
                   span.setAttribute('class', 'e-icons highlight');
                   addClass([args.element], ['special', 'e-day', 'birthday']);
-                    args.element.firstElementChild.setAttribute('title', 'Birthday !');
-                  args.element.setAttribute('title', ' Birthday !');
-                    args.element.setAttribute('data-val', 'Birthday!');
+                    args.element.firstElementChild.setAttribute('title', 'Choose day !');
+                  args.element.setAttribute('title', ' Choose day !');
+                    args.element.setAttribute('data-val', 'Choose day!');
                   args.element.appendChild(span);
               }
               // update maximum value of calendar accordnig to months in the calendar
@@ -106,10 +106,10 @@ export class MyScheduleComponent implements OnInit {
               let span: HTMLElement;
                 span = document.createElement('span');
                 span.setAttribute('class', 'e-icons highlight myComing');
-                addClass([args.element], ['special', 'e-day', 'birthday']);
-                args.element.firstElementChild.setAttribute('title', 'Birthday !');
-                args.element.setAttribute('title', ' Birthday !');
-                args.element.setAttribute('data-val', 'Birthday!');
+                addClass([args.element], ['special', 'e-day', 'Choose Day']);
+                args.element.firstElementChild.setAttribute('title', 'Choose Day !');
+                args.element.setAttribute('title', ' Choose Day !');
+                args.element.setAttribute('data-val', 'Choose Day!');
                 args.element.appendChild(span);
             }
         }
@@ -119,10 +119,10 @@ export class MyScheduleComponent implements OnInit {
               let span: HTMLElement;
                 span = document.createElement('span');
                 span.setAttribute('class', 'e-icons highlight myHistory');
-                addClass([args.element], ['special', 'e-day', 'birthday']);
-                args.element.firstElementChild.setAttribute('title', 'Birthday !');
-                args.element.setAttribute('title', ' Birthday !');
-                args.element.setAttribute('data-val', 'Birthday!');
+                addClass([args.element], ['special', 'e-day', 'Choose Day']);
+                args.element.firstElementChild.setAttribute('title', 'Choose Day !');
+                args.element.setAttribute('title', ' Choose Day !');
+                args.element.setAttribute('data-val', 'Choose Day!');
                 args.element.appendChild(span);
             }
         }
@@ -134,10 +134,10 @@ export class MyScheduleComponent implements OnInit {
                 let span: HTMLElement;
                   span = document.createElement('span');
                   span.setAttribute('class', 'e-icons highlight myComing');
-                  addClass([args.element], ['special', 'e-day', 'birthday']);
-                  args.element.firstElementChild.setAttribute('title', 'Birthday !');
-                  args.element.setAttribute('title', ' Birthday !');
-                  args.element.setAttribute('data-val', 'Birthday!');
+                  addClass([args.element], ['special', 'e-day', 'Choose Day']);
+                  args.element.firstElementChild.setAttribute('title', 'Choose Day !');
+                  args.element.setAttribute('title', ' Choose Day !');
+                  args.element.setAttribute('data-val', 'Choose Day!');
                   args.element.appendChild(span);
               }
           }
@@ -147,10 +147,10 @@ export class MyScheduleComponent implements OnInit {
                 let span: HTMLElement;
                   span = document.createElement('span');
                   span.setAttribute('class', 'e-icons highlight myHistory');
-                  addClass([args.element], ['special', 'e-day', 'birthday']);
-                  args.element.firstElementChild.setAttribute('title', 'Birthday !');
-                  args.element.setAttribute('title', ' Birthday !');
-                  args.element.setAttribute('data-val', 'Birthday!');
+                  addClass([args.element], ['special', 'e-day', 'Choose Day']);
+                  args.element.firstElementChild.setAttribute('title', 'Choose Day !');
+                  args.element.setAttribute('title', ' Choose Day !');
+                  args.element.setAttribute('data-val', 'Choose Day!');
                   args.element.appendChild(span);
               }
           }

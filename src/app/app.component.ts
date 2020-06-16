@@ -9,6 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProfileService } from './shared/profile.service';
 import { Client } from './_models/client.model';
 import * as signalR from "@aspnet/signalr";
+import { DummyNotificationService } from './shared/dummy-notification.service';
 
 
 @Component({
@@ -25,11 +26,18 @@ export class AppComponent  implements OnInit {
   message = '';
   points='';
   messages: string[] = [];
-   
-  constructor(private service: ProfileService){
+  onMain: boolean = false;
+
+  constructor(private service: ProfileService,private dummyService : DummyNotificationService){
   }
   ngOnInit(): void {
-          console.log("OK Started")
+    this.dummyService.onMainEvent.subscribe(
+      (onMain) => {
+        this.onMain = onMain;
+        console.log(onMain);
+      });
+     //this.test();
+     console.log("OK Started")
      this.hubConnection = new signalR.HubConnectionBuilder()
      .withUrl('http://localhost:50856/charthub'
      , {
@@ -47,8 +55,16 @@ export class AppComponent  implements OnInit {
       {
       const text = `${nick}: ${receivedMessage}:${points} points`;
       this.messages.push(text);
-      });
+      this.dummyService.onMainEvent.emit(this.messages);/* emit message */
+    });
+      
   }
 
+  test(){
+    setTimeout(() => {this.messages.push("hi"); console.log("send")
+    this.dummyService.onMainEvent.emit(this.messages);
+    this.test();
+  },100); 
+  }
 }
 

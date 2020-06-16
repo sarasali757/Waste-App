@@ -5,6 +5,7 @@ import { Port } from '../_models/port';
 import { ProfileService } from '../shared/profile.service';
 import { Client } from '../_models/client.model';
 import { Router } from '@angular/router';
+import { DummyNotificationService } from '../shared/dummy-notification.service';
 
 
 @Component({
@@ -17,10 +18,12 @@ export class NavbarComponent implements OnInit {
   showFiller = false;
   client: Client;
   clicked = false;
-  
-  constructor(private service:ProfileService,private router: Router) {
-  }
 
+  numOfMessage: number = 0 ;
+  messages: string[] = [];
+
+  constructor(private service:ProfileService,private router: Router,private dummyService:DummyNotificationService) {
+  }
   getClient(){
     if(tokenGetter()){
       this.service.getClientData().subscribe(data=>{
@@ -34,6 +37,7 @@ export class NavbarComponent implements OnInit {
 
   getClientChange(){
     this.getClient();
+    
     this.service.onMainEvent.subscribe(
       (client) => {
         this.client = client;
@@ -46,6 +50,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getClient();
     this.getClientChange();
+    this.dummyService.onMainEvent.subscribe(
+      (messages) => {
+        this.messages =messages;
+        this.numOfMessage = this.messages.length;
+      },err=>{
+      }
+   );
   }
 
   logOut() {

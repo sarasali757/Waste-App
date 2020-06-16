@@ -70,5 +70,5 @@ export class NewRequestDetailService {
     .subscribe(response => {console.log(response);},
       err => {console.log(err);}) ; 
   }
-
+ 
 }
