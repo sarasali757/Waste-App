@@ -23,7 +23,7 @@ import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { TestImgComponent } from './test-img/test-img.component';
 import { GetImgComponent } from './get-img/get-img.component';
 import {MyScheduleComponent} from './my-schedule/my-schedule.component'
-
+import {AddSurveyComponent} from './add-survey/add-survey.component'
 const routes: Routes = [
   {
     path: '',
@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'NewRequest',
     component: NewRequestDetailsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'Survey',
+    component: AddSurveyComponent,
   },
   {
     path: '**',

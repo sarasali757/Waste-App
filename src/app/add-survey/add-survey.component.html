@@ -1,4 +1,4 @@
-<!-- <br/>
+ <br/>
 <br/>
 <br/>
 <div class="container-fluid"  >
@@ -7,17 +7,23 @@
                 <div class="col-lg-4" style="color: green;font-size: large;" *ngIf="i<=3">{{s.question}}</div>
                 <div class="col-lg-7"  *ngIf="i<=3">
                    
-                 <mat-radio-group  >
-                    <mat-radio-button [value]="p.id" [z]="s.question" *ngFor="let p of choiceArr;"(change)="print(p.text,i)">{{p.text}}<span style="padding: 25px;"></span>   </mat-radio-button>
-                 </mat-radio-group>   
-              
+                 <div class="form-check-inline" *ngFor="let p of choiceArr;">
+                    <input type="radio" class="form-check-input" [value]="p.id" [name]="s.question" (change)="print(p.text,i)">{{p.text}}<span style="padding: 25px;"></span> 
                 </div>
-                <div class="col-lg-2">
-                <mat-radio-button [value]="4" >{{s.choiceD}}</mat-radio-button>
-                </div> 
         
     </div>
-   
-<button (click)="send()"> save</button>
+    <div class="row" *ngFor="let s of survey;let i=index">
+        <div class="col-lg-1" ></div>
+                <div class="col-lg-4" style="color: green;font-size: large;" *ngIf="i>3">{{s.question}}</div>
+                <div class="col-lg-7"  *ngIf="i<=3">
+                   
+                 <div class="form-check-inline" *ngFor="let p of choiceArr;">
+                    <input type="radio" class="form-check-input" [value]="p.id" [name]="s.question" (change)="print(p.text,i)">{{p.text}}<span style="padding: 25px;"></span> 
+                    <input type="radio" class="form-check-input" [value]="p.id" [name]="s.question" (change)="print(p.text,i)">{{p.text}}<span style="padding: 25px;"></span> 
+                    <input type="radio" class="form-check-input" [value]="p.id" [name]="s.question" (change)="print(p.text,i)">{{p.text}}<span style="padding: 25px;"></span> 
+                    
+                </div>
+        
+    </div>
 </div>
- -->
+<button class="btn btn-success" (click)="send()"> save</button>
