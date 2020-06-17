@@ -31,6 +31,7 @@ public ans: {id: number;text: string;val:string;
 ];
 survey:SurveyQues[]=[]
   survey1:SurveyQues[]=[]
+  diffAns1:SurveyQues[]=[]
   id: number;
   sub: any;
   loginId: any;
