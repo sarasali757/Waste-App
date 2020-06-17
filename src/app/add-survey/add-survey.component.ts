@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Route,Params,ActivatedRoute } from '@angular/router';
 import { Port } from '../_models/port';
 import { SurveyQues } from '../_models/survey-ques';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-add-survey',
   templateUrl: './add-survey.component.html',
@@ -32,6 +33,7 @@ survey:SurveyQues[]=[]
   survey1:SurveyQues[]=[]
   id: number;
   sub: any;
+  loginId: any;
   print(r:string,id:number){this.s[id]=r;
     //   for(let p in this.ans){
     //  let obj= this.choiceArr.find(o=>o.id==this.ans[p].id)
@@ -51,8 +53,9 @@ survey:SurveyQues[]=[]
         
            }
     }
-    displaySurv(){
-      this.http.get<SurveyQues[]>("http://localhost:"+this.port.port+"/api/survey/GetSurvey?CId"+this.sub, {observe: 'response',responseType:"json"})
+
+    displaySurv(n:number){
+      this.http.get<SurveyQues[]>("http://localhost:"+this.port.port+"/api/survey/GetSurvey?CId"+n, {observe: 'response',responseType:"json"})
    .subscribe(response => {console.log(response.status);
   console.log(response)
      this.survey=response.body
@@ -75,12 +78,16 @@ survey:SurveyQues[]=[]
   constructor(private http:HttpClient,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.sub = this.route.queryParams
-      .subscribe(params => {  
-        this.id = +params['id'] || 0;// Defaults to 0 if no query param provided.
-  });
-this. displaySurv()
-console.log(this.sub)
+    let token = localStorage.getItem("jwt");
+    const dec=new JwtHelperService();
+   const decoded=   dec.decodeToken(token)
+ this.loginId=decoded.UserId
+    // this.sub = this.route.queryParams
+    //   .subscribe(params => {  
+    //     this.id = +params['id'] || 0;// Defaults to 0 if no query param provided.
+ // });
+this. displaySurv(this.loginId)
+
  }
 }
 

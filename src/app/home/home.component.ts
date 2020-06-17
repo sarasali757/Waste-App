@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Port } from '../_models/port';
 import { Instructions } from '../_models/Instructions.model';
 import { Promotion } from '../_models/promotion.model';
+import { PromotionService } from '../shared/promotion.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
   promotions;
   countPromotion:Array<string> = new Array();
   bindPromotions: boolean;
-  constructor(private jwtHelper: JwtHelperService, private router: Router,private http: HttpClient) {}
+  loginId: any;
+  constructor(private jwtHelper: JwtHelperService, private router: Router,private http: HttpClient,private httpService: PromotionService) {}
 
   isUserAuthenticated() {
     
@@ -41,11 +43,17 @@ export class HomeComponent implements OnInit {
       return false;
     }
   }
+  
   ngOnInit(): void {
     this.http.get('http://localhost:'+this.port.port+'/Api/Instructions/GetInstructions/').subscribe(data=>{
       this.instructions = data as Instructions [];
       console.log(this.instructions)
-      
+      let token = localStorage.getItem("jwt");
+      const dec=new JwtHelperService();
+     const decoded=   dec.decodeToken(token)
+   this.loginId=decoded.UserId
+   
+   
       for(let i=1;i<this.instructions.length;i++){
         this.count.push(i.toString());
         console.log(this.count);
