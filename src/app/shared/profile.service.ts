@@ -45,7 +45,8 @@ export class ProfileService {
     if(this.getId()){
     credentials.id = this.id;
     console.log(credentials.id);
-   return this.httpService.put('http://localhost:'+this.port.port+'/Api/client/UpdateClient', JSON.stringify(credentials),
+   return this.httpService.put('http://localhost:'+this.port.port+'/Api/client/UpdateClient', 
+   JSON.stringify(credentials),
     {headers: new HttpHeaders({ "Content-Type": "application/json; charset=utf-8"})})
      
     }
